@@ -38,15 +38,15 @@ ssh droot@ssh.stuXX.steven.asia
 
 ### 👥 Student-to-Cluster Mapping
 
-| Student No | SSH Host                      | Assigned Student     |
-| ------------ | ----------------------------- | ------------------ |
-| Student 1    | `droot@ssh.stu01.steven.asia` | Alex Tan          |
-| Student 2    | `droot@ssh.stu02.steven.asia` | Priya Narayanan   |
-| Student 3    | `droot@ssh.stu03.steven.asia` | Jason Lim         |
-| Student 4    | `droot@ssh.stu04.steven.asia` | Farah Abdullah    |
-| Student 5    | `droot@ssh.stu05.steven.asia` | Kelvin Ong        |
-| Student 6    | `droot@ssh.stu06.steven.asia` | Aina Rosli        |
-| Student 7    | `droot@ssh.stu07.steven.asia` | Daniel Chong      |
+| Student No  | SSH Host                         | Assigned Student     |
+| ------------ | -----------------------------  | ------------------ |
+| stu01    | `droot@ssh.stu01.steven.asia` | Alex Tan          |
+| stu02    | `droot@ssh.stu02.steven.asia` | Priya Narayanan   |
+| stu03    | `droot@ssh.stu03.steven.asia` | Jason Lim         |
+| stu04    | `droot@ssh.stu04.steven.asia` | Farah Abdullah    |
+| stu05    | `droot@ssh.stu05.steven.asia` | Kelvin Ong        |
+| stu06    | `droot@ssh.stu06.steven.asia` | Aina Rosli        |
+| stu07    | `droot@ssh.stu07.steven.asia` | Steven Nagen      |
 
 
 ---
