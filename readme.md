@@ -11,14 +11,16 @@ Each participant will be provided access to their own Kubernetes cluster, hosted
 
 ### 🔐 SSH Access
 
-Use the following SSH format to connect to your assigned lab environment:
+Use the following SSH format to connect to your assigned lab environment via jumphost:
 
 ```bash
 ssh droot@ssh.stuXX.steven.asia
 ````
+>> You must have linux(wsl) or Windows Powershell Terminal to access jumphost
 
-> Replace `XX` with your assigned student number.
-> The password will be given to you during the training session.
+>> Replace `XX` with your assigned student number.
+
+>> The password will be given to you during the training session.
 
 ---
 
@@ -37,6 +39,14 @@ ssh droot@ssh.stuXX.steven.asia
 ---
 
 Each cluster is isolated, and you’ll have full `sudo` access via the `droot` account to complete the exercises in this repository.
+
+--- 
+
+## 🚀 Lab Machine overview 
+
+![alt text](image.png)
+
+---
 
 >> Happy hacking! 🚧
 
