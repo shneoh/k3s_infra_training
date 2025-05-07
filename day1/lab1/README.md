@@ -24,7 +24,7 @@ Deploy a 3-node High Availability (HA) K3s cluster using embedded etcd with prop
 
 ## 🔧 Setup Instructions
 
-1. **SSH into each K3s node:**
+1. **On terminal 1 , SSH into JumpHost and ssh to `vmk3s001-stuXX`:**
 
     ```bash
     ssh droot@ssh.stuXX.steven.asia
@@ -44,7 +44,7 @@ Deploy a 3-node High Availability (HA) K3s cluster using embedded etcd with prop
     --write-kubeconfig-mode 644
     ```
 
-3. **On `vmk3s002-stuXX`:**
+3. **On terminal 2 , access `vmk3s002-stuXX`:**
 
     ```bash
     ssh droot@ssh.stuXX.steven.asia
@@ -62,7 +62,7 @@ Deploy a 3-node High Availability (HA) K3s cluster using embedded etcd with prop
     --write-kubeconfig-mode 644
     ```
 
-4. **On `vmk3s003-stuXX`:**
+4. **On terminal 3 , access `vmk3s003-stuXX`:**
 
     ```bash
     ssh droot@ssh.stuXX.steven.asia
