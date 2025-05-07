@@ -5,13 +5,25 @@
 
 Welcome to the hands-on lab repository for the **K3s Infrastructure Track Training**. This training is structured over 3 days and contains a series of practical labs to help you master Kubernetes cluster operations, monitoring, service mesh, and disaster recovery using K3s and Linkerd.
 
-## 🚀 How to Access Your Lab Environment
+---
+
+### 🚀 How to Access Your Lab Environment
 
 Each participant will be provided access to their own Kubernetes cluster, hosted on a dedicated virtual environment.
 
+---
+### 🚀 Optional Software 
+
+The following software/cloud service may be useful in the labs and will make your life easier
+* VS Code - https://code.visualstudio.com/
+* Lens Desktop - https://k8slens.dev/
+* Git Hub - https://github.com/
+
+---
+
 ### 🔐 SSH Access
 
-Use the following SSH format to connect to your assigned lab environment via jumphost:
+Use the following SSH command to connect to your assigned lab environment via jumphost:
 
 ```bash
 ssh droot@ssh.stuXX.steven.asia
@@ -26,15 +38,16 @@ ssh droot@ssh.stuXX.steven.asia
 
 ### 👥 Student-to-Cluster Mapping
 
-| Student Name | SSH Host                      |
-| ------------ | ----------------------------- |
-| Student 1    | `droot@ssh.stu01.steven.asia` |
-| Student 2    | `droot@ssh.stu02.steven.asia` |
-| Student 3    | `droot@ssh.stu03.steven.asia` |
-| Student 4    | `droot@ssh.stu04.steven.asia` |
-| Student 5    | `droot@ssh.stu05.steven.asia` |
-| Student 6    | `droot@ssh.stu06.steven.asia` |
-| Student 7    | `droot@ssh.stu07.steven.asia` |
+| Student No | SSH Host                      | Assigned Student     |
+| ------------ | ----------------------------- | ------------------ |
+| Student 1    | `droot@ssh.stu01.steven.asia` | Alex Tan          |
+| Student 2    | `droot@ssh.stu02.steven.asia` | Priya Narayanan   |
+| Student 3    | `droot@ssh.stu03.steven.asia` | Jason Lim         |
+| Student 4    | `droot@ssh.stu04.steven.asia` | Farah Abdullah    |
+| Student 5    | `droot@ssh.stu05.steven.asia` | Kelvin Ong        |
+| Student 6    | `droot@ssh.stu06.steven.asia` | Aina Rosli        |
+| Student 7    | `droot@ssh.stu07.steven.asia` | Daniel Chong      |
+
 
 ---
 
@@ -42,7 +55,7 @@ Each cluster is isolated, and you’ll have full `sudo` access via the `droot` a
 
 --- 
 
-## 🚀 Lab Machine overview 
+## 🚀 Lab Setup overview 
 
 ![alt text](image.png)
 
