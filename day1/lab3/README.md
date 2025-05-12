@@ -73,11 +73,25 @@ exit
 
 ---
 
-## 💡 Lab03C: Simulated LoadBalancer (K3s note)
+## 💡 Lab03C: Simulated LoadBalancer (Static IP via HAProxy)
 
-> LoadBalancer type is unsupported natively in K3s unless MetalLB or similar is used.
+> While K3s doesn’t natively support LoadBalancer services, we can simulate this using a manually defined external IP combined with HAProxy.
 
-We simulate this using Ingress (see next steps).
+We simulate the LoadBalancer 
+
+```bash 
+kubectl apply -f kubia-svc-loadbalancer.yaml
+```
+
+```bash 
+dig icecream.app.stuXX.steven.asia +short 
+```
+>> replace the XX with your student number
+>> use the return Public IP on next Step 
+
+```bash 
+curl http://<PUBLIC_IP>:8081
+```
 
 ---
 
