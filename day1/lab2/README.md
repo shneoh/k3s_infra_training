@@ -64,6 +64,11 @@ kubectl get ingress
 
 Look for `voteapp-frontend` as a LoadBalancer service and all pods in Running state.
 
+```bash 
+kubectl get ingress voteapp-ingress -o jsonpath="{.spec.rules[0].host}" | xargs -I{} echo "http://{}"
+```
+Get the address and access it via your browser 
+
 ---
 
 ## 🔧 etcdctl Installation
