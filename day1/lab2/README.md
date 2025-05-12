@@ -139,13 +139,16 @@ These commands help identify etcd members, leader, and overall cluster health.
 
 ```bash
 sudo k3s etcd-snapshot save --name pre-failure-snapshot
+```
+
+```bash 
 sudo k3s etcd-snapshot ls
 ```
 
 Snapshots are stored under:
 
 ```bash
-/var/lib/rancher/k3s/server/db/snapshots/
+sudo ls -l /var/lib/rancher/k3s/server/db/snapshots/
 ```
 
 ---
