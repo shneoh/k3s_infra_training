@@ -159,10 +159,18 @@ sudo ls -l /var/lib/rancher/k3s/server/db/snapshots/
 
 ```bash
 sudo systemctl stop k3s
+```
+
+```bash 
 sudo rm -rf /var/lib/rancher/k3s/server/db/etcd
 ```
 
 Attempting any `kubectl` commands now will result in failure.
+
+
+```bash 
+kubectl get pods 
+```
 
 ---
 
