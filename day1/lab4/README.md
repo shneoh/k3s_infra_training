@@ -1,4 +1,4 @@
-# 🧪 Lab 4: Traefik Customization & HTTPS with Cert-Manager + Let's Encrypt
+# Lab 04: Traefik Customization & HTTPS with Cert-Manager + Let's Encrypt
 
 ## 🎯 Objective
 
