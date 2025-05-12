@@ -7,7 +7,7 @@ metadata:
    traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-    ## Change XX to your Student Number 
+    # Change XX your student Number
   - host: color.app.stuXX.steven.asia
     http:
       paths:
@@ -18,11 +18,6 @@ spec:
             name: kubiablue
             port: 
               number: 80
-              
-    # Change XX to your Student Number           
-  - host: color.app.stuXX.steven.asia
-    http:          
-      paths:
       - path: /red
         pathType: Prefix
         backend:
