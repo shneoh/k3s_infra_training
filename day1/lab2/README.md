@@ -131,7 +131,7 @@ sudo etcdctl --endpoints=$ENDPOINTS \
   --key=$KEY endpoint status --cluster --write-out=table
 ```
 
-These commands help identify etcd members, leader, and overall cluster health.
+* These commands help identify etcd members, leader, and overall cluster health.
 
 ---
 
@@ -165,20 +165,12 @@ sudo systemctl stop k3s
 sudo rm -rf /var/lib/rancher/k3s/server/db/etcd
 ```
 
-Attempting any `kubectl` commands now will result in failure.
+* Attempting any `kubectl` commands now will result in failure.
 
 
 ```bash 
 kubectl get pods 
 ```
-
-Attempting to start k3s server service will result in failure.
-
-
-```bash 
-sudo systemctl start k3s
-```
-
 
 ---
 
@@ -191,13 +183,13 @@ sudo systemctl stop k3s
 sudo rm -rf /var/lib/rancher/k3s/server/db/
 ```
 
-Then on node1 run the following:
+### ✅ Then on node1 run the following:
 
 ```bash
 sudo bash -c "ls -l /var/lib/rancher/k3s/server/db/snapshots/pre-*"
 ```
 
-Copy the path from above and run 
+* Copy the path from above and run 
 ```bash
 sudo  k3s server \
   --cluster-reset \
@@ -222,7 +214,7 @@ kubectl get svc
 kubectl get nodes
 ```
 
-Ensure the Vote App has returned and control plane is functional.
+* Ensure the Vote App has returned and control plane is functional.
 
 ---
 
