@@ -19,7 +19,7 @@ spec:
         app: app2-frontend-vote
     spec:
       nodeSelector:
-        "beta.kubernetes.io/os": linux
+        "kubernetes.io/os": linux
       containers:
       - name: app2-frontend-vote
         image: stv707/voteapp:v1
@@ -27,15 +27,15 @@ spec:
         - containerPort: 80
         resources:
           requests:
-            cpu: 250m
+            cpu: 50m
           limits:
-            cpu: 500m
+            cpu: 80m
         env:
         - name: REDIS
           value: app2-backend-vote
         - name: TITLE
-          value: "Ingress Test App2-Yokomo"
+          value: "Ingress Test App2-Bike"
         - name: VOTE1VALUE
-          value: YD2SXIII
+          value: YAMAHA
         - name: VOTE2VALUE
-          value: YD2Z
+          value: SUZUKI
