@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+  namespace: demo-app
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+    ## Change the XX to your student number
+  - host: web.app.stuXX.steven.asia
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web
+            port:
+              number: 80
+  tls:
+  - hosts:
+  ## Change the XX to your student number
+    - web.app.stuXX.steven.asia
+    secretName: web-tls
