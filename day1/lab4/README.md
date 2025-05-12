@@ -33,26 +33,6 @@ kubectl get pods -n cert-manager
 
 ## 🧩 Step 2: Create a ClusterIssuer (Let's Encrypt Staging)
 
-Save the following manifest as `clusterissuer-staging.yaml`:
-
-```yaml
-apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
-metadata:
-  name: letsencrypt-staging
-spec:
-  acme:
-    email: your@email.com
-    server: https://acme-staging-v02.api.letsencrypt.org/directory
-    privateKeySecretRef:
-      name: letsencrypt-staging
-    solvers:
-    - http01:
-        ingress:
-          class: traefik
-```
-
-Apply it:
 
 ```bash
 kubectl apply -f clusterissuer-staging.yaml
@@ -72,36 +52,16 @@ kubectl expose deployment web --port=80 --target-port=80 -n demo-app
 
 ---
 
-## 🧩 Step 4: Create an Ingress with TLS
+## 🧩 Step 4: Create a Traefik Middleware to enable http to httpd redirect
 
-Save this as `web-ingress.yaml`:
+Apply the middleware:
 
-```yaml
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: web-ingress
-  namespace: demo-app
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-staging
-    kubernetes.io/ingress.class: traefik
-spec:
-  rules:
-  - host: web.app.stuXX.steven.asia
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: web
-            port:
-              number: 80
-  tls:
-  - hosts:
-    - web.app.stuXX.steven.asia
-    secretName: web-tls
+```bash
+kubectl apply -f middleware-traefik.yaml
 ```
+---
+
+## 🧩 Step 5: Create an Ingress with TLS
 
 Apply the ingress:
 
@@ -111,7 +71,7 @@ kubectl apply -f web-ingress.yaml
 
 ---
 
-## ✅ Step 5: Verify Certificate Issuance
+## ✅ Step 6: Verify Certificate Issuance
 
 Check the certificate status:
 
@@ -142,6 +102,5 @@ kubectl delete clusterissuer letsencrypt-staging
 ## 📌 Notes
 
 - This lab uses Let's Encrypt **staging** environment to avoid rate limits during testing.
-- Replace `app.stuXX.steven.asia` with your actual DNS if testing manually.
 
 
