@@ -19,7 +19,13 @@ This lab demonstrates how services are exposed and routed in K3s using:
 
 ```bash
 kubectl apply -f kubia.yaml
+```
+
+```bash 
 kubectl apply -f kubia-svc.yaml
+```
+
+```bash 
 kubectl apply -f jump_tool_pod.yaml
 ```
 
