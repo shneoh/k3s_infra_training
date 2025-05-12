@@ -184,16 +184,34 @@ sudo systemctl start k3s
 
 ## 🔁 Restore from Snapshot
 
-### ✅ Run restore:
+### ✅ Run stop k3s on (node2 and node3) and remove db dir :
 
 ```bash
-sudo k3s etcd-snapshot restore --name pre-failure-snapshot
+sudo systemctl stop k3s 
+sudo rm -rf /var/lib/rancher/k3s/server/db/
 ```
 
-Then restart the k3s service:
+Then on node1 run the following:
 
 ```bash
-sudo systemctl restart k3s
+sudo bash -c "ls -l /var/lib/rancher/k3s/server/db/snapshots/pre-*"
+```
+
+Copy the path from above and run 
+```bash
+sudo  k3s server \
+  --cluster-reset \
+  --cluster-reset-restore-path=<PATH> 
+```
+>> You should see : Managed etcd cluster membership has been reset, restart without --cluster-reset flag now.
+
+```bash
+sudo systemctl start k3s 
+```
+
+* On node2 and node3 start the k3s 
+```bash
+sudo systemctl start k3s 
 ```
 
 ### ✅ Revalidate:
