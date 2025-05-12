@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1-frontend-vote
+  namespace: app1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app1-frontend-vote
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5 
+  template:
+    metadata:
+      labels:
+        app: app1-frontend-vote
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+      - name: app1-frontend-vote
+        image: stv707/voteapp:v1
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 50m
+          limits:
+            cpu: 80m
+        env:
+        - name: REDIS
+          value: app1-backend-vote
+        - name: TITLE
+          value: "Ingress Test App1-Car"
+        - name: VOTE1VALUE
+          value: Toyota
+        - name: VOTE2VALUE
+          value: Honda

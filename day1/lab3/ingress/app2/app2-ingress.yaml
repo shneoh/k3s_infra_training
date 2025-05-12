@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app2
+  namespace: app2
+  annotations:
+   #Comment the nginx class to use Azure http routing , uncomment addon-http-application-routing 
+   #kubernetes.io/ingress.class: "nginx"
+   kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+    # Change to app2.<azure_dns> 
+  - host: app2.03390d51bfc64fa188d4.eastasia.aksapp.io
+
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service: 
+            name: app2-frontend-vote
+            port: 
+              number: 80

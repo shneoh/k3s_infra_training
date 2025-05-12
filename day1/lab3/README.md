@@ -97,6 +97,8 @@ curl http://<PUBLIC_IP>:8081
 
 ## 💡 Lab03D: Ingress Routing (DNS-Based)
 
+* Setup app1 using DNS Ingress
+
 1. Deploy vote app v1 under app1 namespace:
 
 ```bash
@@ -127,7 +129,37 @@ kubectl get ingress -n app1
 http://app1.app.stuXX.steven.asia
 ```
 
-Repeat for `app2` using ingress/app2 and domain `app2.app.stuXX.steven.asia`
+* Setup app2 using DNS Ingress
+
+1. Deploy vote app v1 under app1 namespace:
+
+```bash
+cd ingress/app2
+kubectl apply -f app2-namespace.yaml
+kubectl apply -f app2-backend-vote.yaml
+kubectl apply -f app2-backend-service.yaml
+kubectl apply -f app2-frontend-vote.yaml
+kubectl apply -f app2-frontend-service.yaml
+```
+
+2. Edit `app2-ingress.yaml`:
+
+```yaml
+host: app2.app.stuXX.steven.asia
+```
+
+3. Apply ingress:
+
+```bash
+kubectl apply -f app2-ingress.yaml
+kubectl get ingress -n app2
+```
+
+4. Access in browser:
+
+```bash
+http://app2.app.stuXX.steven.asia
+```
 
 ---
 

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app2-backend-vote
+  namespace: app2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app2-backend-vote
+  template:
+    metadata:
+      labels:
+        app: app2-backend-vote
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+      - name: app2-backend-vote
+        image: redis
+        env:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
+        ports:
+        - containerPort: 6379
+          name: redis

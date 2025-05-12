@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app1
+  namespace: app1
+  annotations:
+   traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  rules:
+    ## CHANGE THE XX to your student number
+  - host: app1.app.stuXX.steven.asia
+
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service: 
+            name: app1-frontend-vote
+            port: 
+              number: 80

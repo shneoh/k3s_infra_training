@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: kubiablue
+  namespace: redblue
+spec:
+  replicas: 2
+  selector:
+    app: kubiablue
+  template:
+    metadata:
+      labels:
+        app: kubiablue
+    spec:
+      containers:
+      - name: kubiablue
+        image: stv707/kubiablue
+        ports:
+        - containerPort: 8080

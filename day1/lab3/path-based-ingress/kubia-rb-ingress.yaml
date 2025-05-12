@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kubiaredblue
+  namespace: redblue
+  annotations:
+   #Comment the nginx class to use Azure http routing , uncomment addon-http-application-routing 
+   #kubernetes.io/ingress.class: "nginx"
+   kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+    # Change to rb.<azure_dns> 
+  - host: rb.03390d51bfc64fa188d4.eastasia.aksapp.io
+    http:
+      paths:
+      - path: /blue
+        pathType: Prefix
+        backend:
+          service:
+            name: kubiablue
+            port: 
+              number: 80
+              
+    # Change to rb.<azure_dns>           
+  - host: rb.03390d51bfc64fa188d4.eastasia.aksapp.io
+    http:          
+      paths:
+      - path: /red
+        pathType: Prefix
+        backend:
+          service:
+            name: kubiared
+            port: 
+              number: 80
