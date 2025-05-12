@@ -83,8 +83,28 @@ kind: Service
 metadata:
   name: voteapp-frontend
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - port: 80
+    targetPort: 80
   selector:
     app: voteapp-frontend
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: voteapp-ingress
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  rules:
+  - host: voteapp.app.stuXX.steven.asia # CHANGE THE XX to your student number
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: voteapp-frontend
+            port:
+              number: 80

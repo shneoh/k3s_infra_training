@@ -25,7 +25,30 @@ cd k3s_infra_training/day1/lab2
 
 ### ✅ Step 2: Deploy the Vote App
 
-Ensure your cluster is running, then apply the app manifest:
+Ensure your cluster is running, then apply the app manifest
+>> Before applying the manifest file, update the manifest with your Student Number XX 
+
+```bash 
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: voteapp-ingress
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  rules:
+  - host: voteapp.app.stuXX.steven.asia # CHANGE THE XX to your student number
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: voteapp-frontend
+            port:
+              number: 80
+
+```
 
 ```bash
 kubectl apply -f voteapp.yaml
