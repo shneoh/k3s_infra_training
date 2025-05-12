@@ -172,6 +172,14 @@ Attempting any `kubectl` commands now will result in failure.
 kubectl get pods 
 ```
 
+Attempting to start k3s server service will result in failure.
+
+
+```bash 
+sudo systemctl start k3s
+```
+
+
 ---
 
 ## 🔁 Restore from Snapshot
