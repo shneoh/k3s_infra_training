@@ -26,7 +26,7 @@ cd k3s_infra_training/day1/lab2
 ### ✅ Step 2: Deploy the Vote App
 
 Ensure your cluster is running, then apply the app manifest
->> Before applying the manifest file, update the manifest with your Student Number XX 
+>> Before applying the manifest file, update the manifest with your Student Number XX in the ingress section
 
 ```bash 
 apiVersion: networking.k8s.io/v1
@@ -47,7 +47,6 @@ spec:
             name: voteapp-frontend
             port:
               number: 80
-
 ```
 
 ```bash
@@ -135,7 +134,7 @@ sudo etcdctl --endpoints=$ENDPOINTS \
 
 ---
 
-## 💾 Take an etcd Snapshot
+## 💾 Take an etcd Snapshot on your node1 (vmk3s001-stuXX)
 
 ```bash
 sudo k3s etcd-snapshot save --name pre-failure-snapshot
@@ -176,14 +175,14 @@ kubectl get pods
 
 ## 🔁 Restore from Snapshot
 
-### ✅ Run stop k3s on (node2 and node3) and remove db dir :
+### ✅ Run stop k3s on (vmk3s002-stuXX and vmk3s003-stuXX) and remove db dir :
 
 ```bash
 sudo systemctl stop k3s 
 sudo rm -rf /var/lib/rancher/k3s/server/db/
 ```
 
-### ✅ Then on node1 run the following:
+### ✅ Then on vmk3s001-stuXX run the following:
 
 ```bash
 sudo bash -c "ls -l /var/lib/rancher/k3s/server/db/snapshots/pre-*"
@@ -201,7 +200,7 @@ sudo  k3s server \
 sudo systemctl start k3s 
 ```
 
-* On node2 and node3 start the k3s 
+* On (vmk3s002-stuXX and vmk3s003-stuXX) start the k3s 
 ```bash
 sudo systemctl start k3s 
 ```
