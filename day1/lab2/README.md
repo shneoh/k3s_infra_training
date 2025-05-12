@@ -111,20 +111,24 @@ export KEY="/var/lib/rancher/k3s/server/tls/etcd/client.key"
 ### ✅ Run etcdctl Checks
 
 ```bash
-etcdctl --endpoints=$ENDPOINTS \
+sudo etcdctl --endpoints=$ENDPOINTS \
   --cacert=$CACERT \
   --cert=$CERT \
-  --key=$KEY member list
+  --key=$KEY member list --write-out=table
+```
 
-etcdctl --endpoints=$ENDPOINTS \
+```bash 
+sudo etcdctl --endpoints=$ENDPOINTS \
   --cacert=$CACERT \
   --cert=$CERT \
-  --key=$KEY endpoint health
+  --key=$KEY endpoint health --cluster --write-out=table
+```
 
-etcdctl --endpoints=$ENDPOINTS \
+```bash 
+sudo etcdctl --endpoints=$ENDPOINTS \
   --cacert=$CACERT \
   --cert=$CERT \
-  --key=$KEY endpoint status
+  --key=$KEY endpoint status --cluster --write-out=table
 ```
 
 These commands help identify etcd members, leader, and overall cluster health.
