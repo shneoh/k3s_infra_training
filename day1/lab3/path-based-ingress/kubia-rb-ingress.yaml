@@ -4,13 +4,11 @@ metadata:
   name: kubiaredblue
   namespace: redblue
   annotations:
-   #Comment the nginx class to use Azure http routing , uncomment addon-http-application-routing 
-   #kubernetes.io/ingress.class: "nginx"
-   kubernetes.io/ingress.class: addon-http-application-routing
+   traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-    # Change to rb.<azure_dns> 
-  - host: rb.03390d51bfc64fa188d4.eastasia.aksapp.io
+    ## Change XX to your Student Number 
+  - host: color.app.stuXX.steven.asia
     http:
       paths:
       - path: /blue
@@ -21,8 +19,8 @@ spec:
             port: 
               number: 80
               
-    # Change to rb.<azure_dns>           
-  - host: rb.03390d51bfc64fa188d4.eastasia.aksapp.io
+    # Change XX to your Student Number           
+  - host: color.app.stuXX.steven.asia
     http:          
       paths:
       - path: /red

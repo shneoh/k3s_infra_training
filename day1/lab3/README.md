@@ -131,7 +131,7 @@ http://app1.app.stuXX.steven.asia
 
 * Setup app2 using DNS Ingress
 
-1. Deploy vote app v1 under app1 namespace:
+1. Deploy vote app v1 under app2 namespace:
 
 ```bash
 cd ingress/app2
