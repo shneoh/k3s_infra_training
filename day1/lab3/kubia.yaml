@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: kubia
+  labels:
+    app: kubia
+spec:
+  replicas: 8
+  selector:
+    app: kubia
+  template:
+    metadata:
+      labels:
+        app: kubia
+    spec:
+      containers:
+      - name: kubia
+        image: stv707/kubia:v14
+        ports:
+        - containerPort: 8080
+          protocol: TCP

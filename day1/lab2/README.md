@@ -213,7 +213,7 @@ kubectl get svc
 kubectl get nodes
 ```
 
-* Ensure the Vote App has returned and control plane is functional.
+* Ensure the Vote App and control plane is functional.
 
 ---
 
