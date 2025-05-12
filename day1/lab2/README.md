@@ -44,14 +44,24 @@ Look for `voteapp-frontend` as a LoadBalancer service and all pods in Running st
 
 ## 🔧 etcdctl Installation
 
-Download and install the etcdctl binary as described in:
-[https://gist.github.com/skynet86/451c42ec3dc883e190aa7c57bc6c2acc](https://gist.github.com/skynet86/451c42ec3dc883e190aa7c57bc6c2acc)
+To simplify the process, we’ve provided a script to install the `etcdctl` binary for you.
 
-Key steps include:
+### ✅ Step 1: On the first control-plane node (vmk3s001-stuXX)
 
-* Downloading `etcdctl` from GitHub releases
-* Moving it to `/usr/local/bin`
-* Making it executable
+Navigate to the lab folder and run the install script:
+
+```bash
+cd k3s_infra_training/day1/lab2
+bash install_etcd.sh
+```
+
+This script will:
+
+* Download `etcdctl v3.5.5` from the official GitHub release
+* Extract it and move the binary to `/usr/local/bin`
+* Make it ready for use cluster-wide
+
+Once complete, proceed to the etcd inspection steps.
 
 ---
 
@@ -153,4 +163,3 @@ This lab showed:
 * How to inspect etcd cluster health using etcdctl
 * How to take and list snapshots
 * How to simulate failure and successfully recover a K3s control plane using a snapshot
-
