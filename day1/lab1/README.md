@@ -94,9 +94,6 @@ You should see all 3 nodes in `Ready` state and all control-plane components run
 
 ---
 
-
-
-
 ## 🧪 Verify the Power of the K3s Binary
 
 In this section, you will confirm that **K3s runs as a single binary**, packaging all core Kubernetes components into one lightweight executable.
@@ -176,6 +173,93 @@ Expected result:  nothing else K8s-specific
 ---
 
 
+## 🔎 Verifying K3s Embedded CNI (Flannel), CoreDNS, and Traefik
+
+### ✅ 1. Check if Flannel Interface Exists (CNI verification)
+
+```bash
+ip a | grep flannel
+```
+
+You should see an interface like `flannel.1`, confirming that the Flannel overlay network is active on the node.
+
+---
+
+### ✅ 2. Check K3s Logs for Flannel Activity
+
+```bash
+sudo journalctl -u k3s | grep flannel
+```
+
+Look for logs showing Flannel subnet assignments and initialization.
+
+---
+
+### ✅ 3. Check CNI Plugin Configuration
+
+```bash
+cat /etc/cni/net.d/10-flannel.conflist
+```
+
+Confirms that Flannel is installed and configured as the default CNI plugin.
+
+---
+
+## 🧪 Verify Default K3s System Components
+
+### ✅ 4. List All Pods in `kube-system` Namespace
+
+```bash
+kubectl get pods -n kube-system -o wide
+```
+
+Look for:
+
+* `coredns-*` → Kubernetes DNS
+* `traefik-*` → Ingress controller
+* `metrics-server-*` → Optional metrics service
+* `svclb-traefik-*` → LoadBalancer sidecar pods per node
+
+---
+
+### ✅ 5. Check CoreDNS Deployment Details
+
+```bash
+kubectl describe deployment coredns -n kube-system
+```
+
+This shows number of replicas, image used, and events such as health or restart behavior.
+
+---
+
+### ✅ 6. Verify CoreDNS Service Exposure
+
+```bash
+kubectl get svc -n kube-system
+```
+
+You should see:
+
+* `kube-dns` (a `ClusterIP` service) — backing CoreDNS.
+
+---
+
+### ✅ 7. Confirm Traefik is Running
+
+```bash
+kubectl get deploy -n kube-system | grep traefik
+```
+
+And check its service:
+
+```bash
+kubectl get svc -n kube-system | grep traefik
+```
+
+This should show a `LoadBalancer` or `ClusterIP` type service exposing the Ingress controller.
+
+---
+
 ### 📌 Key Takeaway
 
 K3s simplifies the Kubernetes control plane by embedding all core services into a single binary — reducing system overhead, simplifying management, and making HA setups easier to deploy and maintain.
@@ -192,6 +276,3 @@ To uninstall K3s on any node:
    ```
 
 ---
-
-
-
