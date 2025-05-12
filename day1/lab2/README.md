@@ -59,6 +59,7 @@ kubectl apply -f voteapp.yaml
 ```bash
 kubectl get pods -o wide
 kubectl get svc
+kubectl get ingress
 ```
 
 Look for `voteapp-frontend` as a LoadBalancer service and all pods in Running state.
