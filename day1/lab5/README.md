@@ -71,14 +71,23 @@ Use Kubernetes ConfigMaps to manage non-sensitive app configuration.
 
 ```bash
 kubectl create -f fortune-config.yaml
+```
+```sh 
 kubectl get configmaps
+```
+```sh
 kubectl get configmap fortune-config -o yaml
-
+```
+```sh
 cat fortune-pod-env-configmap.yaml
+```
+```sh
 kubectl apply -f fortune-pod-env-configmap.yaml
-
+```
+```sh
 kubectl get pods -o wide
-
+```
+```sh
 kubectl exec -it jump1 -- sh
 # curl <fortune_pod_ip>
 exit
