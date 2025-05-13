@@ -55,6 +55,14 @@ Wait for the pod to be in `Running` state.
 ### 2️⃣ Deploy Fluentd as DaemonSet
 
 ```bash
+kubectl apply -f fluentd/fluentd-serviceaccount.yaml
+```
+```sh 
+kubectl apply -f fluentd/fluentd-clusterrole.yaml
+kubectl apply -f fluentd/fluentd-clusterrolebinding.yaml
+
+```
+```sh 
 kubectl apply -f fluentd/fluentd-configmap.yaml
 ```
 
