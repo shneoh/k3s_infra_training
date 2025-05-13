@@ -1,0 +1,36 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: kibana-https-redirect
+  namespace: default
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kibana-ingress
+  namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.middlewares: default-kibana-https-redirect@kubernetescrd
+spec:
+  rules:
+  - host: kibana.app.stuXX.steven.asia  # 🔁 Change 'stuXX' to your student ID
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kibana
+            port:
+              number: 5601
+  tls:
+  - hosts:
+    - kibana.app.stuXX.steven.asia       # 🔁 Change 'stuXX' to your student ID
+    secretName: kibana-tls

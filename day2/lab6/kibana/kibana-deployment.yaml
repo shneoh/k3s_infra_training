@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kibana
+  labels:
+    app: kibana
 spec:
   replicas: 1
   selector:
@@ -19,4 +21,5 @@ spec:
         - containerPort: 5601
         env:
         - name: ELASTICSEARCH_HOSTS
-          value: "http://elasticsearch:9200"
+          value: "http://elasticsearch.default.svc:9200"
+

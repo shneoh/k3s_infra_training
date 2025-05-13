@@ -29,13 +29,11 @@ In this lab, you will deploy a full EFK (Elasticsearch, Fluentd, Kibana) logging
 ```sh
 kubectl apply -f elasticsearch/elasticsearch-service.yaml
 
-
 kubectl get svc elasticsearch
-
 ```
+
 ```sh
 kubectl apply -f elasticsearch/elasticsearch-statefulset.yaml
-
 
 kubectl get pod -o wide
 
@@ -59,22 +57,43 @@ kubectl apply -f fluentd/fluentd-serviceaccount.yaml
 ```
 ```sh 
 kubectl apply -f fluentd/fluentd-clusterrole.yaml
+```
+```sh
 kubectl apply -f fluentd/fluentd-clusterrolebinding.yaml
-
 ```
 ```sh 
 kubectl apply -f fluentd/fluentd-configmap.yaml
 ```
-
 ```bash 
 kubectl apply -f fluentd/fluentd-daemonset.yaml
 ```
-
 ```bash 
 kubectl get daemonsets -n kube-system | grep fluentd
 ```
 
 Make sure one Fluentd pod is running per node.
+
+--- 
+
+### Verify fluentd is sending logs to elasticsearch 
+
+```bash 
+kubectl -n kube-system get pods -l name=fluentd
+
+```
+
+```bash 
+kubectl exec -it jump1 -- sh
+# wget -qO- http://elasticsearch.default.svc:9200/_cat/indices?v
+health status index               uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   .geoip_databases    xoyVwlVuQHKx_Is08UPuLg   1   0         40            0     37.7mb         37.7mb
+yellow open   logstash-2025.05.13 5nhPNVpQQ7-7J-Dz8BjVnQ   1   1      33776            0      4.7mb          4.7mb
+
+# curl http://elasticsearch.default.svc:9200/logstash-*/_search?pretty
+
+# exit 
+```
+>> if you get a output, it means fluentd is sending logs to elasticsearch 
 
 ---
 
@@ -82,11 +101,18 @@ Make sure one Fluentd pod is running per node.
 
 ```bash
 kubectl apply -f kibana/kibana-deployment.yaml
+```
+```sh 
 kubectl apply -f kibana/kibana-service.yaml
+```
+```sh 
+kubectl apply -f kibana/kibana-ingress.yaml
+```
+```sh 
 kubectl get svc -l app=kibana
 ```
 
-Access Kibana via the exposed NodePort or Ingress.
+Access Kibana via the Ingress.
 
 ---
 
