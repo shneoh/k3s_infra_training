@@ -43,14 +43,22 @@ Inject configuration into a pod using environment variables.
 
 ```bash
 cat fortune-env/fortuneloop.sh
-cat fortune-env/fortune-pod-env.yaml
-kubectl create -f fortune-env/fortune-pod-env.yaml
+cat fortune-pod-env.yaml
+```
 
+```sh
+kubectl create -f fortune-pod-env.yaml
+```
+
+```sh 
 kubectl get pods -o wide
+```
 
+```sh 
 kubectl exec -it jump1 -- sh
 # curl <fortune_pod_ip>
 # watch -n1 curl <fortune_pod_ip>
+
 exit
 ```
 
