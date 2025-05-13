@@ -12,12 +12,13 @@ Welcome to the hands-on lab repository for the **K3s Infrastructure Track Traini
 Each participant will be provided access to their own Kubernetes cluster, hosted on a dedicated virtual environment.
 
 ---
-### 🚀 Optional Software 
+### 🚀 Software 
 
 The following software/cloud service may be useful in the labs and will make your life easier
 * VS Code - https://code.visualstudio.com/
 * Lens Desktop - https://k8slens.dev/
 * Git Hub - https://github.com/
+* kubectl - https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
 
 ---
 
@@ -61,6 +62,13 @@ Each cluster is isolated, and you’ll have full `sudo` access via the `droot` a
 
 ---
 
+# ⚠️ Warning ! 
+
+* Do not abuse the machine given
+* Any kind of Abuse will NOT be tolerated
+* You been warned !
+
+---
 >> Happy hacking! 🚧
 
  
