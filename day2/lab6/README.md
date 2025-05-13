@@ -141,21 +141,28 @@ kubectl get ingress kibana-ingress -o jsonpath="{.spec.rules[0].host}" | xargs -
 ### Configure Kibana index pattern
 ---
 ### Step1 
-
+![alt text](image.png)
 
 ---
 ### Step2
-
+![alt text](image-1.png)
 ---
 ### Step3
-
+![alt text](image-2.png)
 
 ---
 ### Step4
+![alt text](image-3.png)
+
+---
+### Step5
 
 
 ---
+### Step6
 
+
+---
 ### 4️⃣ Generate Logs
 
 ```bash
