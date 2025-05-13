@@ -26,6 +26,13 @@ spec:
           value: "elasticsearch.default.svc"
         - name: FLUENT_ELASTICSEARCH_PORT
           value: "9200"
+        - name: FLUENT_ELASTICSEARCH_USER
+          value: "elastic"
+        - name: FLUENT_ELASTICSEARCH_PASS
+          valueFrom:
+            secretKeyRef:
+              name: elastic-credentials
+              key: elastic
         resources:
           limits:
             memory: 200Mi

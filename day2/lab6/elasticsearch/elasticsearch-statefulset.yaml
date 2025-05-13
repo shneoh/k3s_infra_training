@@ -16,13 +16,6 @@ spec:
       containers:
       - name: elasticsearch
         image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
-        resources:
-          requests:
-            memory: "2Gi"
-            cpu: "500m"
-          limits:
-            memory: "2Gi"
-            cpu: "1000m"
         ports:
         - containerPort: 9200
           name: http
@@ -30,7 +23,14 @@ spec:
           name: transport
         env:
         - name: discovery.type
-          value: "single-node"
+          value: single-node
+        - name: xpack.security.enabled
+          value: "true"
+        - name: ELASTIC_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: elastic-credentials
+              key: elastic
         - name: ES_JAVA_OPTS
           value: "-Xms1g -Xmx1g"
         volumeMounts:

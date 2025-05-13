@@ -26,6 +26,11 @@ In this lab, you will deploy a full EFK (Elasticsearch, Fluentd, Kibana) logging
 
 ### 1️⃣ Deploy Elasticsearch
 
+```sh 
+kubectl create secret generic elastic-credentials --from-literal=elastic=MyElasticPassword123
+```
+
+
 ```sh
 kubectl apply -f elasticsearch/elasticsearch-service.yaml
 
@@ -51,6 +56,10 @@ Wait for the pod to be in `Running` state.
 ---
 
 ### 2️⃣ Deploy Fluentd as DaemonSet
+
+```sh 
+kubectl create secret -n kube-system generic elastic-credentials --from-literal=elastic=MyElasticPassword123 
+```
 
 ```bash
 kubectl apply -f fluentd/fluentd-serviceaccount.yaml
