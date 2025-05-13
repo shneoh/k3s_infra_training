@@ -21,38 +21,16 @@ In this lab, you will deploy a full EFK (Elasticsearch, Fluentd, Kibana) logging
 
 
 ---
-## 🧱 Lab Structure
-
-```
-lab6/
-├── elasticsearch/
-│   ├── elasticsearch-deployment.yaml
-│   └── elasticsearch-pvc.yaml
-├── fluentd/
-│   ├── fluentd-daemonset.yaml
-│   └── fluentd-configmap.yaml
-├── kibana/
-│   ├── kibana-deployment.yaml
-│   └── kibana-service.yaml
-├── test/
-│   └── log-generator-pod.yaml
-└── README.md
-```
-
----
 
 ## 🧩 Step-by-Step Instructions
 
 ### 1️⃣ Deploy Elasticsearch
 
-```bash
-kubectl apply -f elasticsearch/elasticsearch-pvc.yaml
-```
 ```sh
 kubectl apply -f elasticsearch/elasticsearch-service.yaml
 ```
 ```sh
-kubectl apply -f elasticsearch/elasticsearch-deployment.yaml
+kubectl apply -f elasticsearch/elasticsearch-statefulset.yaml
 ```
 ```sh 
 kubectl get pods -l app=elasticsearch
@@ -66,7 +44,13 @@ Wait for the pod to be in `Running` state.
 
 ```bash
 kubectl apply -f fluentd/fluentd-configmap.yaml
+```
+
+```bash 
 kubectl apply -f fluentd/fluentd-daemonset.yaml
+```
+
+```bash 
 kubectl get daemonsets -n kube-system | grep fluentd
 ```
 
