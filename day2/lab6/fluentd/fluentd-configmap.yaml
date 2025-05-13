@@ -8,10 +8,18 @@ data:
     <source>
       @type tail
       path /var/log/containers/*.log
-      pos_file /var/log/es-containers.log.pos
+      pos_file /var/log/fluentd-containers.log.pos
       tag kube.*
-      format json
       read_from_head true
+      <parse>
+        @type multi_format
+        <pattern>
+          format json
+        </pattern>
+        <pattern>
+          format none
+        </pattern>
+      </parse>
     </source>
 
     <filter kube.**>
@@ -20,8 +28,10 @@ data:
 
     <match **>
       @type elasticsearch
-      host elasticsearch
+      host elasticsearch.default.svc
       port 9200
       logstash_format true
+      include_tag_key true
       flush_interval 5s
+      reconnect_on_error true
     </match>

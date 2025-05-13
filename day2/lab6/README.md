@@ -28,10 +28,22 @@ In this lab, you will deploy a full EFK (Elasticsearch, Fluentd, Kibana) logging
 
 ```sh
 kubectl apply -f elasticsearch/elasticsearch-service.yaml
+
+
+kubectl get svc elasticsearch
+
 ```
 ```sh
 kubectl apply -f elasticsearch/elasticsearch-statefulset.yaml
+
+
+kubectl get pod -o wide
+
+kubectl get pv
+
+kubectl get pvc 
 ```
+
 ```sh 
 kubectl get pods -l app=elasticsearch
 ```

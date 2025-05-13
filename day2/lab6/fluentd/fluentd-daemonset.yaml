@@ -3,6 +3,8 @@ kind: DaemonSet
 metadata:
   name: fluentd
   namespace: kube-system
+  labels:
+    k8s-app: fluentd-logging
 spec:
   selector:
     matchLabels:
@@ -21,9 +23,15 @@ spec:
         image: fluent/fluentd-kubernetes-daemonset:v1.13.3-debian-elasticsearch7-1.0
         env:
         - name: FLUENT_ELASTICSEARCH_HOST
-          value: "elasticsearch"
+          value: "elasticsearch.default.svc"
         - name: FLUENT_ELASTICSEARCH_PORT
           value: "9200"
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
         volumeMounts:
         - name: varlog
           mountPath: /var/log
