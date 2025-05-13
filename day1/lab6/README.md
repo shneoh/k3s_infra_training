@@ -1,1 +1,1 @@
-# MYINIT LAB TEMPLATE
+# ? Want more LAB? Go to Day2 !
