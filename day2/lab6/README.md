@@ -47,7 +47,14 @@ lab6/
 
 ```bash
 kubectl apply -f elasticsearch/elasticsearch-pvc.yaml
+```
+```sh
+kubectl apply -f elasticsearch/elasticsearch-service.yaml
+```
+```sh
 kubectl apply -f elasticsearch/elasticsearch-deployment.yaml
+```
+```sh 
 kubectl get pods -l app=elasticsearch
 ```
 
