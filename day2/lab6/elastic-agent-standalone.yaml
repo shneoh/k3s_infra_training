@@ -12,7 +12,7 @@ data:
       default:
         type: elasticsearch
         hosts:
-          - 'http://localhost:9200'
+          - 'http://elasticsearch.default.svc:9200'
         username: '{ES_USERNAME}'
         password: '{ES_PASSWORD}'
     inputs:
