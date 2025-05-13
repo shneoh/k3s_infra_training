@@ -6,6 +6,21 @@ In this lab, you will deploy a full EFK (Elasticsearch, Fluentd, Kibana) logging
 
 ---
 
+## Before you start, please trace any previous lab activity and delete them to free some resources
+
+```sh 
+  kubectl get namespaces
+```
+```sh 
+  kubectl delete namespaces app1
+  kubectl delete namespaces app2
+  kubectl delete namespaces redblue
+  kubectl delete ns demo-app
+```
+>> The reason is to free resources and to keep the env clean for our next lab progress. 
+
+
+---
 ## 🧱 Lab Structure
 
 ```
