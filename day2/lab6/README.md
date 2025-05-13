@@ -30,7 +30,6 @@ In this lab, you will deploy a full EFK (Elasticsearch, Fluentd, Kibana) logging
 kubectl create secret generic elastic-credentials --from-literal=elastic=MyElasticPassword123
 ```
 
-
 ```sh
 kubectl apply -f elasticsearch/elasticsearch-service.yaml
 ```
@@ -133,7 +132,27 @@ kubectl apply -f kibana/kibana-ingress.yaml
 kubectl get svc -l app=kibana
 ```
 
-Access Kibana via the Ingress.
+### Access Kibana via the Ingress.
+
+```sh 
+kubectl get ingress kibana-ingress -o jsonpath="{.spec.rules[0].host}" | xargs -I{} echo "https://{}"
+```
+
+### Configure Kibana index pattern
+---
+### Step1 
+
+
+---
+### Step2
+
+---
+### Step3
+
+
+---
+### Step4
+
 
 ---
 

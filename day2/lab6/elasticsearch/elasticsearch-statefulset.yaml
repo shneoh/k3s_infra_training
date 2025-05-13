@@ -26,6 +26,16 @@ spec:
           value: single-node
         - name: xpack.security.enabled
           value: "true"
+        - name: xpack.security.authc.api_key.enabled
+          value: "true"
+        - name: monitoring.ui.container.elasticsearch.enabled
+          value: "true"
+        - name: xpack.encryptedSavedObjects.encryptionKey
+          value: "f9cd92d3834129433fb0404740b5e89c"
+        - name: xpack.reporting.encryptionKey
+          value: "e3de4fcf3fb5e6f973ce024121ead576"
+        - name: xpack.security.encryptionKey
+          value: "4afebd157537e0f1b2c0b8deddff6b68" 
         - name: ELASTIC_PASSWORD
           valueFrom:
             secretKeyRef:
