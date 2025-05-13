@@ -95,12 +95,15 @@ kubectl -n kube-system get pods -l name=fluentd
 
 ```bash 
 kubectl exec -it jump1 -- sh
-# wget -qO- http://elasticsearch.default.svc:9200/_cat/indices?v
+
+# export ES_USER=elastic
+# export ES_PASS=MyElasticPassword123
+# url -u $ES_USER:$ES_PASS http://elasticsearch.default.svc:9200/_cat/indices?v
 health status index               uuid                   pri rep docs.count docs.deleted store.size pri.store.size
 green  open   .geoip_databases    xoyVwlVuQHKx_Is08UPuLg   1   0         40            0     37.7mb         37.7mb
 yellow open   logstash-2025.05.13 5nhPNVpQQ7-7J-Dz8BjVnQ   1   1      33776            0      4.7mb          4.7mb
 
-# curl http://elasticsearch.default.svc:9200/logstash-*/_search?pretty
+# curl -u $ES_USER:$ES_PASS http://elasticsearch.default.svc:9200/logstash-*/_search?pretty
 
 # exit 
 ```
