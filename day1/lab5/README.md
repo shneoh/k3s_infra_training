@@ -13,19 +13,25 @@ Understand how to pass startup arguments to a container in Kubernetes.
 
 ```bash
 cat fortune-args/fortuneloop.sh
-cat fortune-args/fortune-pod-args.yaml
+cat fortune-pod-args.yaml
 # Modify the ARG value to change behavior
-kubectl apply -f fortune-args/fortune-pod-args.yaml
+kubectl apply -f fortune-pod-args.yaml
+```
 
+```bash 
 kubectl get pods -o wide
 # Note the IP address of fortune pod
+```
 
+```bash 
 kubectl exec -it jump1 -- sh
 # curl <fortune_pod_ip>
 # watch -n1 curl <fortune_pod_ip>
 exit
+```
 
-kubectl delete -f fortune-args/fortune-pod-args.yaml
+```bash 
+kubectl delete -f fortune-pod-args.yaml
 ```
 
 ---
