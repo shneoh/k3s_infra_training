@@ -102,24 +102,40 @@ Mount files from a ConfigMap into a container.
 
 ```bash
 kubectl delete configmap fortune-config
+```
 
+```sh
 ls -l configmap-files/
 cat configmap-files/my-nginx-config.conf
 cat configmap-files/sleep-interval
+```
 
+```sh
 kubectl create configmap fortune-config --from-file=configmap-files
+```
+```sh
 kubectl get configmap fortune-config -o yaml
-
+```
+```sh
 cat fortune-pod-configmap-volume.yaml
+```
+```sh
 kubectl create -f fortune-pod-configmap-volume.yaml
-
+```
+```sh
 kubectl get pods -o wide
-
+```
+```sh
 kubectl exec -it jump1 -- sh
 # curl -H "Accept-Encoding: gzip" -I <POD_IP>
 # exit
+```
 
+```sh
 kubectl exec fortune-configmap-volume -c web-server -- ls /etc/nginx/conf.d
+```
+
+```sh
 kubectl exec fortune-configmap-volume -c web-server -- ls /tmp/whole-fortune-config-volume
 ```
 
@@ -132,30 +148,46 @@ Use Kubernetes Secrets to securely store and use TLS certificates.
 
 ```bash
 kubectl delete configmap fortune-config
+```
+
+```sh
 cd fortune-https/
+```
 
 # Generate TLS certificate
+```sh
 openssl genrsa -out https.key 2048
 openssl req -new -x509 -key https.key -out https.cert -days 3650 -subj /CN=www.kubia-example.com
+```
 
+```sh
 # Create secret from key + cert
 kubectl create secret generic fortune-https --from-file=https.key --from-file=https.cert --from-file=foo
 kubectl get secret fortune-https -o yaml
-
+```
+```sh
 ls -l configmap-files-https/
 cat configmap-files-https/my-nginx-config.conf
 cat configmap-files/sleep-interval
+```
 
+```sh
 kubectl create configmap fortune-config --from-file=configmap-files-https
-kubectl apply -f fortune-https/fortune-pod-https.yaml
-
+```
+```sh
+kubectl apply -f fortune-pod-https.yaml
+```
+```sh
 kubectl get pods -o wide
-
+```
+```sh
 kubectl exec -it jump1 -- sh
 # curl https://<fortune-https_pod_ip> -k
 # curl https://<fortune-https_pod_ip> -k -v
 # exit
+```
 
+```sh
 kubectl exec fortune-https -c web-server -- mount | grep certs
 ```
 
@@ -167,4 +199,3 @@ kubectl exec fortune-https -c web-server -- mount | grep certs
 - Use **env variables** for lightweight configuration.
 - Use **ConfigMaps** for non-sensitive external config.
 - Use **Secrets** for sensitive data like passwords and TLS certs.
-- Apply Kubernetes RBAC and best practices for security and control.
