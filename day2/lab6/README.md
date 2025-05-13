@@ -123,7 +123,7 @@ kubectl apply -f kibana/kibana-service.yaml
 
 ## IMPORTANT, before applying kibana-ingress.yaml, edit the file and change the domain name!! 
 >> host: kibana.app.stuXX.steven.asia  # 🔁 Change 'stuXX' to your student ID
->> - kibana.app.stuXX.steven.asia      # 🔁 Change 'stuXX' to your student ID
+>> kibana.app.stuXX.steven.asia      # 🔁 Change 'stuXX' to your student ID
 
 ```sh 
 kubectl apply -f kibana/kibana-ingress.yaml
