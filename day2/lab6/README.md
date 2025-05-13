@@ -33,13 +33,15 @@ kubectl create secret generic elastic-credentials --from-literal=elastic=MyElast
 
 ```sh
 kubectl apply -f elasticsearch/elasticsearch-service.yaml
-
+```
+```sh 
 kubectl get svc elasticsearch
 ```
 
 ```sh
 kubectl apply -f elasticsearch/elasticsearch-statefulset.yaml
-
+```
+```sh 
 kubectl get pod -o wide
 
 kubectl get pv
