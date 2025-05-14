@@ -111,7 +111,7 @@ Log in using:
 * **Username**: `elastic`
 * **Password**: use the value retrieved earlier
 
- >> ```sh kubectl get secret efk-es-elastic-user -n logging -o go-template='{{.data.elastic | base64decode}}' ```
+ >> **kubectl get secret efk-es-elastic-user -n logging -o go-template='{{.data.elastic | base64decode}}'**
 ---
 
 ### 6️⃣ Deploy Fluentd
