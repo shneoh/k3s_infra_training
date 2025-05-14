@@ -77,10 +77,10 @@ Apply `kibana.yaml` manifest:
 kubectl apply -f kibana/kibana.yaml
 ```
 
-Wait for the Kibana pod to be in `Running` state:
+Wait for the Kibana and elastic pod to be in `Running` state and shows `1/1 READY`:
 
 ```sh
-kubectl get pods -n logging -l kibana.k8s.elastic.co/name=kibana
+kubectl get pod -n logging --watch 
 ```
 
 ---
