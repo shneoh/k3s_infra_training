@@ -37,10 +37,10 @@ Deploy a 3-node High Availability (HA) K3s cluster using embedded etcd with prop
   ```bash 
     curl -sfL https://get.k3s.io | K3S_TOKEN="SECRET" sh -s - server \
     --cluster-init \
-    --tls-san kubeapi.stu01.steven.asia \
-    --tls-san vmk3s001-stu01 \
+    --tls-san kubeapi.stuXX.steven.asia \
+    --tls-san vmk3s001-stuXX \
     --tls-san 10.0.0.5 \
-    --node-name vmk3s001-stu01 \
+    --node-name vmk3s001-stuXX \
     --write-kubeconfig-mode 644 \
     --etcd-expose-metrics \
     --kube-controller-manager-arg bind-address=0.0.0.0 \
@@ -79,7 +79,7 @@ Deploy a 3-node High Availability (HA) K3s cluster using embedded etcd with prop
 
     ssh vmk3s003-stuXX
     ````
-    
+
   ```bash
     curl -sfL https://get.k3s.io | K3S_TOKEN=SECRET sh -s - server \
     --server https://kubeapi.stuXX.steven.asia:6443 \
