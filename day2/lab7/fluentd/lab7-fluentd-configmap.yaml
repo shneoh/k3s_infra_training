@@ -55,6 +55,9 @@ data:
       @type kubernetes_metadata
     </filter>
 
+    #############################################################################
+    # If you want to try specific syslog from journald, you can use this filter #
+    #############################################################################
     # <filter k3slogs>
     #   @type record_transformer
     #   enable_ruby true
@@ -64,7 +67,10 @@ data:
     #     component ${record["_COMM"]}
     #   </record>
     # </filter>
+    #############################################################################
 
+
+    
     <match kube.**>
       @type elasticsearch
       host "#{ENV['FLUENT_ELASTICSEARCH_HOST']}"

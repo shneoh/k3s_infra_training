@@ -152,10 +152,9 @@ kubectl exec -it fluentd-XXXXX -n logging  -- sh
 # 
 # curl -u $FLUENT_ELASTICSEARCH_USER:$FLUENT_ELASTICSEARCH_PASS http://$FLUENT_ELASTICSEARCH_HOST:$FLUENT_ELASTICSEARCH_PORT/_cat/indices?v
 
-health status index               uuid                   pri rep docs.count docs.deleted store.size pri.store.size
-green  open   .geoip_databases    xoyVwlVuQHKx_Is08UPuLg   1   0         40            0     37.7mb         37.7mb
-yellow open   logstash-2025.05.13 5nhPNVpQQ7-7J-Dz8BjVnQ   1   1      33776            0      4.7mb          4.7mb
-
+health status index                           uuid                    pri rep docs.count docs.deleted store.size pri.store.size dataset.size
+yellow open   fluentd-container-2025.05.14    rZ_dH4toSaiA7V7Fw2Om8w   1   1       1879            0    953.2kb        953.2kb      953.2kb
+yellow open   fluentd-syslog-2025.05.14       o9DIpxbHREimHjBwThesuQ   1   1       1482            0    374.1kb        374.1kb      374.1kb
 
 # exit 
 ```
