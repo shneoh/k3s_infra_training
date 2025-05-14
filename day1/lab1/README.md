@@ -281,6 +281,35 @@ This should show a `LoadBalancer` or `ClusterIP` type service exposing the Ingre
 
 ---
 
+### ✅ 8. Install kube-state-metrics
+
+* By Default any Kubernetes deployment will not have kube-state-metrics by default, you can install an instance to 
+gather kubernetes core metrics ( used in later modules )
+
+>> In k3s, metric-server is installed by default, but it will only provide telemetry of nodes and pods 
+
+```bash 
+git clone https://github.com/stv707/k3s_infra_training.git
+```
+```sh 
+cd k3s_infra_training/day1/lab1
+```
+
+```sh 
+kubectl apply -d kube-state-metrics/. 
+```
+
+* Verify kube-state-metrics is up and running 
+```sh 
+kubectl get deployments.apps -n kube-system
+```
+
+```sh 
+kubectl get pod -n kube-system -l app.kubernetes.io/name=kube-state-metrics
+```
+
+
+--- 
 ### 📌 Key Takeaway
 
 K3s simplifies the Kubernetes control plane by embedding all core services into a single binary — reducing system overhead, simplifying management, and making HA setups easier to deploy and maintain.
