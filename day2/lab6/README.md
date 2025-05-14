@@ -163,10 +163,6 @@ yellow open   logstash-2025.05.13 5nhPNVpQQ7-7J-Dz8BjVnQ   1   1      33776     
 
 ---
 
-
-
----
-
 ### 7️⃣ Generate Logs for Testing
 
 ```sh
@@ -178,7 +174,7 @@ kubectl get pods -l app=log-generator
 ```
 
 ```sh
-kubectl logs -f <log-generator-pod-name>
+kubectl logs -f log-generator
 ```
 
 ---
@@ -187,36 +183,10 @@ kubectl logs -f <log-generator-pod-name>
 
 1. Open Kibana via browser.
 2. Navigate to **Discover** tab.
-3. Create an index pattern (e.g., `fluentd-*`).
-4. Search and filter logs.
+3. Create an index pattern (e.g., `fluentd-container*`).
+4. Search and filter logs. using KQL 
 
----
-
-### 9️⃣ Cleanup (Optional)
-
-```sh
-kubectl delete -f test/log-generator-pod.yaml
+```kql
+kubernetes.pod_name : "log-generator"
 ```
-
-```sh
-kubectl delete -f kibana.yaml
-```
-
-```sh
-kubectl delete -f elasticsearch.yaml
-```
-
-```sh
-kubectl delete -f kibana-ingress.yaml
-```
-
----
-
-## 🧠 Notes
-
-* ECK makes deploying and managing the Elastic stack much easier on Kubernetes.
-* Passwords are stored in Kubernetes secrets.
-* Kibana is secured by default, use the `elastic` user to log in.
-* Use `kubectl port-forward` if you don't want Ingress access.
-
 ---
