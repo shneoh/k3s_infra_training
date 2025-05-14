@@ -18,11 +18,13 @@ Ensure the following before proceeding:
 
 1. **Persistent journald logs enabled**:
 
+   * You need to run this command(s) on all nodes ( vmk3s001-stuXX, vmk3s002-stuXX, vmk3s003-stuXX )
+
    ```sh
-   mkdir -p /var/log/journal
-   systemd-tmpfiles --create --prefix /var/log/journal
-   systemctl restart systemd-journald
-   journalctl --disk-usage
+   sudo mkdir -p /var/log/journal
+   sudo systemd-tmpfiles --create --prefix /var/log/journal
+   sudo systemctl restart systemd-journald
+   sudo journalctl --disk-usage
    ```
 
    > This ensures logs survive node reboots and are accessible to FluentD.
@@ -140,20 +142,4 @@ Then watch in Discover.
 
 ---
 
-## 🚀 Outcome
-
-By the end of this lab, students will:
-
-* Understand how to collect system-level logs from journald
-* Route logs into Elasticsearch via FluentD
-* Build real dashboards in Kibana from K3s control plane logs
-* Set up monitoring triggers based on log content
-
----
-
-Lab 7 complete when:
-
-* [ ] FluentD deployed with systemd input
-* [ ] Index `k3slogs-*` visible
-* [ ] Data View created in Kibana
-* [ ] Charts and/or alerts demonstrated
+## 🚀 END 
