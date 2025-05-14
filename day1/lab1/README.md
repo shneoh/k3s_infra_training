@@ -33,17 +33,23 @@ Deploy a 3-node High Availability (HA) K3s cluster using embedded etcd with prop
     ````
 
 2. **Run the following on `vmk3s001-stuXX` (the first/master node):**
-
-    ```bash
-    curl -sfL https://get.k3s.io | K3S_TOKEN=SECRET sh -s - server \
+  
+  ```bash 
+    curl -sfL https://get.k3s.io | K3S_TOKEN="SECRET" sh -s - server \
     --cluster-init \
-    --tls-san kubeapi.stuXX.steven.asia \
-    --tls-san vmk3s001-stuXX \
+    --tls-san kubeapi.stu01.steven.asia \
+    --tls-san vmk3s001-stu01 \
     --tls-san 10.0.0.5 \
-    --node-name vmk3s001-stuXX \
-    --write-kubeconfig-mode 644
-    ```
+    --node-name vmk3s001-stu01 \
+    --write-kubeconfig-mode 644 \
+    --etcd-expose-metrics \
+    --kube-controller-manager-arg bind-address=0.0.0.0 \
+    --kube-scheduler-arg bind-address=0.0.0.0 \
+    --kube-proxy-arg metrics-bind-address=0.0.0.0:10249
+
+  ```
 > ⚠️ Replace `stuXX` with your actual student number (e.g., `stu01`, `stu02`, etc.)
+
 3. **On terminal 2 , access `vmk3s002-stuXX`:**
 
     ```bash
@@ -52,15 +58,19 @@ Deploy a 3-node High Availability (HA) K3s cluster using embedded etcd with prop
     ssh vmk3s002-stuXX
     ````
 
-    ```bash
+  ```bash
     curl -sfL https://get.k3s.io | K3S_TOKEN=SECRET sh -s - server \
     --server https://kubeapi.stuXX.steven.asia:6443 \
     --tls-san kubeapi.stuXX.steven.asia \
     --tls-san vmk3s002-stuXX \
     --tls-san 10.0.0.6 \
     --node-name vmk3s002-stuXX \
-    --write-kubeconfig-mode 644
-    ```
+    --write-kubeconfig-mode 644 \
+    --kube-controller-manager-arg bind-address=0.0.0.0 \
+    --kube-scheduler-arg bind-address=0.0.0.0 \
+    --kube-proxy-arg metrics-bind-address=0.0.0.0:10249
+
+  ```
 > ⚠️ Replace `stuXX` with your actual student number (e.g., `stu01`, `stu02`, etc.)
 4. **On terminal 3 , access `vmk3s003-stuXX`:**
 
@@ -69,15 +79,20 @@ Deploy a 3-node High Availability (HA) K3s cluster using embedded etcd with prop
 
     ssh vmk3s003-stuXX
     ````
-    ```bash
+    
+  ```bash
     curl -sfL https://get.k3s.io | K3S_TOKEN=SECRET sh -s - server \
     --server https://kubeapi.stuXX.steven.asia:6443 \
     --tls-san kubeapi.stuXX.steven.asia \
     --tls-san vmk3s003-stuXX \
     --tls-san 10.0.0.7 \
     --node-name vmk3s003-stuXX \
-    --write-kubeconfig-mode 644
-    ```
+    --write-kubeconfig-mode 644 \
+    --kube-controller-manager-arg bind-address=0.0.0.0 \
+    --kube-scheduler-arg bind-address=0.0.0.0 \
+    --kube-proxy-arg metrics-bind-address=0.0.0.0:10249
+
+  ```
 
 > ⚠️ Replace `stuXX` with your actual student number (e.g., `stu01`, `stu02`, etc.)
 
