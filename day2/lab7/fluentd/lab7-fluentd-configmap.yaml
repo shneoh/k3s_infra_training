@@ -35,10 +35,12 @@ data:
 
     <source>
       @type systemd
-      filters [{ "_SYSTEMD_UNIT": "k3s.service" }]
+      path /var/log/journal
       tag k3slogs
       read_from_head true
+      filters [{ "_SYSTEMD_UNIT": "k3s.service" }]
     </source>
+
 
     <filter kube.**>
       @type kubernetes_metadata
