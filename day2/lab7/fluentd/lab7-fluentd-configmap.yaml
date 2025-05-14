@@ -44,15 +44,15 @@ data:
       @type kubernetes_metadata
     </filter>
 
-    <filter k3slogs>
-      @type record_transformer
-      enable_ruby true
-      <record>
-        node_name ${record["MESSAGE"].match(/Node ([^ ]+)/) && $1}
-        node_status ${record["MESSAGE"].match(/is (NotReady|Ready)/) && $1}
-        component ${record["_COMM"]}
-      </record>
-    </filter>
+    # <filter k3slogs>
+    #   @type record_transformer
+    #   enable_ruby true
+    #   <record>
+    #     node_name ${record["MESSAGE"].match(/Node ([^ ]+)/) && $1}
+    #     node_status ${record["MESSAGE"].match(/is (NotReady|Ready)/) && $1}
+    #     component ${record["_COMM"]}
+    #   </record>
+    # </filter>
 
     <match kube.**>
       @type elasticsearch
