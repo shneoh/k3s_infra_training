@@ -43,14 +43,13 @@ data:
       port "#{ENV['FLUENT_ELASTICSEARCH_PORT']}"
       user "#{ENV['FLUENT_ELASTICSEARCH_USER']}"
       password "#{ENV['FLUENT_ELASTICSEARCH_PASS']}"
-      logstash_format false
-      index_name fluentd-container-%Y.%m.%d
+      logstash_format true
+      logstash_prefix fluentd-container
       include_tag_key true
+      include_timestamp true
       scheme http
       flush_interval 5s
       reconnect_on_error true
-      time_key @timestamp
-      time_key_format %Y-%m-%dT%H:%M:%S.%NZ
     </match>
 
     <match syslog>
@@ -59,12 +58,11 @@ data:
       port "#{ENV['FLUENT_ELASTICSEARCH_PORT']}"
       user "#{ENV['FLUENT_ELASTICSEARCH_USER']}"
       password "#{ENV['FLUENT_ELASTICSEARCH_PASS']}"
-      logstash_format false
-      index_name fluentd-syslog-%Y.%m.%d
+      logstash_format true
+      logstash_prefix fluentd-syslog
       include_tag_key true
+      include_timestamp true
       scheme http
       flush_interval 5s
       reconnect_on_error true
-      time_key @timestamp
-      time_key_format %Y-%m-%dT%H:%M:%S.%NZ
     </match>
