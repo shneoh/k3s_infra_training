@@ -103,7 +103,7 @@ kubectl get ingress -n logging
 Visit:
 
 ```bash 
-kubectl get ingress kibana-ingress -n logging -o jsonpath="{.spec.rules[0].host}" | xargs -I{} echo "http://{}"
+kubectl get ingress kibana-ingress -n logging -o jsonpath="{.spec.rules[0].host}" | xargs -I{} echo "https://{}"
 ```
 
 Log in using:
