@@ -286,7 +286,7 @@ This should show a `LoadBalancer` or `ClusterIP` type service exposing the Ingre
 * By Default any Kubernetes deployment will not have kube-state-metrics, you can install an instance to 
 gather kubernetes core metrics ( used in later modules )
 
->> In k3s, metric-server is installed by default, but it will only provide telemetry of nodes and pods 
+  >> In k3s, metric-server is installed by default, but it will only provide telemetry of nodes and pods 
 
 ```bash 
 git clone https://github.com/stv707/k3s_infra_training.git
