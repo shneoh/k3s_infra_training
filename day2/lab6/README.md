@@ -105,6 +105,7 @@ Visit:
 ```sh
 echo "https://kibana.app.stuXX.steven.asia"
 ```
+>> Replace the XX with your student ID 
 
 Log in using:
 
@@ -115,13 +116,54 @@ Log in using:
 
 ### 6️⃣ Deploy Fluentd
 
-💡 Make sure to configure Fluentd properly to point to:
+💡 Make sure
 
+```bash
+kubectl apply -f fluentd/fluentd-serviceaccount.yaml
 ```
-efk-es-http.logging.svc:9200
+```sh 
+kubectl apply -f fluentd/fluentd-clusterrole.yaml
 ```
 
-(You can reuse the original Fluentd config here, or ask Wolfden for an updated version)
+```sh 
+kubectl apply -f fluentd/fluentd-clusterrolebinding.yaml
+```
+```sh 
+kubectl apply -f fluentd/fluentd-configmap.yaml
+```
+```bash 
+kubectl apply -f fluentd/fluentd-daemonset.yaml
+```
+```bash 
+kubectl get daemonsets -n kube-system | grep fluentd
+```
+
+```sh 
+kubectl -n kube-system get pods -l name=fluentd
+```
+
+```bash 
+kubectl exec -it jump1 -- sh
+```
+
+```sh 
+# export ES_USER=elastic
+# export ES_PASS=MyElasticPassword123
+# curl -u $ES_USER:$ES_PASS http://elasticsearch.default.svc:9200/_cat/indices?v
+health status index               uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   .geoip_databases    xoyVwlVuQHKx_Is08UPuLg   1   0         40            0     37.7mb         37.7mb
+yellow open   logstash-2025.05.13 5nhPNVpQQ7-7J-Dz8BjVnQ   1   1      33776            0      4.7mb          4.7mb
+
+# curl -u $ES_USER:$ES_PASS http://elasticsearch.default.svc:9200/logstash-*/_search?pretty
+
+
+# exit 
+```
+>> if you get a output, it means fluentd is sending logs to elasticsearch 
+
+---
+
+
 
 ---
 
