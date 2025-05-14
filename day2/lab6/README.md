@@ -37,11 +37,11 @@ kubectl delete ns demo-app
 ### 1️⃣ Install Elastic Operator
 
 ```sh
-kubectl create -f https://download.elastic.co/downloads/eck/3.0.0/crds.yaml
+kubectl create -f eck-ops/crds.yaml
 ```
 
 ```sh
-kubectl apply -f https://download.elastic.co/downloads/eck/3.0.0/operator.yaml
+kubectl apply -f eck-ops/operator.yaml
 ```
 
 ---
@@ -102,16 +102,16 @@ kubectl get ingress -n logging
 
 Visit:
 
-```sh
-echo "https://kibana.app.stuXX.steven.asia"
+```bash 
+kubectl get ingress kibana-ingress -n logging -o jsonpath="{.spec.rules[0].host}" | xargs -I{} echo "http://{}"
 ```
->> Replace the XX with your student ID 
 
 Log in using:
 
 * **Username**: `elastic`
 * **Password**: use the value retrieved earlier
 
+ >> ```sh kubectl get secret efk-es-elastic-user -n logging -o go-template='{{.data.elastic | base64decode}}' ```
 ---
 
 ### 6️⃣ Deploy Fluentd
