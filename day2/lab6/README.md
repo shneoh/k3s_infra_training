@@ -116,7 +116,7 @@ Log in using:
 
 ### 6️⃣ Deploy Fluentd
 
-💡 Make sure
+💡 Make sure elastic and kibana are fully functional
 
 ```bash
 kubectl apply -f fluentd/fluentd-serviceaccount.yaml
