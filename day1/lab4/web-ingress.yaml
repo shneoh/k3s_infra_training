@@ -5,7 +5,6 @@ metadata:
   namespace: demo-app
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-staging
-    kubernetes.io/ingress.class: traefik
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     # MUST be <namespace>-<name>@kubernetescrd
     traefik.ingress.kubernetes.io/router.middlewares: demo-app-web-ingress@kubernetescrd
