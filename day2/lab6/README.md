@@ -135,11 +135,11 @@ kubectl apply -f fluentd/fluentd-configmap.yaml
 kubectl apply -f fluentd/fluentd-daemonset.yaml
 ```
 ```bash 
-kubectl get daemonsets -n kube-system | grep fluentd
+kubectl get daemonsets -n logging | grep fluentd
 ```
 
 ```sh 
-kubectl -n kube-system get pods -l name=fluentd
+kubectl -n logging get pods -l name=fluentd
 ```
 
 ```bash 

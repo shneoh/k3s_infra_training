@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: fluentd
-  namespace: kube-system
+  namespace: logging
   labels:
     k8s-app: fluentd-logging
 spec:
@@ -23,7 +23,7 @@ spec:
         image: fluent/fluentd-kubernetes-daemonset:v1.13.3-debian-elasticsearch7-1.0
         env:
         - name: FLUENT_ELASTICSEARCH_HOST
-          value: "elasticsearch.default.svc"
+          value: "efk-es-http.logging.svc"
         - name: FLUENT_ELASTICSEARCH_PORT
           value: "9200"
         - name: FLUENT_ELASTICSEARCH_USER
@@ -44,6 +44,9 @@ spec:
           mountPath: /var/log
         - name: containers
           mountPath: /var/log/containers
+        - name: syslog
+          mountPath: /var/log/syslog
+          readOnly: true
         - name: config-volume
           mountPath: /fluentd/etc
       volumes:
@@ -53,6 +56,9 @@ spec:
       - name: containers
         hostPath:
           path: /var/log/containers
+      - name: syslog
+        hostPath:
+          path: /var/log/syslog
       - name: config-volume
         configMap:
           name: fluentd-config
