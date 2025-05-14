@@ -70,11 +70,30 @@ kubectl -n logging get pods -l name=fluentd
 
 ### 2️⃣ Confirm Logs in Elasticsearch
 
-Run the following from a pod or jump host with curl:
+Run the following from a fluentd pod :
 
-```sh
-curl -u $ES_USER:$ES_PASS http://efk-es-http.logging.svc:9200/_cat/indices?v
+```sh 
+kubectl -n logging get pods -l name=fluentd
 ```
+
+```bash 
+kubectl exec -it fluentd-XXXXX -n logging  -- sh
+```
+>> use any of the pod from previous output 
+
+```sh 
+# apt-get update && apt-get install curl -y
+# 
+# curl -u $FLUENT_ELASTICSEARCH_USER:$FLUENT_ELASTICSEARCH_PASS http://$FLUENT_ELASTICSEARCH_HOST:$FLUENT_ELASTICSEARCH_PORT/_cat/indices?v
+
+health status index               uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   .geoip_databases    xoyVwlVuQHKx_Is08UPuLg   1   0         40            0     37.7mb         37.7mb
+yellow open   logstash-2025.05.13 5nhPNVpQQ7-7J-Dz8BjVnQ   1   1      33776            0      4.7mb          4.7mb
+
+
+# exit 
+```
+>> if you get a output, it means fluentd is sending logs to elasticsearch 
 
 You should see an index named:
 
