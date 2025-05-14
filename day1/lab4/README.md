@@ -68,6 +68,7 @@ Apply the ingress:
 ```bash
 kubectl apply -f web-ingress.yaml
 ```
+>> edit the file web-ingress.yaml and update your stuXX number!! 
 
 ---
 
@@ -85,6 +86,7 @@ Then open your browser and navigate to:
 ```
 https://web.app.stuXX.steven.asia
 ```
+>> replace XX with your student number
 
 If everything is successful, you should see the **nginx welcome page** served over HTTPS with a valid certificate (from Let's Encrypt staging).
 

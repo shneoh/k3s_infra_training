@@ -93,7 +93,6 @@ Deploy a 3-node High Availability (HA) K3s cluster using embedded etcd with prop
     --kube-proxy-arg metrics-bind-address=0.0.0.0:10249
 
   ```
-
 > ⚠️ Replace `stuXX` with your actual student number (e.g., `stu01`, `stu02`, etc.)
 
 ---
@@ -106,6 +105,13 @@ After installing on all three nodes:
   ```
 
 You should see all 3 nodes in `Ready` state and all control-plane components running.
+>> enable kubectl auto completion 
+
+```sh 
+echo 'source <(kubectl completion bash)' >> ~/.bashrc
+source ~/.bashrc
+```
+
 
 ---
 
