@@ -38,8 +38,17 @@ data:
       path /var/log/journal
       tag k3slogs
       read_from_head true
-      filters [{ "_SYSTEMD_UNIT": "k3s.service" }]
+      matches [{ "_SYSTEMD_UNIT": "k3s.service" }]
+      <storage>
+        @type local
+        path /var/log/fluentd-journald-k3s-cursor.json
+      </storage>
+      <entry>
+        fields_strip_underscores true
+        fields_lowercase true
+      </entry>
     </source>
+
 
 
     <filter kube.**>
