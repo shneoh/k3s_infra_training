@@ -31,7 +31,7 @@ spec:
         - name: FLUENT_ELASTICSEARCH_PASS
           valueFrom:
             secretKeyRef:
-              name: elastic-credentials
+              name: efk-es-elastic-user
               key: elastic
         resources:
           limits:

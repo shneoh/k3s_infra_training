@@ -43,8 +43,8 @@ data:
       port "#{ENV['FLUENT_ELASTICSEARCH_PORT']}"
       user "#{ENV['FLUENT_ELASTICSEARCH_USER']}"
       password "#{ENV['FLUENT_ELASTICSEARCH_PASS']}"
+      logstash_format false
       index_name fluentd-container-%Y.%m.%d
-      logstash_format true
       include_tag_key true
       scheme http
       flush_interval 5s
@@ -57,8 +57,8 @@ data:
       port "#{ENV['FLUENT_ELASTICSEARCH_PORT']}"
       user "#{ENV['FLUENT_ELASTICSEARCH_USER']}"
       password "#{ENV['FLUENT_ELASTICSEARCH_PASS']}"
+      logstash_format false
       index_name fluentd-syslog-%Y.%m.%d
-      logstash_format true
       include_tag_key true
       scheme http
       flush_interval 5s
