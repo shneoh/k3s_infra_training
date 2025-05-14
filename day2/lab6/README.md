@@ -2,203 +2,267 @@
 
 ## 🎯 Objective
 
-In this lab, you will deploy a full EFK (Elasticsearch, Fluentd, Kibana) logging stack on a K3s cluster. This will enable centralized log collection, search, and visualization from Kubernetes pods.
+In this lab, you will deploy a full EFK (Elasticsearch, Fluentd, Kibana) logging stack on a K3s cluster using Elastic Cloud on Kubernetes (ECK). This enables centralized log collection, search, and visualization from Kubernetes pods.
 
 ---
 
-## Before you start, please trace any previous lab activity and delete them to free some resources
+## 🔄 Cleanup Before Starting
 
-```sh 
-  kubectl get namespaces
-```
-```sh 
-  kubectl delete namespaces app1
-  kubectl delete namespaces app2
-  kubectl delete namespaces redblue
-  kubectl delete ns demo-app
-```
->> The reason is to free resources and to keep the env clean for our next lab progress. 
+Clean up previous labs to free up resources:
 
+```sh
+kubectl get namespaces
+````
+
+```sh
+kubectl delete namespaces app1
+```
+
+```sh
+kubectl delete namespaces app2
+```
+
+```sh
+kubectl delete namespaces redblue
+```
+
+```sh
+kubectl delete ns demo-app
+```
 
 ---
 
 ## 🧩 Step-by-Step Instructions
 
-### 1️⃣ Deploy Elasticsearch
+### 1️⃣ Install Elastic Operator
 
-```sh 
-kubectl create secret generic elastic-credentials --from-literal=elastic=MyElasticPassword123
+```sh
+kubectl create -f https://download.elastic.co/downloads/eck/3.0.0/crds.yaml
 ```
 
 ```sh
-kubectl apply -f elasticsearch/elasticsearch-service.yaml
+kubectl apply -f https://download.elastic.co/downloads/eck/3.0.0/operator.yaml
 ```
-```sh 
-kubectl get svc elasticsearch
-```
+
+---
+
+### 2️⃣ Deploy Elasticsearch
 
 ```sh
-kubectl apply -f elasticsearch/elasticsearch-statefulset.yaml
-```
-```sh 
-kubectl get pod -o wide
-
-kubectl get pv
-
-kubectl get pvc 
+kubectl create namespace logging
 ```
 
-```sh 
-kubectl get pods -l app=elasticsearch
+Create a file called `elasticsearch.yaml` with the following content:
+
+```yaml
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: efk
+  namespace: logging
+spec:
+  version: 8.11.3
+  nodeSets:
+  - name: default
+    count: 1
+    config:
+      node.store.allow_mmap: false
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true
 ```
 
-Wait for the pod to be in `Running` state.
+Apply it:
 
----
-
-### 2️⃣ Deploy Fluentd as DaemonSet
-
-```sh 
-kubectl create secret -n kube-system generic elastic-credentials --from-literal=elastic=MyElasticPassword123 
-```
-
-```bash
-kubectl apply -f fluentd/fluentd-serviceaccount.yaml
-```
-```sh 
-kubectl apply -f fluentd/fluentd-clusterrole.yaml
-```
 ```sh
-kubectl apply -f fluentd/fluentd-clusterrolebinding.yaml
+kubectl apply -f elasticsearch.yaml
 ```
-```sh 
-kubectl apply -f fluentd/fluentd-configmap.yaml
-```
-```bash 
-kubectl apply -f fluentd/fluentd-daemonset.yaml
-```
-```bash 
-kubectl get daemonsets -n kube-system | grep fluentd
-```
-
-Make sure one Fluentd pod is running per node.
-
---- 
-
-### Verify fluentd is sending logs to elasticsearch 
-
-```bash 
-kubectl -n kube-system get pods -l name=fluentd
-
-```
-
-```bash 
-kubectl exec -it jump1 -- sh
-
-# export ES_USER=elastic
-# export ES_PASS=MyElasticPassword123
-# curl -u $ES_USER:$ES_PASS http://elasticsearch.default.svc:9200/_cat/indices?v
-health status index               uuid                   pri rep docs.count docs.deleted store.size pri.store.size
-green  open   .geoip_databases    xoyVwlVuQHKx_Is08UPuLg   1   0         40            0     37.7mb         37.7mb
-yellow open   logstash-2025.05.13 5nhPNVpQQ7-7J-Dz8BjVnQ   1   1      33776            0      4.7mb          4.7mb
-
-# curl -u $ES_USER:$ES_PASS http://elasticsearch.default.svc:9200/logstash-*/_search?pretty
-
-# exit 
-```
->> if you get a output, it means fluentd is sending logs to elasticsearch 
 
 ---
 
-### 3️⃣ Deploy Kibana
+### 3️⃣ Retrieve `elastic` Password
 
-```bash
-kubectl apply -f kibana/kibana-deployment.yaml
-```
-```sh 
-kubectl apply -f kibana/kibana-service.yaml
+```sh
+kubectl get secret efk-es-elastic-user -n logging -o go-template='{{.data.elastic | base64decode}}'
 ```
 
+---
 
-## IMPORTANT, before applying kibana-ingress.yaml, edit the file and change the domain name!! 
->> host: kibana.app.stuXX.steven.asia  # 🔁 Change 'stuXX' to your student ID
+### 4️⃣ Deploy Kibana
 
->> kibana.app.stuXX.steven.asia      # 🔁 Change 'stuXX' to your student ID
+Create a file called `kibana.yaml` with this content:
 
-```sh 
-kubectl apply -f kibana/kibana-ingress.yaml
+```yaml
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: kibana
+  namespace: logging
+spec:
+  version: 8.11.3
+  count: 1
+  elasticsearchRef:
+    name: efk
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true
 ```
-```sh 
-kubectl get svc -l app=kibana
+
+Apply it:
+
+```sh
+kubectl apply -f kibana.yaml
 ```
 
-### Access Kibana via the Ingress.
+Wait for the Kibana pod to be in `Running` state:
 
-```sh 
-kubectl get ingress kibana-ingress -o jsonpath="{.spec.rules[0].host}" | xargs -I{} echo "https://{}"
+```sh
+kubectl get pods -n logging -l kibana.k8s.elastic.co/name=kibana
 ```
 
-### Configure Kibana index pattern
 ---
-### Step1 
-![alt text](image.png)
+
+### 5️⃣ Create Ingress for Kibana
+
+Create a file called `kibana-ingress.yaml` and update the domain to match your student ID:
+
+```yaml
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: kibana-https-redirect
+  namespace: logging
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kibana-ingress
+  namespace: logging
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.middlewares: logging-kibana-https-redirect@kubernetescrd
+spec:
+  rules:
+  - host: kibana.app.stuXX.steven.asia  # 🔁 Replace stuXX
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kibana-kb-http
+            port:
+              number: 5601
+  tls:
+  - hosts:
+    - kibana.app.stuXX.steven.asia
+    secretName: kibana-tls
+```
+
+Then apply it:
+
+```sh
+kubectl apply -f kibana-ingress.yaml
+```
+
+Verify:
+
+```sh
+kubectl get ingress -n logging
+```
+
+Visit:
+
+```sh
+echo "https://kibana.app.stuXX.steven.asia"
+```
+
+Log in using:
+
+* **Username**: `elastic`
+* **Password**: use the value retrieved earlier
 
 ---
-### Step2
-![alt text](image-1.png)
----
-### Step3
-![alt text](image-2.png)
+
+### 6️⃣ Deploy Fluentd
+
+💡 Make sure to configure Fluentd properly to point to:
+
+```
+efk-es-http.logging.svc:9200
+```
+
+(You can reuse the original Fluentd config here, or ask Wolfden for an updated version)
 
 ---
-### Step4
-![alt text](image-3.png)
 
----
-### Step5
+### 7️⃣ Generate Logs for Testing
 
-
----
-### Step6
-
-
----
-### 4️⃣ Generate Logs
-
-```bash
+```sh
 kubectl apply -f test/log-generator-pod.yaml
+```
+
+```sh
 kubectl get pods -l app=log-generator
+```
+
+```sh
 kubectl logs -f <log-generator-pod-name>
 ```
 
-This will create visible log data for Fluentd to collect.
+---
+
+### 8️⃣ Validate Logs in Kibana
+
+1. Open Kibana via browser.
+2. Navigate to **Discover** tab.
+3. Create an index pattern (e.g., `fluentd-*`).
+4. Search and filter logs.
 
 ---
 
-### 5️⃣ Validate in Kibana
+### 9️⃣ Cleanup (Optional)
 
-1. Open the Kibana dashboard in a browser.
-2. Configure an index pattern (e.g., `fluentd-*`).
-3. Query logs in Discover tab and validate log flow.
-
----
-
-### 6️⃣ Cleanup (Optional)
-
-```bash
+```sh
 kubectl delete -f test/log-generator-pod.yaml
-kubectl delete -f kibana/
-kubectl delete -f fluentd/
-kubectl delete -f elasticsearch/
+```
+
+```sh
+kubectl delete -f kibana.yaml
+```
+
+```sh
+kubectl delete -f elasticsearch.yaml
+```
+
+```sh
+kubectl delete -f kibana-ingress.yaml
 ```
 
 ---
 
 ## 🧠 Notes
 
-- Elasticsearch requires persistent storage. Tune requests/limits in production.
-- Fluentd config must match log format written by container runtime (usually containerd in K3s).
-- Ensure `log-generator` is writing logs to `stdout` to be picked up by Fluentd.
-- Kibana can be exposed using NodePort or Ingress with TLS in production.
+* ECK makes deploying and managing the Elastic stack much easier on Kubernetes.
+* Passwords are stored in Kubernetes secrets.
+* Kibana is secured by default, use the `elastic` user to log in.
+* Use `kubectl port-forward` if you don't want Ingress access.
 
-
+---
