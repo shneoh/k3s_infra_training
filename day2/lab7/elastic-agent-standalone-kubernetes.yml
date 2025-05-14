@@ -1028,7 +1028,7 @@ spec:
       #        mountPath: /etc/elastic-agent/inputs.d
       containers:
         - name: elastic-agent
-          image: docker.elastic.co/beats/elastic-agent:9.0.1
+          image: elastic/elastic-agent:9.0.1
           args: ["-c", "/etc/elastic-agent/agent.yml", "-e"]
           env:
             # The basic authentication username used to connect to Elasticsearch
