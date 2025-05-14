@@ -52,40 +52,10 @@ kubectl apply -f https://download.elastic.co/downloads/eck/3.0.0/operator.yaml
 kubectl create namespace logging
 ```
 
-Create a file called `elasticsearch.yaml` with the following content:
-
-```yaml
-apiVersion: elasticsearch.k8s.elastic.co/v1
-kind: Elasticsearch
-metadata:
-  name: efk
-  namespace: logging
-spec:
-  version: 8.11.3
-  nodeSets:
-  - name: default
-    count: 1
-    config:
-      node.store.allow_mmap: false
-    volumeClaimTemplates:
-    - metadata:
-        name: elasticsearch-data
-      spec:
-        accessModes:
-        - ReadWriteOnce
-        resources:
-          requests:
-            storage: 5Gi
-  http:
-    tls:
-      selfSignedCertificate:
-        disabled: true
-```
-
-Apply it:
+Apply `elasticsearch.yaml` manifest:
 
 ```sh
-kubectl apply -f elasticsearch.yaml
+kubectl apply -f elasticsearch/elasticsearch.yaml
 ```
 
 ---
@@ -100,29 +70,11 @@ kubectl get secret efk-es-elastic-user -n logging -o go-template='{{.data.elasti
 
 ### 4️⃣ Deploy Kibana
 
-Create a file called `kibana.yaml` with this content:
+Apply `kibana.yaml` manifest:
 
-```yaml
-apiVersion: kibana.k8s.elastic.co/v1
-kind: Kibana
-metadata:
-  name: kibana
-  namespace: logging
-spec:
-  version: 8.11.3
-  count: 1
-  elasticsearchRef:
-    name: efk
-  http:
-    tls:
-      selfSignedCertificate:
-        disabled: true
-```
-
-Apply it:
 
 ```sh
-kubectl apply -f kibana.yaml
+kubectl apply -f kibana/kibana.yaml
 ```
 
 Wait for the Kibana pod to be in `Running` state:
@@ -135,51 +87,11 @@ kubectl get pods -n logging -l kibana.k8s.elastic.co/name=kibana
 
 ### 5️⃣ Create Ingress for Kibana
 
-Create a file called `kibana-ingress.yaml` and update the domain to match your student ID:
+Edit `kibana/kibana-ingress.yaml`  Update the domain to match your student ID and  Apply `kibana-ingress.yaml` :
 
-```yaml
----
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: kibana-https-redirect
-  namespace: logging
-spec:
-  redirectScheme:
-    scheme: https
-    permanent: true
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: kibana-ingress
-  namespace: logging
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-staging
-    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-    traefik.ingress.kubernetes.io/router.middlewares: logging-kibana-https-redirect@kubernetescrd
-spec:
-  rules:
-  - host: kibana.app.stuXX.steven.asia  # 🔁 Replace stuXX
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: kibana-kb-http
-            port:
-              number: 5601
-  tls:
-  - hosts:
-    - kibana.app.stuXX.steven.asia
-    secretName: kibana-tls
-```
-
-Then apply it:
 
 ```sh
-kubectl apply -f kibana-ingress.yaml
+kubectl apply -f kibana/kibana-ingress.yaml
 ```
 
 Verify:
