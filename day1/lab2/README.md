@@ -26,7 +26,7 @@ cd k3s_infra_training/day1/lab2
 ### ✅ Step 2: Deploy the Vote App
 
 Ensure your cluster is running, then apply the app manifest
->> Before applying the manifest file, update the manifest with your Student Number XX in the ingress section
+>> Before applying the voteapp.yaml manifest file, update the manifest with your Student Number XX in the ingress section
 
 ```bash 
 apiVersion: networking.k8s.io/v1
