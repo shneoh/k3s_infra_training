@@ -277,6 +277,11 @@ And check its service:
 kubectl get svc -n kube-system | grep traefik
 ```
 
+```bash 
+kubectl -n kube-system patch deployment traefik -p '{"spec": {"replicas": 3}}'
+```
+>> Since we have 3 node, we want to ensure, traefik ingress runs on all 3 node
+
 This should show a `LoadBalancer` or `ClusterIP` type service exposing the Ingress controller.
 
 ---
@@ -308,6 +313,29 @@ kubectl get deployments.apps -n kube-system
 kubectl get pod -n kube-system -l app.kubernetes.io/name=kube-state-metrics
 ```
 
+
+
+### ✅ 9. Install longhorn Distributed CSI
+
+* By Default any k3s uses local-path as a default storage (csi ) Provider
+
+  >> In k3s you can install longhorn to support true HA 
+
+```bash 
+kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.8.1/deploy/longhorn.yaml
+```
+```sh 
+kubectl patch storageclass local-path -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "false"}}}'
+```
+
+```sh 
+kubectl get sc
+```
+
+* Verify kube-state-metrics is up and running 
+```sh 
+kubectl get all -n longhorn-system
+```
 
 --- 
 ### 📌 Key Takeaway
