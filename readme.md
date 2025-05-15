@@ -73,7 +73,7 @@ Each cluster is isolated, and you’ll have full `sudo` access via the `droot` a
 ---
 
 * 🧪 Do NOT attempt any lab exercise unless explicitly instructed by Steven.
-  >> Some labs have interdependencies, and jumping ahead without supervision will break things — and you own the mess you create.
+  >> Some labs have interdependencies, and jumping ahead without supervision will break things — and if you break things, then you own the mess you create.
 ---
 
 * 👊 This is your only warning.
