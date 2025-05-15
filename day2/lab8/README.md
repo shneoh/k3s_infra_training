@@ -20,33 +20,74 @@ Ensure the following before proceeding:
 
 ### 1️⃣ Login to Kibana Dashboard
 
----
-
-### 2️⃣ Navigate to “Fleet” under Management
-
----
-
-### 3️⃣ Setup Fleet (if not done already)
+* in case you need the password and the default username `elastic` 
+```sh 
+kubectl get secret efk-es-elastic-user -n logging -o go-template='{{.data.elastic | base64decode}}'
+```
+![alt text](image.png)
 
 
----
-
-### 4️⃣ Download the Elastic Agent Installation Command
 
 ---
 
-### 5️⃣ Deploy Elastic Agent as a DaemonSet in K3s
+### 2️⃣ Navigate to `Add Integrations` under Menu
+
+![alt text](image-1.png)
+
 
 ---
 
-### 6️⃣ Verify Elastic Agent is Running on All Nodes
+### 3️⃣ Add Kubernetes Integrations
+
+
+![alt text](image-2.png)
 
 ---
 
-### 7️⃣ Navigate to “Integrations” and Search for Kubernetes
+![alt text](image-3.png)
+
 
 ---
 
+### 4️⃣ Select all the Collection and `Save and Continue`
+
+![alt text](image-4.png)
+
+
+---
+
+### 5️⃣ Once Kubernetes Integrations added, select `Add Elastic Agent to yout hosts`
+![alt text](image-5.png)
+
+---
+
+
+### 6️⃣ Under Add Agent, select `Run Standalone` and `Copy the Yaml Manifest to your editor` 
+
+* name the file as `elastic-agent-standalone-kubernetes.yml`
+
+
+![alt text](image-6.png)
+
+
+---
+
+### 7️⃣ You need to add/update 3 directive in the agent manifest before running it
+---
+
+
+
+---
+
+
+---
+
+
+
+---
+
+
+---
 ### 8️⃣ Add the Kubernetes Integration to Fleet
 
 ---
