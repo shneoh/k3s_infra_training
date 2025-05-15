@@ -1,14 +1,8 @@
-# Lab 07: FluentD System Log Collection with K3s Journald
+# Lab 07: FluentD System Log Collection 
 
 ## 🌟 Objective
 
 In this lab, you will configure FluentD to collect logs directly from the K3s system journal (`journald`) using the `systemd` input plugin. The goal is to parse control plane logs (including kubelet, kube-apiserver, etc.) from `k3s.service` and push them into Elasticsearch for centralized search and analysis in Kibana.
-
-You will create dashboards and alerts around:
-
-* Node status changes (e.g., `NotReady`, `Ready`)
-* Control plane errors (e.g., pod sandbox failures)
-* API server warnings and etcd-related events
 
 ---
 
@@ -28,6 +22,7 @@ Ensure the following before proceeding:
    ```
 
    > This ensures logs survive node reboots and are accessible to FluentD.
+   > This a linux core functionality ( journald )
 
 2. Previous FluentD resources must be deleted:
 
@@ -35,8 +30,10 @@ Ensure the following before proceeding:
    kubectl delete daemonset fluentd -n logging
    kubectl delete configmap fluentd-config -n logging
    ```
+   > We will implement more robust fluentd log parsing/filtering
 
 3. FluentD should run under the `logging` namespace.
+   > in lab6, you have already created logging namespace !
 
 ---
 
@@ -138,28 +135,6 @@ Use the Discover and Dashboard tabs to explore:
 
 * Raw k3s logs (structured and filterable)
 * Group by severity level or keyword match
-
----
-
-## ⚠️ Alerts (Optional)
-
-Use Kibana's **Alerting > Rules** section to define:
-
-* Rule: If `message` contains `Node .* is NotReady` in last 5 minutes
-* Action: Log to Kibana or notify (if alerting stack is configured)
-
----
-
-## 🔍 Verification
-
-You can simulate events using `logger`:
-
-```sh
-logger "Node vmk3s001-stu01 is NotReady"
-logger "E1001 Failed to pull image busybox"
-```
-
-Then watch in Discover.
 
 ---
 
