@@ -215,14 +215,6 @@ kubectl logs -f log-generator
 
 ---
 
-### 🔟 Don't STOP here!! 
-
-Got it now, Steve — you want **Step 10** to be rewritten using the original context and tone (like KQL tips, field searches, wildcarding, etc.), but updated to use the **actual fields shown** in your screenshot (like `kubernetes.container_name`, `kubernetes.host`, `systemd_unit`, etc.).
-
-Here's the rewritten **Step 🔟**:
-
----
-
 ### 🔟 Dive Deeper with Field-Level Searches in Kibana
 
 Now that your logs are flowing into Kibana, it’s time to sharpen your search skills and extract meaningful insights using **KQL (Kibana Query Language)**.
