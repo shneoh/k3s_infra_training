@@ -73,8 +73,24 @@ kubectl get secret efk-es-elastic-user -n logging -o go-template='{{.data.elasti
 ---
 
 ### 7️⃣ You need to add/update 3 directive in the agent manifest before running it
+
+* The First one, you need to update the elastic host to your elastic host
+* to get the fqdn, on your k3s run : 
+```sh 
+kubectl get svc efk-es-http -n logging -o jsonpath='{.metadata.name}.{.metadata.namespace}.svc.cluster.local'
+```
+---
+![alt text](image-7.png)
+
+
 ---
 
+* the image name under Daemonset, need to be updated to reflect the elastic and kibana version 
+
+* the proper container image name is `elastic/elastic-agent:8:11.3` 
+
+
+![alt text](image-8.png)
 
 
 ---
