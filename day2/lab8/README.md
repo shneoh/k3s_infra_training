@@ -29,7 +29,6 @@ Ensure the following before proceeding:
 ### 3️⃣ Setup Fleet (if not done already)
 
 
-
 ---
 
 ### 4️⃣ Download the Elastic Agent Installation Command

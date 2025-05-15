@@ -180,12 +180,142 @@ kubectl logs -f log-generator
 ---
 ### 8️⃣ Validate Logs in Kibana
 
-1. Open Kibana via browser.
-2. Navigate to **Discover** tab.
-3. Create an index pattern (e.g., `fluentd-container*`).
-4. Search and filter logs. using KQL 
+* Add `fluentd-container*` indices into the DataView
+
+1. Go to **Kibana > Stack Management > Data Views**
+2. Click **"Create data view"**
+3. Enter `ContainerLogs` as Name
+3. Enter: `fluentd-container*` in Index Pattern
+4. Set **Time field**: `@timestamp`
+5. Save
+
+* Add `fluentd-syslog*` indices into the DataView
+
+1. Go to **Kibana > Stack Management > Data Views**
+2. Click **"Create data view"**
+3. Enter `SystemLogs` as Name
+3. Enter: `fluentd-syslog*` in Index Pattern
+4. Set **Time field**: `@timestamp`
+5. Save
+
+* Explore the Logs in Discover View
+
+1. While in Kibana , navigate the Menu.
+2. Navigate to Discover tab.
+3. At the top left corner, you should able to see the Logs
+
+---
+
+### 9️⃣ Filter in Kibana for container that is producing Log `EFK Lab Log`
+
+1. While in Discover
+2. in the Filter write `kubernetes.pod_name : "log-generator"`
+3. Clear the filter
+4. in the Filter write `kubernetes.pod_name : "log-generator" and message : "*EFK Lab Log*"`
+
+---
+
+### 🔟 Don't STOP here!! 
+
+Got it now, Steve — you want **Step 10** to be rewritten using the original context and tone (like KQL tips, field searches, wildcarding, etc.), but updated to use the **actual fields shown** in your screenshot (like `kubernetes.container_name`, `kubernetes.host`, `systemd_unit`, etc.).
+
+Here's the rewritten **Step 🔟**:
+
+---
+
+### 🔟 Dive Deeper with Field-Level Searches in Kibana
+
+Now that your logs are flowing into Kibana, it’s time to sharpen your search skills and extract meaningful insights using **KQL (Kibana Query Language)**.
+
+You can use **field-level filters** and **free-text searches** to zero in on specific container logs, Elasticsearch node roles, or system-level activity from your K3s cluster.
+
+---
+
+#### 🔍 Free-Text Search
+
+Run this in the Discover search bar:
 
 ```kql
-kubernetes.pod_name : "log-generator"
+"vm.max_map_count"
 ```
+
+It will match any log message containing the text `vm.max_map_count`.
+
+> **Note:** Quotes make it an exact match. No quotes = partial/fuzzy match.
+
 ---
+
+#### 🔎 Field-Level Queries
+
+Here are some real field-based searches based on your current schema:
+
+| Goal                                                | Query                                                                   |
+| --------------------------------------------------- | ----------------------------------------------------------------------- |
+| Show all logs from container named `elasticsearch`  | `kubernetes.container_name : "elasticsearch"`                           |
+| Match containers using image `elasticsearch:8.11.3` | `kubernetes.container_image : "*elasticsearch*"`                        |
+| Logs from a specific K3s node                       | `kubernetes.host : "vmk3s001-stu01"`                                    |
+| All logs from master-eligible Elasticsearch nodes   | `kubernetes.labels.elasticsearch.k8s.elastic.co/node-master : "true"`   |
+| Logs from hot data Elasticsearch nodes              | `kubernetes.labels.elasticsearch.k8s.elastic.co/node-data_hot : "true"` |
+
+---
+
+#### 🧠 Wildcard Matching
+
+KQL supports `*` and `?` for wildcards:
+
+```kql
+kubernetes.container_image : "*beat*"
+```
+
+Would match containers running any Beats (e.g., filebeat, metricbeat).
+
+---
+
+#### ⚠️ System-Level Log Search
+
+You can find logs from systemd using:
+
+```kql
+systemd_unit : "k3s.service"
+```
+
+Or search across **all Elasticsearch-related units**:
+
+```kql
+systemd_unit : "*elasticsearch*"
+```
+
+---
+
+#### ✅ Existence Check
+
+Want to find logs that contain a specific field?
+
+```kql
+_exists_ : kubernetes.labels.elasticsearch.k8s.elastic.co/node-master
+```
+
+---
+
+#### 🔁 Range Queries
+
+Example to find logs by `uid` if it's numeric:
+
+```kql
+uid : [1000 TO 2000]
+```
+
+---
+
+#### 🧨 Pro Tip
+
+Want to find logs that are **not** from the data-hot nodes?
+
+```kql
+NOT kubernetes.labels.elasticsearch.k8s.elastic.co/node-data_hot : "true"
+```
+
+---
+
+🧠 Remember: Case doesn’t matter in KQL, but wildcards do.
+Use this section as your quick-fire arsenal during training or demos.
