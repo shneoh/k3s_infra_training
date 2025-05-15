@@ -87,7 +87,7 @@ kubectl get svc efk-es-http -n logging -o jsonpath='{.metadata.name}.{.metadata.
 
 * the image name under Daemonset, need to be updated to reflect the elastic and kibana version 
 
-* the proper container image name is `elastic/elastic-agent:8:11.3` 
+* the proper container image name is `elastic/elastic-agent:8.11.3` 
 
 
 ![alt text](image-8.png)
@@ -102,15 +102,36 @@ kubectl get svc efk-es-http -n logging -o jsonpath='{.metadata.name}.{.metadata.
 
 
 ---
+* Save the file and apply the file in kubernetes 
+
+```sh 
+kubectl apply -f elastic-agent-standalone-kubernetes.yml
+```
+
+* Verify the agents are running 
+
+```sh 
+kubectl get pod -n kube-system -l app=elastic-agent -o wide
+```
+>> there should be 3 agent running on all 3 nodes ( daemonset )
+
+
+---
+### 8️⃣ Verify the logs/metrics from elastic-agent are received in elastic/kibana 
+
+--- 
+* Under Index > Data Streams, you should able to see the ingested logs from agent
+
+![alt text](image-10.png)
 
 
 
 ---
-### 8️⃣ Add the Kubernetes Integration to Fleet
 
+### 9️⃣ Verify under Data Views, 2 New Data Views are added automatically 
 ---
+![alt text](image-11.png)
 
-### 9️⃣ Select the Elastic Agent Policy and Add Kubernetes Logs + Metrics
 
 ---
 
