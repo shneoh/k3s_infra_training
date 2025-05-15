@@ -65,8 +65,11 @@ Each cluster is isolated, and you’ll have full `sudo` access via the `droot` a
 # ⚠️ Warning ! 
 
 * ⚠️ Lab Usage Policy – READ THIS OR REGRET LATER ⚠️
-* 🚫 Do NOT abuse the machine provided to you — this environment is monitored and any misuse is unacceptable.
-* 🔒 Any form of abuse will result in immediate revocation of access — no exceptions, no appeals.
+* 🚫 Do NOT abuse the machine provided to you 
+  >> this environment is monitored and any misuse is unacceptable.
+
+* 🔒 Any form of abuse will result in immediate revocation of access! 
+  >> No exceptions, No appeals.
 ---
 
 * 🧪 Do NOT attempt any lab exercise unless explicitly instructed by Steven.
