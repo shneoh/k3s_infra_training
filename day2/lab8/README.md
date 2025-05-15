@@ -20,7 +20,7 @@ Ensure the following before proceeding:
 
 ### 1️⃣ Login to Kibana Dashboard
 
-* in case you need the password and the default username `elastic` 
+* in case you need the password, run the below command and the default username `elastic` 
 ```sh 
 kubectl get secret efk-es-elastic-user -n logging -o go-template='{{.data.elastic | base64decode}}'
 ```
@@ -89,6 +89,8 @@ kubectl get svc efk-es-http -n logging -o jsonpath='{.metadata.name}.{.metadata.
 
 * the proper container image name is `elastic/elastic-agent:8.11.3` 
 
+* WARNING: ( Late Update ) : the below screenshot have error , the image name suppose to be `elastic/elastic-agent:8.11.3` and NOT `elastic/elastic-agent:8:11.3` 
+
 
 ![alt text](image-8.png)
 
@@ -127,17 +129,26 @@ kubectl get pod -n kube-system -l app=elastic-agent -o wide
 
 
 ---
-
 ### 9️⃣ Verify under Data Views, 2 New Data Views are added automatically 
 ---
 ![alt text](image-11.png)
 
 
 ---
+### 🔟 We can now consume the logs/metrics from k3s as Kubernetes Metrics/Logs 
 
-### 🔟 Confirm K3s Logs are Ingested into Elasticsearch
+* Use the build in Kubernetes Kibana Dashboards 
+
+* Explore other Kibana Dashboards as well 
 
 ---
+![alt text](image-12.png)
+
+---
+![alt text](image-13.png)
+
+---
+
 
 ### 1️⃣1️⃣ Create a New Data View in Kibana (e.g., `logs-*`)
 
