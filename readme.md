@@ -18,6 +18,7 @@ The following software/cloud service may be useful in the labs and will make you
 * VS Code - https://code.visualstudio.com/
 * Lens Desktop - https://k8slens.dev/
 * Git Hub - https://github.com/
+* git - https://git-scm.com/downloads
 * kubectl - https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
 
 ---
