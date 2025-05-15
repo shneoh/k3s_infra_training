@@ -1,8 +1,8 @@
-# Lab 06: Deploying and Scaling EFK Stack in K3s
+# Lab 06: Deploying EFK Stack in K3s
 
 ## 🎯 Objective
 
-In this lab, you will deploy a full EFK (Elasticsearch, Fluentd, Kibana) logging stack on a K3s cluster using Elastic Cloud on Kubernetes (ECK). This enables centralized log collection, search, and visualization from Kubernetes pods.
+In this lab, you will deploy a full EFK (Elasticsearch, Fluentd, Kibana) logging stack on a K3s cluster using Elastic Cloud on Kubernetes (ECK). This enables centralized log collection, search, and visualization from Kubernetes pods
 
 ---
 
@@ -178,7 +178,6 @@ kubectl logs -f log-generator
 ```
 
 ---
-
 ### 8️⃣ Validate Logs in Kibana
 
 1. Open Kibana via browser.

@@ -112,7 +112,22 @@ k3slogs-YYYY.MM.DD
 
 ---
 
-## 🎭 What to Visualize in Kibana
+
+## 🎭 Explore more Fluentd Config Example: 
+
+>> There are sample available in asset sub directory
+
+```sh 
+cd assets/
+
+ls -l 
+
+```
+
+---
+
+
+## 🎭 What to Visualize in Kibana ?
 
 Use the Discover and Dashboard tabs to explore:
 
@@ -137,5 +152,6 @@ Use the Discover and Dashboard tabs to explore:
 * Group by severity level or keyword match
 
 ---
+>> We will explore more on next chapter on Kibana Visualization
 
 ## 🚀 END 
