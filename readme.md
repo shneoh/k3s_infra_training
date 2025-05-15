@@ -64,9 +64,15 @@ Each cluster is isolated, and you’ll have full `sudo` access via the `droot` a
 
 # ⚠️ Warning ! 
 
-* Do not abuse the machine given
-* Any kind of Abuse will NOT be tolerated
-* You been warned !
+* ⚠️ Lab Usage Policy – READ THIS OR REGRET LATER ⚠️
+🚫 Do NOT abuse the machine provided to you — this environment is monitored and any misuse is unacceptable.
+* 🔒 Any form of abuse will result in immediate revocation of access — no exceptions, no appeals.
+
+* 🧪 Do NOT attempt any lab exercise unless explicitly instructed by Steven.
+* Some labs have interdependencies, and jumping ahead without supervision will break things — and you own the mess you create.
+
+* 👊 This is your only warning.
+* If you act like a cowboy, don’t expect support when it blows up in your face.
 
 ---
 >> Happy hacking! 🚧
