@@ -159,6 +159,7 @@ yellow open   fluentd-syslog-2025.05.14       o9DIpxbHREimHjBwThesuQ   1   1    
 # exit 
 ```
 >> if you get a output, it means fluentd is sending logs to elasticsearch 
+>> look for fluentd-* logs 
 
 ---
 
