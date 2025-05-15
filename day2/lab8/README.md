@@ -94,13 +94,15 @@ kubectl get svc efk-es-http -n logging -o jsonpath='{.metadata.name}.{.metadata.
 
 
 ---
+* Finally, you need to update the password in the manifest file
+
+* you can run this command in k3s to retrieve the password `kubectl get secret efk-es-elastic-user -n logging -o go-template='{{.data.elastic | base64decode}}'`
+
+![alt text](image-9.png)
 
 
 ---
 
-
-
----
 
 
 ---
