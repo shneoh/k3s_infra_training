@@ -80,7 +80,7 @@ Each cluster is isolated, and you’ll have full `sudo` access via the `droot` a
   >> If you act like a cowboy, don’t expect support when it blows up in your face.
 
 ---
->> Happy hacking! 🚧
+>> Happy hacking! Happy Learning! 🚧
 
  
 >> www.steven.com.my
