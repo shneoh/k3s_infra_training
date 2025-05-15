@@ -137,7 +137,7 @@ kubectl get pod -n kube-system -l app=elastic-agent -o wide
 ---
 ### 🔟 We can now consume the logs/metrics from k3s as Kubernetes Metrics/Logs 
 
-* Use the build in Kubernetes Kibana Dashboards 
+* Use the default Kubernetes Kibana Dashboards 
 
 * Explore other Kibana Dashboards as well 
 
@@ -150,44 +150,23 @@ kubectl get pod -n kube-system -l app=elastic-agent -o wide
 ---
 
 
-### 1️⃣1️⃣ Create a New Data View in Kibana (e.g., `logs-*`)
+### 1️⃣1️⃣ Create a Alert in Observability 
+---
+![alt text](image-14.png)
+
+
+
+---
+![alt text](image-15.png)
+
+
+
+---
+### 1️⃣2️⃣ To test the Alert , Stop k3s Service on on of the node
 
 ---
 
-### 1️⃣2️⃣ Open Discover Tab and Browse Incoming Logs
 
----
 
-### 1️⃣3️⃣ Filter Logs by K3s Components (kubelet, containerd, etc.)
-
----
-
-### 1️⃣4️⃣ Create a Dashboard to Visualize Node Metrics
-
----
-
-### 1️⃣5️⃣ Navigate to “Stack Management” > “Rules and Connectors”
-
----
-
-### 1️⃣6️⃣ Create New Rule for Node Down Alert
-
----
-
-### 1️⃣7️⃣ Set Conditions: e.g., Agent is Offline or Node NotReady > 5m
-
----
-
-### 1️⃣8️⃣ Add Action: Email, Slack, or Webhook Notification
-
----
-
-### 1️⃣9️⃣ Save and Enable the Rule
-
----
-
-### 2️⃣0️⃣ Simulate a Node Failure and Observe Alert Trigger
-
----
 
 ## 🚀 END
