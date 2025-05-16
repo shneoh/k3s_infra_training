@@ -106,7 +106,8 @@ k3slogs-YYYY.MM.DD
 
 1. Go to **Kibana > Stack Management > Data Views**
 2. Click **"Create data view"**
-3. Enter: `k3slogs-*`
+3. Enter `k3sLogs` as Name
+3. Enter: `k3slogs-*`in Index Pattern
 4. Set **Time field**: `@timestamp`
 5. Save
 
