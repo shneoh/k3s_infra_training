@@ -1,4 +1,4 @@
-# Lab 10: Pod Security Admission (PSA) Enforcement Lab
+# Lab 9: Pod Security Admission (PSA) Enforcement Lab
 
 ## 🌟 Objective
 
