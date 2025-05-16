@@ -103,6 +103,6 @@ kubectl delete clusterissuer letsencrypt-staging
 
 ## 📌 Notes
 
-- This lab uses Let's Encrypt **staging** environment to avoid rate limits during testing.
+- This lab uses Let's Encrypt **staging** environment to avoid rate limits during training/testing.
 
 
