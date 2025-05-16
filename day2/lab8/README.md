@@ -166,7 +166,4 @@ kubectl get pod -n kube-system -l app=elastic-agent -o wide
 
 ---
 
-
-
-
 ## 🚀 END

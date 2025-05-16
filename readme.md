@@ -12,7 +12,7 @@ Welcome to the hands-on lab repository for the **K3s Infrastructure Track Traini
 Each participant will be provided access to their own Kubernetes cluster, hosted on a dedicated virtual environment.
 
 ---
-### 🚀 Software 
+### 🚀 Software
 
 The following software/cloud service may be useful in the labs and will make your life easier
 * VS Code - https://code.visualstudio.com/
@@ -34,7 +34,9 @@ ssh droot@ssh.stuXX.steven.asia
 
 >> Replace `XX` with your assigned student number.
 
->> The password will be given to you during the training session.
+>> ⚠️ The temporary password will be given to you during the training session.
+
+>> ⚠️ You are expected to change the password to protect your Lab Env.
 
 ---
 
@@ -83,7 +85,6 @@ Each cluster is isolated, and you’ll have full `sudo` access via the `droot` a
 ---
 >> Happy hacking! Happy Learning! 🚧
 
- 
 >> www.steven.com.my
 
 
