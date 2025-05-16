@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: viewer-pod
+  namespace: rbac-lab
+spec:
+  serviceAccountName: viewer
+  containers:
+  - name: viewer
+    image: curlimages/curl:latest
+    command: ["sleep", "3600"]

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: inspector-pod
+  namespace: devspace
+spec:
+  serviceAccountName: inspector
+  containers:
+  - name: inspector
+    image: curlimages/curl:latest
+    command: ["sleep", "3600"]

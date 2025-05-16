@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: read-pods-cluster
+subjects:
+- kind: ServiceAccount
+  name: inspector
+  namespace: devspace
+roleRef:
+  kind: ClusterRole
+  name: pod-reader-cluster
+  apiGroup: rbac.authorization.k8s.io
