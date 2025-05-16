@@ -1,4 +1,4 @@
-# Lab 10: Kubernetes Network Policy Hands-On (Calico Stars Demo)
+# Lab 10: Kubernetes Network Policy Hands-On
 
 ## 🌟 Objective
 
