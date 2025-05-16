@@ -44,6 +44,13 @@ kubectl get ingress management-ui-ingress -n management-ui -o jsonpath="{.spec.r
 ```
 
 * Open `https://vstar.app.stuXX.steven.asia` in your browser
+
+---
+![alt text](image.png)
+---
+
+
+
 * This is the UI which will track the access/communication between pods on different namespace
 * You’ll see service nodes: `client (C)`, `frontend (F)`, and `backend (B)`
 * By default, all nodes can communicate
