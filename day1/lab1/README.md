@@ -324,9 +324,7 @@ kubectl get pod -n kube-system -l app.kubernetes.io/name=kube-state-metrics
 ```bash 
 kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.8.1/deploy/longhorn.yaml
 ```
-```sh 
-kubectl patch storageclass local-path -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "false"}}}'
-```
+
 
 ```sh 
 kubectl get sc
@@ -335,6 +333,11 @@ kubectl get sc
 * Verify longhorn is up and running 
 ```sh 
 kubectl get all -n longhorn-system
+```
+
+* Once all are running, patch the Storage Class 
+```sh 
+kubectl patch storageclass local-path -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "false"}}}'
 ```
 
 --- 
