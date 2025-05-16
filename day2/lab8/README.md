@@ -200,6 +200,10 @@ kubectl delete -f clean-up-3/.
 ```
 
 ```sh 
+kubectl delete -f clean-up-4/. 
+```
+
+```sh 
 
 ```
 
