@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: client
-          image: calico/star-probe:multiarch
+          image: stv707/star-probe:multiarch
           imagePullPolicy: Always
           command:
             - probe

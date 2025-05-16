@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
         - name: management-ui
-          image: calico/star-collect:multiarch
+          image: stv707/star-collect:multiarch
           imagePullPolicy: Always
           ports:
             - containerPort: 9001
