@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath-pod
+spec:
+  containers:
+  - name: kubia
+    image: stv707/kubia:v14
+    volumeMounts:
+    - mountPath: /host-data
+      name: host-volume
+  volumes:
+  - name: host-volume
+    hostPath:
+      path: /etc
+      type: Directory

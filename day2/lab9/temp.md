@@ -7,7 +7,7 @@ Understand the purpose and enforcement of Kubernetes Pod Security Admission (PSA
 ## 🛠️ Tasks
 
 1. Create two namespaces: one unrestricted, one with `restricted` enforcement
-2. Deploy an insecure pod (`kubia:v14`) in both namespaces
+2. Deploy an insecure pod (`stv707/kubia:v14`) in both namespaces
 3. Observe enforcement failure in the restricted namespace
 4. Patch pod to include compliant securityContext
 5. Attempt privilege escalation and hostPath mounts to demonstrate blocking
@@ -22,7 +22,6 @@ This lab uses the image `stv707/kubia:v14` for all pod deployments.
 
   * `secure-ns`: `enforce=restricted`
   * `open-ns`: `enforce=privileged`
-
 * All pods deployed using manifest files located in this directory.
 
 ## 🔧 Setup Instructions
@@ -73,6 +72,85 @@ Expected PSA Rejection:
 ```
 hostPath volumes are forbidden
 ```
+
+## 📂 Sample Pod Manifest: `pod-unrestricted.yaml`
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nonsecure-pod
+spec:
+  containers:
+  - name: kubia
+    image: stv707/kubia:v14
+    ports:
+    - containerPort: 8080
+```
+
+### 📂 Compliant Pod Manifest: `pod-restricted-compliant.yaml`
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secure-pod
+spec:
+  containers:
+  - name: kubia
+    image: stv707/kubia:v14
+    ports:
+    - containerPort: 8080
+    securityContext:
+      runAsNonRoot: true
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop: ["ALL"]
+      readOnlyRootFilesystem: true
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 3000
+    fsGroup: 2000
+```
+
+### 📂 Privilege Escalation Pod Manifest: `pod-priv-escalation.yaml`
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: escalate-pod
+spec:
+  containers:
+  - name: kubia
+    image: stv707/kubia:v14
+    ports:
+    - containerPort: 8080
+    securityContext:
+      allowPrivilegeEscalation: true
+```
+
+### 📂 HostPath Mount Pod Manifest: `pod-hostpath.yaml`
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath-pod
+spec:
+  containers:
+  - name: kubia
+    image: stv707/kubia:v14
+    volumeMounts:
+    - mountPath: /host-data
+      name: host-volume
+  volumes:
+  - name: host-volume
+    hostPath:
+      path: /etc
+      type: Directory
+```
+
 ## 📉 Validation
 
 ### ✅ Check pod creation status
@@ -92,16 +170,27 @@ Expected:
 Inspect event logs for denied pod in `secure-ns`:
 
 ```bash
-kubectl describe pod nonsecure-pod -n secure-ns
+kubectl describe pod <pod-name> -n secure-ns
 ```
 
 Look for errors such as:
 
 ```
-violates PodSecurity "restricted:latest": unrestricted capabilities, allowPrivilegeEscalation=true, runAsRoot=true
+violates PodSecurity "restricted:latest": allowPrivilegeEscalation=true, hostPath volume detected
 ```
 
 ## 🧪 Fixing the Pod
+
+Update or apply:
+
+```yaml
+securityContext:
+  runAsNonRoot: true
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop: ["ALL"]
+  readOnlyRootFilesystem: true
+```
 
 Re-apply the corrected pod manifest:
 
