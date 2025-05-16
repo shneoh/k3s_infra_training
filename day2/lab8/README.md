@@ -72,7 +72,7 @@ kubectl get secret efk-es-elastic-user -n logging -o go-template='{{.data.elasti
 
 ---
 
-### 7️⃣ You need to add/update 3 directive in the agent manifest before running it
+### 7️⃣ You need to add/update 4 directive in the agent manifest before running it
 
 * The First one, you need to update the elastic host to your elastic host
 * to get the fqdn, on your k3s run : 
@@ -94,11 +94,21 @@ kubectl get svc efk-es-http -n logging -o jsonpath='{.metadata.name}.{.metadata.
 
 
 ---
-* Finally, you need to update the password in the manifest file
+* Next, you need to update the password in the manifest file
 
 * you can run this command in k3s to retrieve the password `kubectl get secret efk-es-elastic-user -n logging -o go-template='{{.data.elastic | base64decode}}'`
 
 ![alt text](image-9.png)
+
+---
+* Due to longhorn/elastic crd/kibana, The agent needs higher memory and cpu
+
+* You need to update that as follows 
+
+![alt text](image-16.png)
+
+
+
 
 
 ---
