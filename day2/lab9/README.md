@@ -32,7 +32,9 @@ This lab uses the image `stv707/kubia:v14` for all pod deployments.
 ```bash
 kubectl create ns secure-ns
 kubectl label ns secure-ns pod-security.kubernetes.io/enforce=restricted
+```
 
+```sh 
 kubectl create ns open-ns
 kubectl label ns open-ns pod-security.kubernetes.io/enforce=privileged
 ```
@@ -56,7 +58,7 @@ kubectl apply -f pod-restricted-compliant.yaml -n secure-ns  # Should succeed
 kubectl apply -f pod-priv-escalation.yaml -n secure-ns  # Should fail
 ```
 
-Expected PSA Rejection:
+* Expected PSA Rejection:
 
 ```
 allowPrivilegeEscalation != false (container "kubia" must set securityContext.allowPrivilegeEscalation=false)
@@ -68,7 +70,7 @@ allowPrivilegeEscalation != false (container "kubia" must set securityContext.al
 kubectl apply -f pod-hostpath.yaml -n secure-ns  # Should fail
 ```
 
-Expected PSA Rejection:
+* Expected PSA Rejection:
 
 ```
 hostPath volumes are forbidden
@@ -82,20 +84,20 @@ kubectl get pods -n open-ns
 kubectl get pods -n secure-ns
 ```
 
-Expected:
+* Expected:
 
 * Pod is `Running` in `open-ns`
 * Pod is `Rejected` in `secure-ns` with PSA error
 
 ## 🤕 Troubleshooting Failed Pod
 
-Inspect event logs for denied pod in `secure-ns`:
+* Inspect event logs for denied pod in `secure-ns`:
 
 ```bash
 kubectl describe pod nonsecure-pod -n secure-ns
 ```
 
-Look for errors such as:
+* Look for errors such as:
 
 ```
 violates PodSecurity "restricted:latest": unrestricted capabilities, allowPrivilegeEscalation=true, runAsRoot=true
@@ -103,7 +105,7 @@ violates PodSecurity "restricted:latest": unrestricted capabilities, allowPrivil
 
 ## 🧪 Fixing the Pod
 
-Re-apply the corrected pod manifest:
+* Re-apply the corrected pod manifest:
 
 ```bash
 kubectl apply -f pod-restricted-compliant.yaml -n secure-ns
