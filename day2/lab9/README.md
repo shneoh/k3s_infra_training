@@ -109,15 +109,12 @@ Re-apply the corrected pod manifest:
 kubectl apply -f pod-restricted-compliant.yaml -n secure-ns
 ```
 
-## 🤖 Additional Scenarios (coming next)
+## 🤖 Additional Scenarios 
 
-* ❌ Attempting hostPath mounts in restricted namespace
-* ❌ Attempting privileged escalation in restricted namespace
 * ✅ Deploying fully compliant pod with full `securityContext`
 
-## 🔐 Key Takeaway
+* PSA labels enforce critical pod security constraints. Without proper `securityContext`, pods will be rejected in hardened namespaces. Learning to create compliant manifests is essential for running workloads securely.
 
-PSA labels enforce critical pod security constraints. Without proper `securityContext`, pods will be rejected in hardened namespaces. Learning to create compliant manifests is essential for running workloads securely.
 
 ## 🧹 Reset (Optional)
 
