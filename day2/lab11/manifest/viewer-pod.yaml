@@ -7,5 +7,5 @@ spec:
   serviceAccountName: viewer
   containers:
   - name: viewer
-    image: curlimages/curl:latest
+    image: bitnami/kubectl
     command: ["sleep", "3600"]

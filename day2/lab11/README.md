@@ -53,13 +53,13 @@ kubectl apply -f manifest/rolebinding-pod-reader.yaml
 ### ✅ 6. Validate Allowed Action (list pods)
 
 ```bash
-kubectl exec -n rbac-lab viewer-pod -- curl -s localhost:8001/api/v1/namespaces/rbac-lab/pods
+kubectl exec -n rbac-lab viewer-pod -- kubectl get pods -n rbac-lab
 ```
 
 ### ✅ 7. Try Unauthorized Action (create secret)
 
 ```bash
-kubectl exec -n rbac-lab viewer-pod -- curl -X POST localhost:8001/api/v1/namespaces/rbac-lab/secrets
+kubectl exec -n rbac-lab viewer-pod -- kubectl create secret generic mysecret --from-literal=foo=bar -n rbac-lab
 ```
 
 ---
@@ -99,7 +99,7 @@ kubectl apply -f manifest/inspector-pod.yaml
 ### ✅ 6. Test Cluster-Level Pod Access
 
 ```bash
-kubectl exec -n devspace inspector-pod -- curl -s localhost:8001/api/v1/pods
+kubectl exec -n devspace inspector-pod -- kubectl get pods -A
 ```
 
 ---
