@@ -1,0 +1,117 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd-config
+  namespace: logging
+data:
+  fluent.conf: |
+    <source>
+      @type tail
+      path /var/log/containers/*.log
+      pos_file /var/log/fluentd-containers.log.pos
+      tag kube.*
+      read_from_head true
+      <parse>
+        @type multi_format
+        <pattern>
+          format json
+        </pattern>
+        <pattern>
+          format none
+        </pattern>
+      </parse>
+    </source>
+
+    <source>
+      @type tail
+      path /var/log/syslog
+      pos_file /var/log/fluentd-syslog.log.pos
+      tag syslog
+      read_from_head true
+      <parse>
+        @type syslog
+      </parse>
+    </source>
+
+    <source>
+      @type systemd
+      path /var/log/journal
+      tag k3slogs
+      read_from_head true
+      matches [{ "_SYSTEMD_UNIT": "k3s.service" }]
+      <storage>
+        @type local
+        path /var/log/fluentd-journald-k3s-cursor.json
+      </storage>
+      <entry>
+        fields_strip_underscores true
+        fields_lowercase true
+      </entry>
+    </source>
+
+
+
+    <filter kube.**>
+      @type kubernetes_metadata
+    </filter>
+
+    #############################################################################
+    # If you want to try specific syslog from journald, you can use this filter #
+    #############################################################################
+    # <filter k3slogs>
+    #   @type record_transformer
+    #   enable_ruby true
+    #   <record>
+    #     node_name ${record["MESSAGE"].match(/Node ([^ ]+)/) && $1}
+    #     node_status ${record["MESSAGE"].match(/is (NotReady|Ready)/) && $1}
+    #     component ${record["_COMM"]}
+    #   </record>
+    # </filter>
+    #############################################################################
+
+
+    
+    <match kube.**>
+      @type elasticsearch
+      host "#{ENV['FLUENT_ELASTICSEARCH_HOST']}"
+      port "#{ENV['FLUENT_ELASTICSEARCH_PORT']}"
+      user "#{ENV['FLUENT_ELASTICSEARCH_USER']}"
+      password "#{ENV['FLUENT_ELASTICSEARCH_PASS']}"
+      logstash_format true
+      logstash_prefix fluentd-container
+      include_tag_key true
+      include_timestamp true
+      scheme http
+      flush_interval 5s
+      reconnect_on_error true
+    </match>
+
+    <match syslog>
+      @type elasticsearch
+      host "#{ENV['FLUENT_ELASTICSEARCH_HOST']}"
+      port "#{ENV['FLUENT_ELASTICSEARCH_PORT']}"
+      user "#{ENV['FLUENT_ELASTICSEARCH_USER']}"
+      password "#{ENV['FLUENT_ELASTICSEARCH_PASS']}"
+      logstash_format true
+      logstash_prefix fluentd-syslog
+      include_tag_key true
+      include_timestamp true
+      scheme http
+      flush_interval 5s
+      reconnect_on_error true
+    </match>
+
+    <match k3slogs>
+      @type elasticsearch
+      host "#{ENV['FLUENT_ELASTICSEARCH_HOST']}"
+      port "#{ENV['FLUENT_ELASTICSEARCH_PORT']}"
+      user "#{ENV['FLUENT_ELASTICSEARCH_USER']}"
+      password "#{ENV['FLUENT_ELASTICSEARCH_PASS']}"
+      logstash_format true
+      logstash_prefix k3slogs
+      include_tag_key true
+      include_timestamp true
+      scheme http
+      flush_interval 5s
+      reconnect_on_error true
+    </match>

@@ -170,8 +170,38 @@ kubectl get pod -n kube-system -l app=elastic-agent -o wide
 
 
 ---
-### 1️⃣2️⃣ To test the Alert , Stop k3s Service on on of the node
+### 1️⃣2️⃣ To test the Alert , Stop k3s Service on one of the node ( vmk3s003-stuXX )
 
+* Run the following command to stop the k3s service to generate Node not Ready Alert
+
+```sh 
+sudo systemctl stop k3s.service
+```
+
+* Monitor for the Alert on Kibana
 ---
+
+# ! IMPORTANT !
+
+* Elastic, Fluentd, Elastic Agent and Kibana are resource intense Application, for all upcoming chapter, We need to free the Resource
+* We will remove all that is plumbed for last 3 labs : Lab6, Lab7 and Lab8
+* Run the following command to remove all resources and verify all are removed. 
+
+```sh 
+kubectl delete -f clean-up-1/. 
+```
+
+```sh 
+kubectl delete -f clean-up-2/. 
+```
+
+```sh 
+kubectl delete -f clean-up-3/. 
+```
+
+```sh 
+
+```
+
 
 ## 🚀 END

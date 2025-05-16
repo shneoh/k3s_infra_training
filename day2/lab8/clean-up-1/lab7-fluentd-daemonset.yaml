@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd
+  namespace: logging
+  labels:
+    k8s-app: fluentd-logging
+spec:
+  selector:
+    matchLabels:
+      name: fluentd
+  template:
+    metadata:
+      labels:
+        name: fluentd
+    spec:
+      serviceAccountName: fluentd
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+      containers:
+      - name: fluentd
+        image: fluent/fluentd-kubernetes-daemonset:v1.16-debian-elasticsearch7-2
+        env:
+        - name: FLUENT_ELASTICSEARCH_HOST
+          value: "efk-es-http.logging.svc"
+        - name: FLUENT_ELASTICSEARCH_PORT
+          value: "9200"
+        - name: FLUENT_ELASTICSEARCH_USER
+          value: "elastic"
+        - name: FLUENT_ELASTICSEARCH_PASS
+          valueFrom:
+            secretKeyRef:
+              name: efk-es-elastic-user
+              key: elastic
+        resources:
+          limits:
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 512Mi
+        volumeMounts:
+        - name: varlog
+          mountPath: /var/log
+        - name: containers
+          mountPath: /var/log/containers
+        - name: syslog
+          mountPath: /var/log/syslog
+          readOnly: true
+        - name: config-volume
+          mountPath: /fluentd/etc
+        - name: journal
+          mountPath: /var/log/journal
+          readOnly: true
+      volumes:
+      - name: varlog
+        hostPath:
+          path: /var/log
+      - name: containers
+        hostPath:
+          path: /var/log/containers
+      - name: syslog
+        hostPath:
+          path: /var/log/syslog
+      - name: config-volume
+        configMap:
+          name: fluentd-config
+      - name: journal
+        hostPath:
+          path: /var/log/journal 
