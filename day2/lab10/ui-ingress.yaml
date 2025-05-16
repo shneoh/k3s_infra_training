@@ -20,7 +20,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: management-ui-management-ui-https-redirect@kubernetescrd
 spec:
   rules:
-  - host: lab10.app.stuXX.steven.asia  # 🔁 Replace stuXX with actual student ID
+  - host: vstar.app.stuXX.steven.asia  # 🔁 Replace stuXX with actual student ID
     http:
       paths:
       - path: /
@@ -32,5 +32,5 @@ spec:
               number: 9001
   tls:
   - hosts:
-    - lab10.app.stuXX.steven.asia  # 🔁 Replace stuXX
+    - vstar.app.stuXX.steven.asia  # 🔁 Replace stuXX
     secretName: management-ui-tls

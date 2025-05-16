@@ -37,7 +37,14 @@ kubectl create -f ui-ingress.yaml
 || Rememeber to EDIT the file and change the XX value!! 
 
 
-* Open `https://lab10.app.stuXX.steven.asia` in your browser
+* Run the following to get the address of ingress
+
+```bash 
+kubectl get ingress management-ui-ingress -n management-ui -o jsonpath="{.spec.rules[0].host}" | xargs -I{} echo "https://{}"
+```
+
+* Open `https://vstar.app.stuXX.steven.asia` in your browser
+* This is the UI which will track the access/communication between pods on different namespace
 * You’ll see service nodes: `client (C)`, `frontend (F)`, and `backend (B)`
 * By default, all nodes can communicate
 
@@ -45,8 +52,14 @@ kubectl create -f ui-ingress.yaml
 
 ## ⛔️ 4. Enable Isolation with Default Deny
 
+* Make sure you browse/open the Network Policy files to see what are they applying! 
+
 ```bash
 kubectl create -n stars -f demoapp/default-deny.yaml
+```
+
+
+```bash 
 kubectl create -n client -f demoapp/default-deny.yaml
 ```
 
@@ -61,6 +74,9 @@ kubectl create -n client -f demoapp/default-deny.yaml
 
 ```bash
 kubectl create -f demoapp/allow-ui.yaml
+```
+
+```bash
 kubectl create -f demoapp/allow-ui-client.yaml
 ```
 
@@ -114,3 +130,4 @@ kubectl create -f demoapp/frontend-policy.yaml
 ```bash
 kubectl delete ns client stars management-ui
 ```
+
