@@ -322,7 +322,7 @@ kubectl get pod -n kube-system -l app.kubernetes.io/name=kube-state-metrics
   >> In k3s you can install longhorn to support true HA 
 
 ```bash 
-kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.8.1/deploy/longhorn.yaml
+kubectl apply -f longhorn/.
 ```
 
 
