@@ -204,8 +204,7 @@ kubectl delete -f clean-up-4/.
 ```
 
 ```sh 
-
+kubectl delete ns logging 
 ```
-
 
 ## 🚀 END
