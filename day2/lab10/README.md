@@ -34,7 +34,7 @@ kubectl get pods --all-namespaces --watch
 ```bash 
 kubectl create -f ui-ingress.yaml 
 ```
-|| Rememeber to EDIT the file and change the XX value!! 
+>> Remember to EDIT the file and change the XX value!! 
 
 
 * Run the following to get the address of ingress
