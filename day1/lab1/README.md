@@ -332,7 +332,7 @@ kubectl patch storageclass local-path -p '{"metadata": {"annotations": {"storage
 kubectl get sc
 ```
 
-* Verify kube-state-metrics is up and running 
+* Verify longhorn is up and running 
 ```sh 
 kubectl get all -n longhorn-system
 ```
