@@ -2,7 +2,7 @@
 
 ## 🌟 Objective
 
- Learn and apply Kubernetes NetworkPolicy for traffic control between frontend, backend, client, and management UI pods. This demo shows real-time visual feedback using a Internet exposed web UI.
+ Learn and apply Kubernetes NetworkPolicy for traffic control between frontend, backend, client, and management UI pods. This lab shows real-time visual feedback using a Internet exposed web UI.
 
 ---
 
