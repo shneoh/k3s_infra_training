@@ -1,5 +1,4 @@
 # Lab 11: Kubernetes RBAC Deep Dive
-
 ## 🎯 Objective
 
 This lab demonstrates practical, real-world applications of Kubernetes RBAC based on the concepts introduced in lesson. We will:
@@ -11,9 +10,9 @@ This lab demonstrates practical, real-world applications of Kubernetes RBAC base
 
 ## 🛠️ Tasks Overview
 
-1. Practice 1: Namespaced Role & RoleBinding
-2. Practice 2: ClusterRole for Cluster-Wide Access
-3. Practice 3: Unauthorized Access Attempt + Minimal `kubectl auth can-i`
+* Practice 1: Namespaced Role & RoleBinding
+* Practice 2: ClusterRole for Cluster-Wide Access
+* Practice 3: Unauthorized Access Attempt + Minimal `kubectl auth can-i`
 
 Each task will be followed by real command validation using pods running the `curlimage` image.
 
@@ -140,5 +139,3 @@ kubectl delete ns devspace
 ```
 
 ---
-
-Next: All required manifest files will be provided inside the `manifest/` folder.
