@@ -97,31 +97,10 @@ kubectl get pods -n secure-ns
 * Expected:
 
 * Pod is `Running` in `open-ns`
-* Pod is `Rejected` in `secure-ns` with PSA error
+* Pod with PSA error rejected
 
-## 🤕 Troubleshooting Failed Pod
 
-* Inspect event logs for denied pod in `secure-ns`:
-
-```bash
-kubectl describe pod nonsecure-pod -n secure-ns
-```
-
-* Look for errors such as:
-
-```
-violates PodSecurity "restricted:latest": unrestricted capabilities, allowPrivilegeEscalation=true, runAsRoot=true
-```
-
-## 🧪 Fixing the Pod
-
-* Re-apply the corrected pod manifest:
-
-```bash
-kubectl apply -f pod-restricted-compliant.yaml -n secure-ns
-```
-
-## 🤖 Additional Scenarios 
+## 🤖 Additional Info 
 
 * ✅ Deploying fully compliant pod with full `securityContext`
 
