@@ -42,20 +42,20 @@ kubectl label ns open-ns pod-security.kubernetes.io/enforce=privileged
 ### ✅ 2. Apply basic pod manifest in both namespaces
 
 ```bash
-kubectl apply -f pod-unrestricted.yaml -n open-ns  # Should succeed
-kubectl apply -f pod-unrestricted.yaml -n secure-ns  # Should fail
+kubectl apply -f pod-unrestricted.yaml -n open-ns  
+kubectl apply -f pod-unrestricted.yaml -n secure-ns  
 ```
 
 ### ✅ 3. Apply a compliant pod manifest in secure-ns
 
 ```bash
-kubectl apply -f pod-restricted-compliant.yaml -n secure-ns  # Should succeed
+kubectl apply -f pod-restricted-compliant.yaml -n secure-ns 
 ```
 
 ### ✅ 4. Test privilege escalation rejection
 
 ```bash
-kubectl apply -f pod-priv-escalation.yaml -n secure-ns  # Should fail
+kubectl apply -f pod-priv-escalation.yaml -n secure-ns  
 ```
 
 * Expected PSA Rejection:
@@ -67,7 +67,7 @@ allowPrivilegeEscalation != false (container "kubia" must set securityContext.al
 ### ✅ 5. Test hostPath volume rejection
 
 ```bash
-kubectl apply -f pod-hostpath.yaml -n secure-ns  # Should fail
+kubectl apply -f pod-hostpath.yaml -n secure-ns  
 ```
 
 * Expected PSA Rejection:
