@@ -89,10 +89,8 @@ kubectl get svc efk-es-http -n logging -o jsonpath='{.metadata.name}.{.metadata.
 
 * the proper container image name is `elastic/elastic-agent:8.11.3` 
 
-* WARNING: ( Late Update ) : the below screenshot have error , the image name suppose to be `elastic/elastic-agent:8.11.3` and NOT `elastic/elastic-agent:8:11.3` 
-
-
 ![alt text](image-8.png)
+
 
 
 ---
