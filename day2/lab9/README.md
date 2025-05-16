@@ -52,7 +52,11 @@ kubectl apply -f pod-unrestricted.yaml -n secure-ns
 kubectl apply -f pod-restricted-compliant.yaml -n secure-ns 
 ```
 
-### ✅ 4. Test privilege escalation rejection
+### ✅ 4. Test privilege escalation rejection both namespaces
+
+```bash
+kubectl apply -f pod-priv-escalation.yaml -n open-ns  
+```
 
 ```bash
 kubectl apply -f pod-priv-escalation.yaml -n secure-ns  
@@ -64,7 +68,13 @@ kubectl apply -f pod-priv-escalation.yaml -n secure-ns
 allowPrivilegeEscalation != false (container "kubia" must set securityContext.allowPrivilegeEscalation=false)
 ```
 
-### ✅ 5. Test hostPath volume rejection
+### ✅ 5. Test hostPath volume rejection both namespaces
+
+
+```bash
+kubectl apply -f pod-hostpath.yaml -n open-ns
+```
+
 
 ```bash
 kubectl apply -f pod-hostpath.yaml -n secure-ns  
