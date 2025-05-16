@@ -45,7 +45,12 @@ Deploy a 3-node High Availability (HA) K3s cluster using embedded etcd with prop
     --etcd-expose-metrics \
     --kube-controller-manager-arg bind-address=0.0.0.0 \
     --kube-scheduler-arg bind-address=0.0.0.0 \
-    --kube-proxy-arg metrics-bind-address=0.0.0.0:10249 
+    --kube-proxy-arg metrics-bind-address=0.0.0.0:10249 \
+    --kube-apiserver-arg=feature-gates=InPlacePodVerticalScaling=true \
+    --kube-controller-manager-arg=feature-gates=InPlacePodVerticalScaling=true \
+    --kube-scheduler-arg=feature-gates=InPlacePodVerticalScaling=true \
+    --kubelet-arg=feature-gates=InPlacePodVerticalScaling=true \
+    --kube-proxy-arg=feature-gates=InPlacePodVerticalScaling=true 
 
   ```
 > ⚠️ Replace `stuXX` with your actual student number (e.g., `stu01`, `stu02`, etc.)
@@ -68,7 +73,12 @@ Deploy a 3-node High Availability (HA) K3s cluster using embedded etcd with prop
     --write-kubeconfig-mode 644 \
     --kube-controller-manager-arg bind-address=0.0.0.0 \
     --kube-scheduler-arg bind-address=0.0.0.0 \
-    --kube-proxy-arg metrics-bind-address=0.0.0.0:10249
+    --kube-proxy-arg metrics-bind-address=0.0.0.0:10249 \
+    --kube-apiserver-arg=feature-gates=InPlacePodVerticalScaling=true \
+    --kube-controller-manager-arg=feature-gates=InPlacePodVerticalScaling=true \
+    --kube-scheduler-arg=feature-gates=InPlacePodVerticalScaling=true \
+    --kubelet-arg=feature-gates=InPlacePodVerticalScaling=true \
+    --kube-proxy-arg=feature-gates=InPlacePodVerticalScaling=true 
 
   ```
 > ⚠️ Replace `stuXX` with your actual student number (e.g., `stu01`, `stu02`, etc.)
@@ -90,7 +100,12 @@ Deploy a 3-node High Availability (HA) K3s cluster using embedded etcd with prop
     --write-kubeconfig-mode 644 \
     --kube-controller-manager-arg bind-address=0.0.0.0 \
     --kube-scheduler-arg bind-address=0.0.0.0 \
-    --kube-proxy-arg metrics-bind-address=0.0.0.0:10249
+    --kube-proxy-arg metrics-bind-address=0.0.0.0:10249 \
+    --kube-apiserver-arg=feature-gates=InPlacePodVerticalScaling=true \
+    --kube-controller-manager-arg=feature-gates=InPlacePodVerticalScaling=true \
+    --kube-scheduler-arg=feature-gates=InPlacePodVerticalScaling=true \
+    --kubelet-arg=feature-gates=InPlacePodVerticalScaling=true \
+    --kube-proxy-arg=feature-gates=InPlacePodVerticalScaling=true     
 
   ```
 > ⚠️ Replace `stuXX` with your actual student number (e.g., `stu01`, `stu02`, etc.)
