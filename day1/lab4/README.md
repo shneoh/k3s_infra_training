@@ -114,7 +114,8 @@ In this part, you'll enable Basic Auth using Traefik Ingress to Secure Public Ac
 htpasswd -nb steven DumbDumbWillgoPumpPump | openssl base64
 ```
 >> copy the hash
->> if the command `htpasswd` not found, then, take a `flight (MAS/Airasia)` to `Ubuntu Canonical HQ`, and ask them to install it for you!
+
+>> **if the command `htpasswd` not found, then, take a `flight (MAS/Airasia)` to `Ubuntu Canonical HQ`, and ask them to install it for you!**
 
 * edit the file longhorn-secret.yaml and add the hash
 * replace the `XXXXXXXX` hash placeholder
