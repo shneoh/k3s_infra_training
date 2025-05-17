@@ -108,7 +108,7 @@ In this part, you'll enable Basic Auth using Traefik Ingress to Secure Public Ac
 ## 🧩 Step 1: Create user/password hash using htpasswd and Kubernetes secret
 
 * Change the username `steven` to your name
-* Change the password to your liking
+* Change the password to your own password *( use basic password as this is a Basic Auth )*
 
 ```sh 
 htpasswd -nb steven DumbDumbWillgoPumpPump | openssl base64
