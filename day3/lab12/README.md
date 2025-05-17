@@ -2,13 +2,13 @@
 
 ## 🎯 Objective
 
-This lab demonstrates how to implement Horizontal Pod Autoscaling (HPA) in Kubernetes using a CPU-based scaling trigger. Based on the Apptio HPA guide, this exercise will:
+This lab is about  how to implement Horizontal Pod Autoscaling (HPA) in Kubernetes using a CPU-based scaling trigger. In this exercise, you will:
 
 * Deploy a sample PHP-Apache application
 * Create a LoadGenerator to simulate traffic
 * Configure and observe HPA behavior based on CPU usage
 
-> ⚠️ This lab is adapted for **k3s** (not EKS). The cluster is assumed to be fully operational with `metrics-server` installed.
+> ⚠️ This lab is adapted for **k3s**. The cluster is assumed to be fully operational with `metrics-server` installed.
 
 ---
 
@@ -70,7 +70,29 @@ kubectl apply -f manifest/load-generator.yaml
 kubectl get hpa -n hpa-lab -w
 ```
 
-You should see the replica count increase after a minute or two based on the CPU target threshold.
+>> You should see the replica count increase after a minute or two based on the CPU target threshold.
+
+## 🚀 Manual Scale
+
+### ✅ 1. Scale the deployment
+
+```bash
+kubectl get deployments.apps -n hpa-lab
+```
+
+```bash
+kubectl scale --replicas=10 deployment -n hpa-lab php-apache
+```
+
+```bash
+kubectl get deployments.apps -n hpa-lab
+```
+
+### ✅ 2. Check HPA 
+
+```bash
+kubectl get hpa -n hpa-lab
+```
 
 ---
 
