@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: longhorn-ingress
+  namespace: longhorn-system
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.middlewares: longhorn-system-enforce-https@kubernetescrd,longhorn-system-basic-auth@kubernetescrd
+spec:
+  rules:
+    ## Change the XX to your student number
+  - host: longhorn.app.stuXX.steven.asia
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web
+            port:
+              number: 80
+  tls:
+  - hosts:
+  ## Change the XX to your student number
+    - longhorn.app.stuXX.steven.asia
+    secretName: web-tls

@@ -1,6 +1,6 @@
 # Lab 04: Traefik Customization & HTTPS with Cert-Manager + Let's Encrypt
 
-## 🎯 Objective
+## 🎯 Objective 1
 
 In this lab, you'll customize the default Traefik Ingress controller in your K3s cluster to automatically issue and manage TLS certificates for your apps using **cert-manager** and **Let's Encrypt**.
 
@@ -89,6 +89,67 @@ https://web.app.stuXX.steven.asia
 >> replace XX with your student number
 
 If everything is successful, you should see the **nginx welcome page** served over HTTPS with a valid certificate (from Let's Encrypt staging).
+
+---
+
+## 🎯 Objective 2
+
+In this part, you'll enable Basic Auth using Traefik Ingress to Secure Public Access to LongHorn CSI Management.
+
+---
+
+## 🛠️ Prerequisites
+
+- A working K3s cluster with Traefik installed (default).
+- A working LongHorn CSI installed and plugged into k3s
+
+---
+
+## 🧩 Step 1: Create user/password hash using htpasswd and Kubernetes secret
+
+* Change the username `steven` to your name
+* Change the password to your liking
+
+```sh 
+htpasswd -nb steven DumbDumbWillgoPumpPump | openssl base64
+```
+>> copy the hash
+>> if the command `htpasswd` not found, then, take a `flight (MAS/Airasia)` to `Ubuntu Canonical HQ`, and ask them to install it for you!
+
+* edit the file longhorn-secret.yaml and add the hash
+* replace the `XXXXXXXX` hash placeholder
+* Apply the manifest
+
+```sh 
+kubectl apply -f longhorn-secret.yaml 
+```
+
+
+## 🧩 Step 2: Create traefik middleware for Auth
+
+
+
+
+## 🧩 Step 3: Create traefik middleware for http to https redirection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---
 
