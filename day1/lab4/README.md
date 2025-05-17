@@ -127,27 +127,66 @@ kubectl apply -f longhorn-secret.yaml
 
 ## 🧩 Step 2: Create traefik middleware for Auth
 
-
+```sh 
+kubectl apply -f mid-auth.yaml
+```
 
 
 ## 🧩 Step 3: Create traefik middleware for http to https redirection
 
+```sh 
+kubectl apply -f mid-https.yaml
+```
+
+* Verify both traefik middleware are in place
+
+```sh 
+kubectl get middleware -n longhorn-system
+```
+## 🧩 Step 4: Edit `longhorn-ingress.yaml` to replace your `stuXX` with your `student number`
+
+```sh 
+    ## Change the XX to your student number
+  - host: longhorn.app.stuXX.steven.asia
+
+```
+
+```sh 
+  ## Change the XX to your student number
+    - longhorn.app.stuXX.steven.asia
+
+```
+
+* Apply the longhorn-ingress.yaml 
+
+```sh 
+kubectl apply -f longhorn-ingress.yaml
+```
+
+* Verify ingress and Certificate are created
+```sh 
+kubectl get ingress -n longhorn-system
+```
+
+```sh 
+kubectl get certificate -n longhorn-system
+```
 
 
+## 🧩 Step 5: Once the ingress and certificate created, access the LongHorn Ui 
+
+* Get the web link 
+
+```sh 
+kubectl get ingress longhorn-ingress -n longhorn-system -o jsonpath="{.spec.rules[0].host}" | xargs -I{} echo "https://{}"
+```
+
+## 🧩 Step 6: Access the Longhorn UI with your Username and Password from Secret
+
+---
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+---
 
 
 
@@ -165,5 +204,5 @@ kubectl delete clusterissuer letsencrypt-staging
 ## 📌 Notes
 
 - This lab uses Let's Encrypt **staging** environment to avoid rate limits during training/testing.
-
+- This training is not about LongHorn!! its about Traefik/Https/TLS/Ingress/Middleware
 

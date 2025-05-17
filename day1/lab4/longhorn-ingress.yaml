@@ -17,11 +17,11 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: web
+            name: longhorn-frontend
             port:
               number: 80
   tls:
   - hosts:
   ## Change the XX to your student number
     - longhorn.app.stuXX.steven.asia
-    secretName: web-tls
+    secretName: longhorn-frontend-tls
