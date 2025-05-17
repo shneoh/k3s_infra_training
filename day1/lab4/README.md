@@ -143,7 +143,8 @@ kubectl apply -f mid-https.yaml
 ```sh 
 kubectl get middleware -n longhorn-system
 ```
-## 🧩 Step 4: Edit `longhorn-ingress.yaml` to replace your `stuXX` with your `student number`
+## 🧩 Step 4: Edit `longhorn-ingress.yaml` 
+*  replace your `stuXX` with your `student number`
 
 ```sh 
     ## Change the XX to your student number
