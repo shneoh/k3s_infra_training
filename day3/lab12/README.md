@@ -72,6 +72,8 @@ kubectl get hpa -n hpa-lab -w
 
 >> You should see the replica count increase after a minute or two based on the CPU target threshold.
 
+>> Note the CPU usage goes below `averageUtilization: 50` 
+
 ## 🚀 Manual Scale
 
 ### ✅ 1. Scale the deployment
@@ -94,6 +96,10 @@ kubectl get deployments.apps -n hpa-lab
 kubectl get hpa -n hpa-lab
 ```
 
+>> Note the CPU usage goes lower then 50% ( our target averageUtilization )
+
+>> The load generator is still running
+
 ---
 
 ## 🧼 Cleanup (Optional)
@@ -109,5 +115,4 @@ kubectl delete namespace hpa-lab
 * HPA created with CPU-based scaling trigger
 * Load Generator successfully increases CPU load
 * Replica count increases in response
-* App scales down when load is removed
 
