@@ -234,7 +234,7 @@ Look for logs showing Flannel subnet assignments and initialization.
 ### ✅ 3. Check CNI Plugin Configuration
 
 ```bash
-cat /etc/cni/net.d/10-flannel.conflist
+sudo cat  /var/lib/rancher/k3s/agent/etc/cni/net.d/10-flannel.conflist
 ```
 
 Confirms that Flannel is installed and configured as the default CNI plugin.
@@ -358,6 +358,15 @@ kubectl patch storageclass local-path -p '{"metadata": {"annotations": {"storage
 * Verify longhorn is the default StorageClass 
 ```sh 
 kubectl get sc
+```
+
+### ✅ 10. Verify k3s Config is good
+
+* run the following command and **MAKE SURE, it returns all GOOD** 
+* run in each node ( master or worker )
+
+```bash 
+sudo k3s check-config
 ```
 
 --- 
