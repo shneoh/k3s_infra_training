@@ -185,7 +185,7 @@ kubectl get ingress longhorn-ingress -n longhorn-system -o jsonpath="{.spec.rule
 ## 🧩 Step 6: Access the Longhorn UI with your Username and Password from Secret
 
 ---
-
+![alt text](image.png)
 
 ---
 
