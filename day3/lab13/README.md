@@ -14,7 +14,6 @@ Students will:
 > ⚠️ This lab is designed for **k3s** and assumes you have a working cluster ready.
 
 ---
-
 ## 🛠️ Tasks Overview
 
 1. Install the VPA components (Recommender, Updater, Admission Controller)
@@ -27,32 +26,27 @@ Students will:
 
 ## 🔧 Setup Instructions
 
-### ✅ 1. Create Namespace
-
-```bash
-kubectl create namespace vpa-lab
-```
-
-### ✅ 2. Install VPA Components
-
+### ✅ 1. Install VPA Components
 ```bash
  ./manifest/hack/vpa-up.sh
 ```
 
-### ✅ 3. Deploy Sample Workload
-
+### ✅ 2. Create Namespace
 ```bash
-kubectl apply -f manifest/sample-deployment.yaml
+kubectl create namespace vpa-lab
+```
+
+### ✅ 3. Deploy Sample Workload
+```bash
+kubectl apply -f manifest/lab/sample-deployment.yaml
 ```
 
 ### ✅ 4. Apply VPA in Recommender Mode
-
 ```bash
-kubectl apply -f manifest/vpa-recommendation.yaml
+kubectl apply -f manifest/lab/vpa-recommendation.yaml
 ```
 
 ### ✅ 5. Monitor VPA Recommendations
-
 ```bash
 kubectl describe vpa sample-app -n vpa-lab
 ```
@@ -76,12 +70,12 @@ Recommendation:
 
 ---
 
-## 🔁 Optional: Test Auto Mode
+## 🔁 Test Auto Mode
 
 ### ✅ 1. Apply VPA with Auto Update
 
 ```bash
-kubectl apply -f manifest/vpa-auto.yaml
+kubectl apply -f manifest/lab/vpa-auto.yaml
 ```
 
 ### ✅ 2. Observe Pod Restart and Updates
@@ -98,7 +92,7 @@ You should see updated resource `requests` inline with VPA target recommendation
 
 ---
 
-## 🧼 Cleanup (Optional)
+## 🧼 Cleanup
 
 ```bash
 kubectl delete ns vpa-lab
