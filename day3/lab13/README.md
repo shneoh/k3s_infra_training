@@ -59,6 +59,14 @@ kubectl create namespace vpa-lab
 kubectl apply -f manifest/lab/sample-deployment.yaml
 ```
 
+```sh 
+kubectl get pod -n vpa-lab
+```
+
+```sh 
+kubectl top pod -n vpa-lab
+```
+
 ### ✅ 4. Apply VPA in Recommender Mode
 ```bash
 kubectl apply -f manifest/lab/vpa-recommendation.yaml
