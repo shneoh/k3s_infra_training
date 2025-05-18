@@ -1,0 +1,20 @@
+apiVersion: "autoscaling.k8s.io/v1"
+kind: VerticalPodAutoscaler
+metadata:
+  name: sample-app
+  namespace: vpa-lab
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind: Deployment
+    name: sample-app
+  resourcePolicy:
+    containerPolicies:
+      - containerName: '*'
+        minAllowed:
+          cpu: 50m
+          memory: 32Mi
+        maxAllowed:
+          cpu: 200mi
+          memory: 256Mi
+        controlledResources: ["cpu", "memory"]
