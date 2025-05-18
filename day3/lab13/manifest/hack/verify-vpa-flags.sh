@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright 2018 The Kubernetes Authors.
+# Copyright 2025 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,9 +14,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Unregisters the admission controller webhook.
-set -e
+set -o errexit
+set -o nounset
+set -o pipefail
 
-echo "Unregistering VPA admission controller webhook"
+SCRIPT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}"))/..
+FLAG_FILE="${SCRIPT_ROOT}/docs/flags.md"
+GENERATE_FLAGS_SCRIPT="${SCRIPT_ROOT}/hack/generate-flags.sh"
 
-kubectl delete -n kube-system mutatingwebhookconfiguration.v1.admissionregistration.k8s.io vpa-webhook-config --ignore-not-found
+existing_flags=$(<"$FLAG_FILE")
+"$GENERATE_FLAGS_SCRIPT"
+updated_flags=$(<"$FLAG_FILE")
+
+if [[ "$existing_flags" != "$updated_flags" ]]; then
+    echo "VPA flags are not up to date. Please run ${GENERATE_FLAGS_SCRIPT}"
+    exit 1
+fi
