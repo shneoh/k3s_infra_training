@@ -26,9 +26,27 @@ Students will:
 
 ## 🔧 Setup Instructions
 
-### ✅ 1. Install VPA Components
+### ✅ 1. Install VPA Components and verify 
+
+* This script will download and install the VPA component
+* The script is part of https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler
+
 ```bash
  ./manifest/hack/vpa-up.sh
+```
+
+* Verify all vpa component is working
+
+```bash 
+kubectl get pod -n kube-system -l app=vpa-admission-controller
+```
+
+```bash 
+kubectl get pod -n kube-system -l app=vpa-recommender
+ ```
+
+```bash 
+kubectl get pod -n kube-system -l app=vpa-updater
 ```
 
 ### ✅ 2. Create Namespace
