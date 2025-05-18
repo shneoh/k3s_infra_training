@@ -32,8 +32,17 @@ Students will:
 * The script is part of https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler
 
 ```bash
- ./manifest/hack/vpa-up.sh
+ git clone https://github.com/kubernetes/autoscaler.git
 ```
+
+```bash
+ cd autoscaler/vertical-pod-autoscaler/
+```
+
+```bash
+ ./hack/vpa-up.sh
+```
+
 
 * Verify all vpa component is working
 
@@ -96,7 +105,7 @@ Recommendation:
 
 ---
 
-## 🔁 Test Auto Mode
+## 🔁 Test Auto Mode ( DO NOT DO THIS! this is just for DEMO! )
 
 ### ✅ 1. Apply VPA with Auto Update
 
