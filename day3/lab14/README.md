@@ -63,6 +63,15 @@ kubectl apply -f manifest/sidecar-container-demo.yaml
 
 ### ✅ 5. Observe Sidecar Behavior
 
+```sh 
+kubectl get pod -n pod-patterns
+```
+
+```bash 
+kubectl get pod <sidecar-pod-name> -n pod-patterns -o jsonpath='{.spec.containers[*].name}'
+```
+
+
 ```bash
 kubectl logs -f <sidecar-pod-name> -c sidecar -n pod-patterns
 ```
