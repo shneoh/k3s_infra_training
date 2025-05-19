@@ -1,10 +1,15 @@
 # An Introduction to Service Mesh
 
 ## A simple Web UI: videos-web
+
+* this is NOT a production ready APP 
+* This is used for Microservice DEMO / Service Mesh Demo
+* All DB are redis ( for Training and Demo )
+
 <hr/>
 <br/>
 
-Consider `videos-web` <br/>
+`videos-web` <br/>
 It's an HTML application that lists a bunch of playlists with videos in them.
 
 ```
@@ -19,7 +24,7 @@ It's an HTML application that lists a bunch of playlists with videos in them.
 <hr/>
 <br/>
 
-For `videos-web` to get any content, it needs to make a call to `playlists-api`
+For `videos-web` to get any content, it needs to make a api call to `playlists-api`
 
 ```
 +------------+     +---------------+
@@ -43,7 +48,7 @@ Playlists are stored in a database. <br/>
 
 <br/>
 
-## A little complexity
+## A little complexity - to Simulate Service Mesh
 <hr/>
 <br/>
 
@@ -58,7 +63,7 @@ Example `playlist`:
   "videos" : [ "video-1", "video-x" , "video-b"]
 }
 ```
-Take not above `videos: []` is a list of video id's <br/>
+Take note above `videos: []` is a list of video id's <br/>
 
 Videos have their own `title` and `description` and other metadata. <br/>
 
@@ -136,6 +141,7 @@ mesh.stux.dom.io/home/ +------+------------+                   +--------------+
                                                                | videos-api +------>+ videos-db |
                                                                |            |       |           |
                                                                +------------+       +-----------+
+
 
 
 
