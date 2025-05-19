@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: videos-db
+  namespace: servicemesh-ns
+  labels:
+    app: videos-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: videos-db
+  template:
+    metadata:
+      labels:
+        app: videos-db
+    spec:
+      containers:
+        - name: videos-db
+          image: stv707/dataredis:6.0-alpine
+          ports:
+            - containerPort: 6379
+              protocol: TCP
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: videos-db
+  namespace: servicemesh-ns
+  labels:
+    app: videos-db
+spec:
+  selector:
+    app: videos-db
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379
+  type: ClusterIP
+  sessionAffinity: None
+  ipFamilyPolicy: SingleStack
+  internalTrafficPolicy: Cluster
