@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sidecar-container-demo
+  namespace: pod-patterns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sidecar-container-demo
+  template:
+    metadata:
+      labels:
+        app: sidecar-container-demo
+    spec:
+      containers:
+      - name: main
+        image: stv707/kubia:v14
+        ports:
+        - containerPort: 8080
+      - name: sidecar
+        image: busybox
+        command: ["sh", "-c", "while true; do echo Sidecar active...; sleep 5; done"]

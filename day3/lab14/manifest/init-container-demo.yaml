@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: init-container-demo
+  namespace: pod-patterns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: init-container-demo
+  template:
+    metadata:
+      labels:
+        app: init-container-demo
+    spec:
+      initContainers:
+      - name: init-wait
+        image: busybox
+        command: ["sh", "-c", "echo Init step running... && sleep 10"]
+      containers:
+      - name: main
+        image: stv707/kubia:v14
+        ports:
+        - containerPort: 8080
