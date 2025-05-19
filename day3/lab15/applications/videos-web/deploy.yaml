@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: videos-web
+  namespace: servicemesh-ns
   labels:
     app: videos-web
 spec:
@@ -30,6 +31,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: videos-web
+  namespace: servicemesh-ns
   labels:
     app: videos-web
 spec:
@@ -41,26 +43,5 @@ spec:
       name: http
       port: 80
       targetPort: 80
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-  name: videos-web
-spec:
-  ingressClassName: nginx
-  rules:
-  - host: servicemesh.demo
-    http:
-      paths:
-      - path: /home(/|$)(.*)
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: videos-web
-            port:
-              number: 80
 
 

@@ -7,13 +7,13 @@ $1
 $3
 set
 $11
-jM36M39MA3I
+EtJY6J-h8LQ
 $206
 {
-		"id" : "jM36M39MA3I",
-		"title" : "Kubernetes cluster autoscaling",
-		"imageurl" : "https://i.ytimg.com/vi/jM36M39MA3I/sddefault.jpg",
-		"url" : "https://youtu.be/jM36M39MA3I",
+		"id" : "EtJY6J-h8LQ",
+		"title" : "Linux AI Redhat",
+		"imageurl" : "https://i.ibb.co/WpVJjyLN/redhat-ai.jpg",
+		"url" : "https://youtu.be/EtJY6J-h8LQ",
 		"description" : ""
 	}
 	
@@ -21,13 +21,13 @@ $206
 $3
 set
 $11
-FfDI08sgrYY
+z6qr3y0E2D4
 $202
 {
-		"id" : "FfDI08sgrYY",
-		"title" : "Kubernetes pod autoscaling",
-		"imageurl" : "https://i.ytimg.com/vi/FfDI08sgrYY/sddefault.jpg",
-		"url" : "https://youtu.be/FfDI08sgrYY",
+		"id" : "z6qr3y0E2D4",
+		"title" : "Linux AI Ubuntu",
+		"imageurl" : "https://i.ibb.co/B53tF9TL/ubuntu-ai.jpg",
+		"url" : "https://youtu.be/z6qr3y0E2D4",
 		"description" : ""
 	}
 	
@@ -35,13 +35,13 @@ $202
 $3
 set
 $11
-JmCn7k0PlV4
+A_XAVFfFbmI
 $195
 {
-		"id" : "JmCn7k0PlV4",
+		"id" : "A_XAVFfFbmI",
 		"title" : "Redis on Kubernetes",
-		"imageurl" : "https://i.ytimg.com/vi/JmCn7k0PlV4/sddefault.jpg",
-		"url" : "https://youtu.be/JmCn7k0PlV4",
+		"imageurl" : "https://i.ibb.co/s9XGvN55/redis-k8s.jpg",
+		"url" : "https://youtu.be/A_XAVFfFbmI",
 		"description" : ""
 	}
 	
@@ -63,13 +63,13 @@ $198
 $3
 set
 $11
-OFgziggbCOg
+FmLna7tHDRc
 $183
 {
-		"id" : "OFgziggbCOg",
-		"title" : "Flux CD",
-		"imageurl" : "https://i.ytimg.com/vi/OFgziggbCOg/sddefault.jpg",
-		"url" : "https://youtu.be/OFgziggbCOg",
+		"id" : "FmLna7tHDRc",
+		"title" : "K3s",
+		"imageurl" : "https://i.ibb.co/G1DNBGk/K3s.jpg",
+		"url" : "https://youtu.be/FmLna7tHDRc",
 		"description" : ""
 	}
 	
@@ -77,13 +77,13 @@ $183
 $3
 set
 $11
-myCcJJ_Fk10
+nRVBNkcr4eM
 $184
 {
-		"id" : "myCcJJ_Fk10",
-		"title" : "Drone CI",
-		"imageurl" : "https://i.ytimg.com/vi/myCcJJ_Fk10/sddefault.jpg",
-		"url" : "https://youtu.be/myCcJJ_Fk10",
+		"id" : "nRVBNkcr4eM",
+		"title" : "Rancher",
+		"imageurl" : "https://i.ibb.co/hRQ1Vh6B/rancher-platform.jpg",
+		"url" : "https://youtu.be/nRVBNkcr4eM",
 		"description" : ""
 	}
 	
@@ -91,13 +91,13 @@ $184
 $3
 set
 $11
-2WSJF7d8dUg
+KTN_QBuDplo
 $183
 {
-		"id" : "2WSJF7d8dUg",
-		"title" : "Argo CD",
-		"imageurl" : "https://i.ytimg.com/vi/2WSJF7d8dUg/sddefault.jpg",
-		"url" : "https://youtu.be/2WSJF7d8dUg",
+		"id" : "KTN_QBuDplo",
+		"title" : "OpenShift",
+		"imageurl" : "https://i.ibb.co/zh2TpJQG/Red-Hat-Open-Shift.jpg",
+		"url" : "https://youtu.be/KTN_QBuDplo",
 		"description" : ""
 	}
 	
@@ -105,13 +105,13 @@ $183
 $3
 set
 $11
-QThadS3Soig
+c4nTKMU6fBU
 $196
 {
-		"id" : "QThadS3Soig",
-		"title" : "Kubernetes on Amazon",
-		"imageurl" : "https://i.ytimg.com/vi/QThadS3Soig/sddefault.jpg",
-		"url" : "https://youtu.be/QThadS3Soig",
+		"id" : "c4nTKMU6fBU",
+		"title" : "Kubernetes on Azure",
+		"imageurl" : "https://i.ibb.co/LdHDgWvy/Microsoft-Azure.jpg",
+		"url" : "https://youtu.be/c4nTKMU6fBU",
 		"description" : ""
 	}
 	
@@ -119,12 +119,12 @@ $196
 $3
 set
 $11
-eyvLwK5C2dw
+p6xDCz00TxU
 $244
 {
-		"id" : "eyvLwK5C2dw",
-		"title" : "Kubernetes on Azure",
-		"imageurl" : "https://i.ytimg.com/vi/eyvLwK5C2dw/mqdefault.jpg?sqp=CISC_PoF&rs=AOn4CLDo7kizrJozB0pxBhxL9JbyiW_EPw",
-		"url" : "https://youtu.be/eyvLwK5C2dw",
+		"id" : "p6xDCz00TxU",
+		"title" : "Kubernetes on AWS",
+		"imageurl" : "https://i.ibb.co/QSWgQKt/aws.jpg",
+		"url" : "https://youtu.be/p6xDCz00TxU",
 		"description" : ""
 	}
