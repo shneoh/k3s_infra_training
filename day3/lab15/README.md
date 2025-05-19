@@ -65,21 +65,26 @@ kubectl create -f ./applications/videos-api/deploy.yaml
 
 
 ### ✅ 2. Verify Deployment of Microservice
-
+---
 * Make sure all Pods are Running 
 ```bash
 kubectl get all -n servicemesh-ns
 ```
-
+---
 * Make sure ingress in place for api(playlist) and web access (videos web) 
 ```sh 
 kubectl get ingress -n servicemesh-ns
 ```
-
+---
 * Get the FQDN and browse to verify the App is working
 ```sh 
 kubectl get ingress videos-web -n servicemesh-ns -o jsonpath="{.spec.rules[0].host}" | xargs -I{} echo "https://{}/home/"
 ```
+---
+
+* Its should look like this: 
+
+![alt text](image.png)
 
 
 
