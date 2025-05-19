@@ -7,7 +7,7 @@ This lab introduces two fundamental Pod design patterns in Kubernetes:
 * Init Containers: used for setup tasks before the main container runs
 * Sidecar Containers: run alongside the main container to extend functionality
 
-Students will:
+You will:
 
 * Deploy a Pod with an Init Container that simulates setup work
 * Deploy a Pod with a Sidecar Container that performs simple background logging
@@ -85,4 +85,3 @@ kubectl delete ns pod-patterns
 
 * Init container completes before the main app starts
 * Sidecar and main container run in parallel
-* Logs confirm distinct container responsibilities within a single Pod
