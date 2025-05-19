@@ -26,15 +26,14 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-staging
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-    traefik.ingress.kubernetes.io/router.middlewares: servicemesh-ns-videos-web-rewrite@kubernetescrd
-    traefik.ingress.kubernetes.io/router.middlewares: servicemesh-ns-videos-web-https-redirect@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares:  servicemesh-ns-videos-web-https-redirect@kubernetescrd,servicemesh-ns-videos-web-rewrite@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
   - host: mesh.app.stu07.steven.asia
     http:
       paths:
-      - path: /home/
+      - path: /home
         pathType: Prefix
         backend:
           service:

@@ -25,8 +25,7 @@ metadata:
   namespace: servicemesh-ns
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-    traefik.ingress.kubernetes.io/router.middlewares: servicemesh-ns-playlists-api-rewrite@kubernetescrd
-    traefik.ingress.kubernetes.io/router.middlewares: servicemesh-ns-playlists-api-https-redirectt@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: servicemesh-ns-playlists-api-https-redirect@kubernetescrd,servicemesh-ns-playlists-api-rewrite@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
