@@ -6,7 +6,6 @@
 
 ---
 ## 🛠️ Tasks Overview
-
 ---
 
 ## 🔧 Setup Instructions
@@ -82,6 +81,12 @@ kubectl get ingress videos-web -n servicemesh-ns -o jsonpath="{.spec.rules[0].ho
 ```
 >> should be an address like this *https://mesh.app.stuXX.steven.asia/home/* 
 
+---
+* Verify the API are responding: 
+```sh 
+curl -k  https://mesh.app.stuXX.steven.asia/api/playlists/ | jq 
+```
+>> replace the XX with your student number 
 
 ---
 
