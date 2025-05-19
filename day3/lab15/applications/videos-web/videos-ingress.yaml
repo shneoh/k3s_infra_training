@@ -1,128 +1,36 @@
-# ---
-# apiVersion: traefik.io/v1alpha1
-# kind: Middleware
-# metadata:
-#   name: servicemesh-https-redirect
-#   namespace: servicemesh-ns
-# spec:
-#   redirectScheme:
-#     scheme: https
-#     permanent: true
-# ---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: videos-web-rewrite
+  namespace: servicemesh-ns
+spec:
+  replacePathRegex:
+    regex: "^/home(/|$)(.*)"
+    replacement: "/$2"
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: servicemesh-ingress
+  name: videos-web
   namespace: servicemesh-ns
   annotations:
-    #cert-manager.io/cluster-issuer: letsencrypt-staging
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-    #traefik.ingress.kubernetes.io/router.middlewares: servicemesh-ns-servicemesh-https-redirect@kubernetescrd
-    traefik.ingress.kubernetes.io/rewrite-target: /home/
+    traefik.ingress.kubernetes.io/router.middlewares: servicemesh-ns-videos-web-rewrite@kubernetescrd
 spec:
+  ingressClassName: traefik
   rules:
-  - host: servicemesh.app.stu07.steven.asia  # 🔁 Replace stuXX
+  - host: servicemesh.demo
     http:
       paths:
-      - path: /
-        pathType: ImplementationSpecific
+      - path: /home
+        pathType: Prefix
         backend:
           service:
             name: videos-web
             port:
               number: 80
+
   # tls:
   # - hosts:
   #   - servicemesh.app.stu07.steven.asia # 🔁 Replace stuXX
   #   secretName: servicemesh-tls
-
-
-
-
-
-
-
-
-
-
-
-
-# apiVersion: traefik.io/v1alpha1
-# kind: Middleware
-# metadata:
-#   name: playlists-api-rewrite
-#   namespace: servicemesh-ns
-# spec:
-#   replacePathRegex:
-#     regex: "^/api/playlists(/|$)(.*)"
-#     replacement: "/$2"
-# ---
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: playlists-api
-#   namespace: servicemesh-ns
-#   annotations:
-#     traefik.ingress.kubernetes.io/router.entrypoints: web
-#     traefik.ingress.kubernetes.io/router.middlewares: servicemesh-ns-playlists-api-rewrite@kubernetescrd
-# spec:
-#   ingressClassName: traefik
-#   rules:
-#   - host: servicemesh.app.stuXX.steven.asia  # 🔁 Replace stuXX
-#     http:
-#       paths:
-#       - path: /api/playlists
-#         pathType: Prefix
-#         backend:
-#           service:
-#             name: playlists-api
-#             port:
-#               number: 80
-
-
-
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: servicemesh-ingress
-#   namespace: servicemesh-ns
-#   annotations:
-#     traefik.ingress.kubernetes.io/router.entrypoints: web
-#     traefik.ingress.kubernetes.io/rewrite-target: /$1
-# spec:
-#   ingressClassName: traefik
-#   rules:
-#   - host: servicemesh.app.stuXX.steven.asia # 🔁 Replace stuXX
-#     http:
-#       paths:
-#       - path: /home/(.*)
-#         pathType: ImplementationSpecific
-#         backend:
-#           service:
-#             name: servicemesh-ns
-#             port:
-#               number: 80
-
-
-
-####OLD####
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   annotations:
-#     nginx.ingress.kubernetes.io/ssl-redirect: "false"
-#     nginx.ingress.kubernetes.io/rewrite-target: /$2
-#   name: servicemesh-ns
-# spec:
-#   ingressClassName: nginx
-#   rules:
-#   - host: servicemesh.demo
-#     http:
-#       paths:
-#       - path: /home(/|$)(.*)
-#         pathType: ImplementationSpecific
-#         backend:
-#           service:
-#             name: servicemesh-ns
-#             port:
-#               number: 80
