@@ -14,50 +14,54 @@
 ### ✅ 1. Deploy Microservice 
 
 * In this task, you will deploy a Sample YouTube Playlist MicroService
->> This is a NOT a production Application!! You been WARNED!! 
+  >> This is a NOT a production Application!! You been WARNED!! 
+
+---
 
 * Create NS servicemesh-ns
 ```bash 
 kubectl create ns servicemesh-ns
 ```
-
+---
 * Deploy Frontend web UI
 ```bash
 kubectl create -f ./applications/videos-web/deploy.yaml
 ```
-
+---
 * Deploy Frontend Ingress 
 * Edit the file and change the XX before deploying 
 ```bash
 kubectl create -f ./applications/videos-web/videos-ingress.yaml
 ```
-
+---
 * Deploy the playlist api 
 ```bash
 kubectl create -f ./applications/playlists-api/deploy.yaml
 ```
-
+---
 * Deploy the playlist api db
+
 ```bash
 kubectl create -f ./applications/playlists-db/deploy.yaml
 ```
-
+---
 * Deploy Playlist Ingress 
 * Edit the file and change the XX before deploying 
 ```bash
 kubectl create -f ./applications/playlists-api/playlist-ingress.yaml
 ```
-
+---
 * Deploy the videos api and db
 
 ```bash
 kubectl create -f ./applications/videos-db/deploy.yaml
 ```
-
+---
 * Deploy the videos api 
 ```bash
 kubectl create -f ./applications/videos-api/deploy.yaml
 ```
+---
 
 
 ### ✅ 2. PLACE
