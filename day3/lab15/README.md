@@ -52,6 +52,17 @@ kubectl create -f ./applications/playlists-db/deploy.yaml
 kubectl create -f ./applications/playlists-api/playlist-ingress.yaml
 ```
 
+* Deploy the videos api config map and db
+```bash
+kubectl create -f ./applications/videos-db/configmap.yaml
+```
+
+```bash
+kubectl create -f ./applications/videos-db/deploy.yaml
+```
+
+
+
 
 ### ✅ 2. PLACE
 ```bash
