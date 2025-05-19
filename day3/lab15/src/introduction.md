@@ -111,25 +111,25 @@ This is intentional to demonstrate a busy network.
 ## Adding an Ingress Controller
 
 Adding an ingress controller allows us to route all our traffic. </br>
-We setup a `host` file with entry `127.0.0.1  servicemesh.demo`
+We setup a `host` file with entry `127.0.0.1  mesh.stux.dom.io`
 And `port-forward` to the `ingress-controller`
 
 
 ```
-servicemesh.demo/home --> videos-web
-servicemesh.demo/api/playlists --> playlists-api
+mesh.stux.dom.io/home --> videos-web
+mesh.stux.dom.io/api/playlists --> playlists-api
 
 
-                              servicemesh.demo/home/           +--------------+
+                              mesh.stux.dom.io/home/           +--------------+
                               +------------------------------> | videos-web   |
                               |                                |              |
-servicemesh.demo/home/ +------+------------+                   +--------------+
+mesh.stux.dom.io/home/ +------+------------+                   +--------------+
    +------------------>+ingress-nginx      |
                        |Ingress controller |
                        +------+------------+                   +---------------+    +--------------+
                               |                                | playlists-api +--->+ playlists-db |
                               +------------------------------> |               |    |              |
-                              servicemesh.demo/api/playlists   +-----+---------+    +--------------+
+                              mesh.stux.dom.io/api/playlists   +-----+---------+    +--------------+
                                                                      |
                                                                      v
                                                                +-----+------+       +-----------+
@@ -140,84 +140,3 @@ servicemesh.demo/home/ +------+------------+                   +--------------+
 
 
 ```
-<br/>
-
-## Run the apps: Docker
-<hr/>
-<br/>
-There is a `docker-compose.yaml`  in this directory. <br/>
-Change your terminal to this folder and run:
-
-```
-docker-compose build
-
-docker-compose up
-
-```
-
-You can access the app on `http://localhost` 
-
-<br/>
-
-## Run the apps: Kubernetes 
-<hr/>
-<br/>
-
-Create a cluster with [kind](https://kind.sigs.k8s.io/docs/user/quick-start/)
-
-```
-kind create cluster --name servicemesh --image kindest/node:v1.18.4
-```
-<br/>
-
-### Deploy videos-web
-
-<hr/>
-<br/>
-
-```
-cd ./kubernetes/servicemesh/
-
-kubectl apply -f applications/videos-web/deploy.yaml
-kubectl port-forward svc/videos-web 80:80
-
-```
-
-You should see blank page at `http://localhost/` <br/>
-It's blank because it needs the `playlists-api` to get data
-
-<br/>
-
-### Deploy playlists-api and database
-
-<hr/>
-<br/>
-
-```
-cd ./kubernetes/servicemesh/
-
-kubectl apply -f applications/playlists-api/deploy.yaml
-kubectl apply -f applications/playlists-db/
-kubectl port-forward svc/playlists-api 81:80
-
-```
-
-You should see empty playlists page at `http://localhost/` <br/>
-Playlists are empty because it needs the `videos-api` to get video data <br/>
-
-<br/>
-
-### Deploy videos-api and database
-
-<hr/>
-<br/>
-
-```
-cd ./kubernetes/servicemesh/
-
-kubectl apply -f applications/videos-api/deploy.yaml
-kubectl apply -f applications/videos-db/
-```
-
-Refresh page at `http://localhost/` <br/>
-You should now see the complete architecture in the browser <br/>
