@@ -1,23 +1,23 @@
----
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: servicemesh-https-redirect
-  namespace: servicemesh-ns
-spec:
-  redirectScheme:
-    scheme: https
-    permanent: true
----
+# ---
+# apiVersion: traefik.io/v1alpha1
+# kind: Middleware
+# metadata:
+#   name: servicemesh-https-redirect
+#   namespace: servicemesh-ns
+# spec:
+#   redirectScheme:
+#     scheme: https
+#     permanent: true
+# ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: servicemesh-ingress
   namespace: servicemesh-ns
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    #cert-manager.io/cluster-issuer: letsencrypt-staging
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-    traefik.ingress.kubernetes.io/router.middlewares: servicemesh-ns-servicemesh-https-redirect@kubernetescrd
+    #traefik.ingress.kubernetes.io/router.middlewares: servicemesh-ns-servicemesh-https-redirect@kubernetescrd
     traefik.ingress.kubernetes.io/rewrite-target: /home/
 spec:
   rules:
@@ -31,10 +31,10 @@ spec:
             name: videos-web
             port:
               number: 80
-  tls:
-  - hosts:
-    - servicemesh.app.stu07.steven.asia # 🔁 Replace stuXX
-    secretName: servicemesh-tls
+  # tls:
+  # - hosts:
+  #   - servicemesh.app.stu07.steven.asia # 🔁 Replace stuXX
+  #   secretName: servicemesh-tls
 
 
 
