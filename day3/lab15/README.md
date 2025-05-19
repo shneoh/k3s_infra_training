@@ -80,6 +80,9 @@ kubectl get ingress -n servicemesh-ns
 ```sh 
 kubectl get ingress videos-web -n servicemesh-ns -o jsonpath="{.spec.rules[0].host}" | xargs -I{} echo "https://{}/home/"
 ```
+>> should be an address like this *https://mesh.app.stuXX.steven.asia/home/* 
+
+
 ---
 
 * Its should look like this: 
