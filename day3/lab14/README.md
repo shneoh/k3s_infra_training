@@ -43,7 +43,9 @@ kubectl apply -f manifest/init-container-demo.yaml
 kubectl get pods -n pod-patterns -w
 ```
 
-
+```bash
+kubectl get pods -n pod-patterns
+```
 
 ```bash
 kubectl describe pod <init-pod-name> -n pod-patterns

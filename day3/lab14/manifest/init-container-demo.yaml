@@ -16,7 +16,7 @@ spec:
       initContainers:
       - name: init-wait
         image: busybox
-        command: ["sh", "-c", "echo Init step running... && sleep 10"]
+        command: ["sh", "-c", "echo Init step running... && sleep 30"]
       containers:
       - name: main
         image: stv707/kubia:v14

@@ -20,4 +20,4 @@ spec:
         - containerPort: 8080
       - name: sidecar
         image: busybox
-        command: ["sh", "-c", "while true; do echo Sidecar active...; sleep 5; done"]
+        command: ["sh", "-c", "while true; do echo Sidecar active $(date)...; sleep 30; done"]
