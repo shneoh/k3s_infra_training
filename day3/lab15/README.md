@@ -61,7 +61,10 @@ kubectl create -f ./applications/videos-db/configmap.yaml
 kubectl create -f ./applications/videos-db/deploy.yaml
 ```
 
-
+* Deploy the videos api 
+```bash
+kubectl create -f ./applications/videos-api/deploy.yaml
+```
 
 
 ### ✅ 2. PLACE
