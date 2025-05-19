@@ -18,12 +18,13 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-staging
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     traefik.ingress.kubernetes.io/router.middlewares: servicemesh-ns-servicemesh-https-redirect@kubernetescrd
+    traefik.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
   - host: servicemesh.app.stu07.steven.asia  # 🔁 Replace stuXX
     http:
       paths:
-      - path: /home/(.*)
+      - path: /home(/|$)(.*)
         pathType: ImplementationSpecific
         backend:
           service:
