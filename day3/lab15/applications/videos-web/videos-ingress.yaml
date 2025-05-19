@@ -20,10 +20,10 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: servicemesh-ns-servicemesh-https-redirect@kubernetescrd
 spec:
   rules:
-  - host: servicemesh.app.stuXX.steven.asia  # 🔁 Replace stuXX
+  - host: servicemesh.app.stu07.steven.asia  # 🔁 Replace stuXX
     http:
       paths:
-      - path: /
+      - path: /home
         pathType: Prefix
         backend:
           service:
@@ -32,7 +32,7 @@ spec:
               number: 80
   tls:
   - hosts:
-    - servicemesh.app.stuXX.steven.asia # 🔁 Replace stuXX
+    - servicemesh.app.stu07.steven.asia # 🔁 Replace stuXX
     secretName: servicemesh-tls
 
 

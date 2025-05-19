@@ -17,14 +17,14 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-staging
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     traefik.ingress.kubernetes.io/router.middlewares: servicemesh-ns-playlist-https-redirect@kubernetescrd
-    traefik.ingress.kubernetes.io/rewrite-target: /$2
+    traefik.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   rules:
-  - host: servicemesh.app.stuXX.steven.asia  # 🔁 Replace stuXX
+  - host: servicemesh.app.stu07.steven.asia  # 🔁 Replace stuXX
     http:
       paths:
-      - path: /
-        pathType: Prefix
+      - path: /playlists/api/(.*)
+        pathType: ImplementationSpecific
         backend:
           service:
             name: playlists-api
@@ -32,7 +32,7 @@ spec:
               number: 80
   tls:
   - hosts:
-    - servicemesh.app.stuXX.steven.asia # 🔁 Replace stuXX
+    - servicemesh.app.stu07.steven.asia # 🔁 Replace stuXX
     secretName: servicemesh-tls
               
 # apiVersion: networking.k8s.io/v1
