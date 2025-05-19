@@ -19,7 +19,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: servicemesh.demo
+  - host: servicemesh.app.stuXX.steven.asia  # 🔁 Replace stuXX
     http:
       paths:
       - path: /home
