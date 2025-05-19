@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: videos-api
-        image: aimvector/service-mesh:videos-api-1.0.0
+        image: stv707/service-mesh:videos-api-v1
         imagePullPolicy : Always
         ports:
         - containerPort: 10010
@@ -33,7 +33,7 @@ spec:
           value: "videos-db"
         - name: "REDIS_PORT"
           value: "6379"
-        - name: "FLAKY"
+        - name: "RAMBO"
           value: "false"
 ---
 apiVersion: v1

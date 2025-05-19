@@ -29,7 +29,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: mesh.app.stu07.steven.asia
+  - host: mesh.app.stuXX.steven.asia # 🔁 Replace stuXX
     http:
       paths:
       - path: /api/playlists
@@ -41,5 +41,5 @@ spec:
               number: 80
   tls:
   - hosts:
-    - mesh.app.stu07.steven.asia # 🔁 Replace stuXX
+    - mesh.app.stuXX.steven.asia # 🔁 Replace stuXX
     secretName: servicemesh-tls

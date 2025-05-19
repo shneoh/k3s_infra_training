@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: playlists-db
-        image: stv707/playlistdb:v1
+        image: stv707/service-mesh:playlistdb-v1
         ports:
         - containerPort: 6379
 ---

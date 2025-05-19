@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: videos-db
-          image: stv707/dataredis:6.0-alpine
+          image: stv707/service-mesh:videoswebdb-v1
           ports:
             - containerPort: 6379
               protocol: TCP

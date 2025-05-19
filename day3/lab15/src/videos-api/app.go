@@ -14,7 +14,7 @@ import (
 var environment = os.Getenv("ENVIRONMENT")
 var redis_host = os.Getenv("REDIS_HOST")
 var redis_port = os.Getenv("REDIS_PORT")
-var flaky = os.Getenv("FLAKY")
+var rambo = os.Getenv("RAMBO")
 
 var ctx = context.Background()
 var rdb *redis.Client
@@ -25,9 +25,9 @@ func main() {
 
 	router.GET("/:id", func(w http.ResponseWriter, r *http.Request, p httprouter.Params){
 		
-		if flaky == "true"{
+		if rambo == "true"{
 			if rand.Intn(90) < 30 {
-				panic("flaky error occurred ")
+				panic("rambo error occurred ")
 		  } 
 		}
 		

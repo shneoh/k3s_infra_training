@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: videos-web
-        image: aimvector/service-mesh:videos-web-1.0.0
+        image: stv707/service-mesh:videos-web-v1
         imagePullPolicy : Always
         ports:
         - containerPort: 80
@@ -43,5 +43,3 @@ spec:
       name: http
       port: 80
       targetPort: 80
-
-

@@ -38,7 +38,6 @@ kubectl create -f ./applications/playlists-api/deploy.yaml
 ```
 
 * Deploy the playlist api db
-
 ```bash
 kubectl create -f ./applications/playlists-db/deploy.yaml
 ```
