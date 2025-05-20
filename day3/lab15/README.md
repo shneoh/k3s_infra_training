@@ -232,6 +232,13 @@ Annotate the namespace to enable automatic proxy injection:
 kubectl annotate ns servicemesh-ns linkerd.io/inject=enabled
 ```
 
+We need to annotate traefik ingress deployment as well 
+
+```bash 
+kubectl annotate deploy traefik -n kube-system linkerd.io/inject=enabled
+```
+
+
 ```bash 
 kubectl describe ns servicemesh-ns
 ```
@@ -244,6 +251,12 @@ This will force all deployments to be re-deployed with Linkerd sidecars:
 
 ```bash
 kubectl rollout restart deployment -n servicemesh-ns
+```
+
+This will force all traefik deployments to be re-deployed with Linkerd sidecars: 
+
+```bash
+kubectl rollout restart deploy traefik -n kube-system
 ```
 
 ---

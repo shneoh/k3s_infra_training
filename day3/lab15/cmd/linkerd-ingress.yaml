@@ -16,17 +16,6 @@ spec:
   redirectScheme:
     scheme: https
     permanent: true
-# ---
-# apiVersion: traefik.io/v1alpha1
-# kind: Middleware
-# metadata:
-#   name: viz-fake-origin
-#   namespace: linkerd-viz
-# spec:
-#   headers:
-#     customRequestHeaders:
-#       Host: "web.linkerd-viz.svc.cluster.local"
-#       Origin: "http://localhost"
 ---
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
@@ -63,5 +52,5 @@ spec:
               number: 8084
   tls:
   - hosts:
-    - viz.app.stuXX.steven.asia
+    - viz.app.stuXX.steven.asia  # Replace stuXX dynamically
     secretName: viz-tls

@@ -72,11 +72,7 @@ kubectl rollout restart deployment web -n linkerd-viz
 
 echo "✅ Done: --enforced-host set to .* (wildcard)"
 
-
 #rm -rf $DEPLOY_DUMP_PATH $PATCHED_INGRESS
-
-
-
 
 # Final Output
 echo ""
