@@ -23,8 +23,9 @@ metadata:
   name: linkerd-viz-ingress
   namespace: linkerd-viz
   annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-    traefik.ingress.kubernetes.io/router.middlewares: linkerd-viz-viz-auth@kubernetescrd,linkerd-viz-viz-https-redirect@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: linkerd-viz-viz-https-redirect@kubernetescrd,linkerd-viz-viz-auth@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
