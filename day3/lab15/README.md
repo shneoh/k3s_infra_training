@@ -201,7 +201,7 @@ linkerd check
 * MAKE SURE you are in dir day3/lab15/
 
 ```bash
-bash ./cmd/
+bash ./cmd/linkerd-viz-secure.sh
 ```
 
 ### ✅ 2. PLACE
