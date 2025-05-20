@@ -138,9 +138,9 @@ linkerd check --pre
 
 ```sh 
 linkerd install --crds | kubectl apply -f -
+```
 
-
-```sh 
+```bash
 linkerd install | kubectl apply -f -
 ```
 
