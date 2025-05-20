@@ -191,8 +191,6 @@ linkerd viz install --set grafana.url=grafana.grafana.svc.cluster.local  | kubec
 linkerd check
 ```
 
-
-
 ```
 
 ---

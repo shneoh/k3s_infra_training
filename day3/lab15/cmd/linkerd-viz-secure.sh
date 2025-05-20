@@ -13,7 +13,9 @@ echo "🔍 Detected Student ID: $STUID"
 
 # Define variables
 USERNAME="admin"
-PASSWORD=$(openssl rand -base64 12)
+#Commented this because basic auth don't support 
+#PASSWORD=$(openssl rand -base64 12)
+PASSWORD=$(LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c 12)
 HTPASSWD=$(htpasswd -nbB "$USERNAME" "$PASSWORD" | openssl base64)
 
 # Create BasicAuth Secret
