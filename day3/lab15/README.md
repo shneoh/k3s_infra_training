@@ -172,6 +172,13 @@ helm install grafana -n grafana --create-namespace grafana/grafana -f https://ra
 
 ### ✅ 5. Install linkerd-viz extension to view Real Time Service Mesh Data
 
+
+
+* Install linkerd viz using grafana internal url 
+```bash
+linkerd viz install --set grafana.url=grafana.grafana.svc.cluster.local  | kubectl apply -f -
+```
+
 * The access to Linkerd Viz’ Prometheus instance is restricted through the prometheus-admin AuthorizationPolicy
 
 * In order to also grant access to Grafana, you need to add an AuthorizationPolicy pointing to its ServiceAccount. You can apply `authzpolicy-grafana.yaml` which grants permission for the grafana `ServiceAccount`.
@@ -180,10 +187,6 @@ helm install grafana -n grafana --create-namespace grafana/grafana -f https://ra
 kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd2/refs/heads/release/stable-2.13/grafana/authzpolicy-grafana.yaml
 ```
 
-* Install linkerd viz using grafana internal url 
-```bash
-linkerd viz install --set grafana.url=grafana.grafana.svc.cluster.local  | kubectl apply -f -
-```
 
 * Verify linkerd viz is good and running 
 ```sh 
