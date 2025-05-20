@@ -12,21 +12,25 @@ fi
 # Extract stuXX from hostname
 STUID=$(echo "$HOSTNAME" | grep -o 'stu[0-9]\{2\}')
 
-# Check if the g-ingress.yaml file exists
-if [ ! -f g-ingress.yaml ]; then
-  echo "❌ g-ingress.yaml not found in current directory."
+# Determine script directory to find g-ingress.yaml
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+INGRESS_TEMPLATE="${SCRIPT_DIR}/g-ingress.yaml"
+MODIFIED_FILE="${SCRIPT_DIR}/g-ingress-patched.yaml"
+
+# Check if the file exists
+if [ ! -f "$INGRESS_TEMPLATE" ]; then
+  echo "❌ g-ingress.yaml not found at $INGRESS_TEMPLATE"
   exit 1
 fi
 
-# Prepare a temp file with stuXX replaced
-MODIFIED_FILE="g-ingress-patched.yaml"
-sed "s/stuXX/${STUID}/g" g-ingress.yaml > "$MODIFIED_FILE"
+# Replace stuXX with actual student ID
+sed "s/stuXX/${STUID}/g" "$INGRESS_TEMPLATE" > "$MODIFIED_FILE"
 
-# Apply the Ingress
+# Apply the patched file
 echo "🚀 Applying patched Ingress for $STUID..."
 kubectl apply -f "$MODIFIED_FILE"
 
-# Wait for TLS certificate to be provisioned (loop with timeout)
+# Wait for TLS cert (Ingress IP allocation)
 echo "⏳ Waiting for TLS certificate to be ready..."
 for i in {1..20}; do
   STATUS=$(kubectl get ingress grafana-ingress -n grafana -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
@@ -41,7 +45,7 @@ done
 echo "🔐 Fetching Grafana admin password..."
 GRAFANA_PASS=$(kubectl get secret --namespace grafana grafana -o jsonpath="{.data.admin-password}" | base64 --decode)
 
-# Display final output
+# Output access details
 URL="https://grafana.app.${STUID}.steven.asia"
 echo ""
 echo "🎉 Grafana is now accessible!"

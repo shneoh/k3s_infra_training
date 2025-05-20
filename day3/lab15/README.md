@@ -176,8 +176,11 @@ kubectl get secret --namespace grafana grafana -o jsonpath="{.data.admin-passwor
 
 * Secure grafana using ingress ( execute the shell script in day3/lab15/cmd/grafana-ingress.sh )
 
+* make sure you are in day5/lab15 
+
+
 ```bash
-./cmd/lab15/grafana-ingress.sh
+./cmd/grafana-ingress.sh
 ```
 
 ```bash
