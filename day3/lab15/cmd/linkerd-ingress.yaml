@@ -38,6 +38,7 @@ spec:
     customRequestHeaders:
       Connection: keep-alive, Upgrade
       Upgrade: WebSocket
+      X-Forwarded-Proto: "https"
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
