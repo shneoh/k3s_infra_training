@@ -111,11 +111,11 @@ curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 ```
 
 ```sh 
-echo "PATH=$PATH:/home/droot/.linkerd2/bin" >> ~/.bashrc 
+echo "PATH=$PATH:/home/droot/.linkerd2/bin" >> ~/.bashrc
 ```
 
 ```sh 
-source ~/.bashrc 
+source ~/.bashrc
 ```
 
 ```sh 
@@ -191,16 +191,17 @@ linkerd viz install --set grafana.url=grafana.grafana.svc.cluster.local  | kubec
 linkerd check
 ```
 
-```
-
 ---
 
-## 🔁 PLACE
+### ✅ 6. Install and Enable Ingress for linkerd-viz so you can access securely 
+ >> we are implementing Basic Auth, its not really Secure, but better then Nothing 
 
-### ✅ 1. PLACE
+* We will run a shell script that will auto create user and password and inject that to Traefik Ingress 
+
+* MAKE SURE you are in dir day3/lab15/
 
 ```bash
-
+bash ./cmd/
 ```
 
 ### ✅ 2. PLACE
