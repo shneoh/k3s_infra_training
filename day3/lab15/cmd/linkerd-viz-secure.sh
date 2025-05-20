@@ -53,6 +53,31 @@ for i in {1..20}; do
   sleep 5
 done
 
+# ---------------------------------------
+# PATCH ENFORCED-HOST TO WILDCARD (.*)
+# ---------------------------------------
+
+echo "📄 Dumping linkerd-viz web deployment to YAML..."
+DEPLOY_DUMP_PATH="./linkerd-web-patched.yaml"
+kubectl get deploy web -n linkerd-viz -o yaml > "$DEPLOY_DUMP_PATH"
+
+echo "🔧 Replacing enforced-host regex with wildcard '.*' in the YAML (inline-safe)..."
+sed -i 's|-enforced-host=[^"]*|-enforced-host=.*|g' "$DEPLOY_DUMP_PATH"
+
+echo "🚀 Applying patched deployment..."
+kubectl apply -f "$DEPLOY_DUMP_PATH"
+
+echo "🔁 Restarting web pod to apply new enforced-host setting..."
+kubectl rollout restart deployment web -n linkerd-viz
+
+echo "✅ Done: --enforced-host set to .* (wildcard)"
+
+
+#rm -rf $DEPLOY_DUMP_PATH $PATCHED_INGRESS
+
+
+
+
 # Final Output
 echo ""
 echo "🎉 Linkerd Viz is now accessible at:"
