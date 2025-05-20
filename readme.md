@@ -15,11 +15,15 @@ Each participant will be provided access to their own Kubernetes cluster, hosted
 ### 🚀 Software
 
 The following software/cloud service may be useful in the labs and will make your life easier
+
+* WSL Linux - https://learn.microsoft.com/en-us/windows/wsl/install
 * VS Code - https://code.visualstudio.com/
 * Lens Desktop - https://k8slens.dev/
 * Git Hub - https://github.com/
 * git - https://git-scm.com/downloads
 * kubectl - https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
+
+>> WSL Linux is only for Windows Desktop/Laptop, if you are using Mac or Linux, You're GOOD to GO! 😎
 
 ---
 
