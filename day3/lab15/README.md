@@ -95,7 +95,7 @@ curl -k  https://mesh.app.stuXX.steven.asia/api/playlists/ | jq
 ![alt text](image.png)
 
 
-
+---
 ### ✅ 3. Download and Install linkerd 
 
 * Do you Dive? like diving on Open Sea? 
@@ -150,6 +150,8 @@ linkerd install | kubectl apply -f -
 linkerd check
 ```
 
+---
+
 ### ✅ 4. Install Grafana via helm ( For Visualization )
 
 * Helm add grafana 
@@ -167,36 +169,31 @@ helm repo list
 helm install grafana -n grafana --create-namespace grafana/grafana -f https://raw.githubusercontent.com/linkerd/linkerd2/main/grafana/values.yaml
 ```
 
-* Once installed, you can check grafana password with the following command 
+---
 
+### ✅ 5. Install linkerd-viz extension to view Real Time Service Mesh Data
+
+* The access to Linkerd Viz’ Prometheus instance is restricted through the prometheus-admin AuthorizationPolicy
+
+* In order to also grant access to Grafana, you need to add an AuthorizationPolicy pointing to its ServiceAccount. You can apply `authzpolicy-grafana.yaml` which grants permission for the grafana `ServiceAccount`.
+
+```sh 
+kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd2/refs/heads/release/stable-2.13/grafana/authzpolicy-grafana.yaml
+```
+
+* Install linkerd viz using grafana internal url 
 ```bash
-kubectl get secret --namespace grafana grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+linkerd viz install --set grafana.url=grafana.grafana.svc.cluster.local  | kubectl apply -f -
+```
+
+* Verify linkerd viz is good and running 
+```sh 
+linkerd check
 ```
 
 
-* Secure grafana using ingress ( execute the shell script in day3/lab15/cmd/grafana-ingress.sh )
-
-* make sure you are in day5/lab15 
-
-
-```bash
-./cmd/grafana-ingress.sh
-```
-
-```bash
 
 ```
-
-```bash
-
-```
-
-### ✅ 5. PLACE 
-```bash
-
-```
-
-
 
 ---
 
@@ -226,5 +223,3 @@ kubectl get secret --namespace grafana grafana -o jsonpath="{.data.admin-passwor
 ---
 
 ## ✅ Validation Checklist
-
-

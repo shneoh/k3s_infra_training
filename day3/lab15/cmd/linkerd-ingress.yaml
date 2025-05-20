@@ -1,0 +1,46 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: viz-auth
+  namespace: linkerd-viz
+spec:
+  basicAuth:
+    secret: viz-authsecret
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: viz-https-redirect
+  namespace: linkerd-viz
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: linkerd-viz-ingress
+  namespace: linkerd-viz
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.middlewares: |
+      viz-auth@kubernetescrd,
+      viz-https-redirect@kubernetescrd
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: viz.app.stuXX.steven.asia # 🔁 Replace stuXX dynamically
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web
+                port:
+                  number: 8084
+  tls:
+    - hosts:
+        - viz.app.stuXX.steven.asia # 🔁 Replace stuXX dynamically
+      secretName: viz-tls
