@@ -204,19 +204,16 @@ bash ./cmd/linkerd-viz-secure.sh
 
 * Access the printed Address with your user name and password and verify linkerd-viz can be accessed with grafana attached
 
-### ✅ 7. Inject linkerd to our microservice and Check in linkerd-viz 
-
-Awesome, Steve 🐺 — I’ve digested your `README.md` and the directory structure context is clear.
-
-Your microservices (`videos-web`, `videos-api`, `playlists-api`, and both DBs) are all deployed under the namespace `servicemesh-ns`, and everything is ready to be **injected with Linkerd** to observe them in **Linkerd Viz + Grafana**.
-
-Let’s move on to **✅ Step 7: Inject Linkerd into our microservice**.
 
 ---
 
 # Part 2 
 
 ## Inject Linkerd to Our Microservice and Check in Linkerd-Viz
+
+
+* Your microservices (`videos-web`, `videos-api`, `playlists-api`, and both DBs) are all deployed under the namespace `servicemesh-ns`
+* Everything is ready to be **injected with Linkerd** to observe them in **Linkerd Viz + Grafana**.
 
 ### 🎯 Objective:
 
