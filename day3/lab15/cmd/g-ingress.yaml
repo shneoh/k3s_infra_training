@@ -15,7 +15,7 @@ metadata:
   namespace: grafana
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-    traefik.ingress.kubernetes.io/router.middlewares: grafana grafana-https-redirect@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: grafana-grafana-https-redirect@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
