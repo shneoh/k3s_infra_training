@@ -112,7 +112,7 @@ Deploy a 3-node High Availability (HA) K3s cluster using embedded etcd with prop
 
 ---
 
-## ✅ Validation
+## ✅ Validation - Perform this in all 3 nodes 
 
 After installing on all three nodes:
   ```bash
@@ -126,6 +126,13 @@ You should see all 3 nodes in `Ready` state and all control-plane components run
 echo 'source <(kubectl completion bash)' >> ~/.bashrc
 source ~/.bashrc
 ```
+
+* Copy kubectl context file to local .kube/ directory 
+
+```sh 
+mkdir ~/.kube || cat /etc/rancher/k3s/k3s.yaml > ~/.kube/config 
+```
+
 
 
 ---
