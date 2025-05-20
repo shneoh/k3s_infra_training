@@ -24,23 +24,21 @@ metadata:
   namespace: linkerd-viz
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-    traefik.ingress.kubernetes.io/router.middlewares: |
-      viz-auth@kubernetescrd,
-      viz-https-redirect@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: linkerd-viz-viz-auth@kubernetescrd,linkerd-viz-viz-https-redirect@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
-    - host: viz.app.stuXX.steven.asia # 🔁 Replace stuXX dynamically
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: web
-                port:
-                  number: 8084
+  - host: viz.app.stuXX.steven.asia  # Replace stuXX dynamically
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web
+            port:
+              number: 8084
   tls:
-    - hosts:
-        - viz.app.stuXX.steven.asia # 🔁 Replace stuXX dynamically
-      secretName: viz-tls
+  - hosts:
+    - viz.app.stuXX.steven.asia
+    secretName: viz-tls
