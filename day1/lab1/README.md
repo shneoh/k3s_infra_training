@@ -302,7 +302,7 @@ kubectl get svc -n kube-system | grep traefik
 ```bash 
 kubectl -n kube-system patch deployment traefik -p '{"spec": {"replicas": 3}}'
 ```
->> Since we have 3 node, we want to ensure, traefik ingress runs on all 3 node
+>> Since we have 3 node, we want to ensure, traefik ingress runs 3 pods 
 
 This should show a `LoadBalancer` or `ClusterIP` type service exposing the Ingress controller.
 
@@ -375,6 +375,9 @@ kubectl get sc
 ```bash 
 sudo k3s check-config
 ```
+
+>> if the config check returns `STATUS: pass`  , then you are Good to Go 😎 
+
 
 --- 
 ### 📌 Key Takeaway
