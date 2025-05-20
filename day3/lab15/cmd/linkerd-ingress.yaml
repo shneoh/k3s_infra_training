@@ -16,17 +16,17 @@ spec:
   redirectScheme:
     scheme: https
     permanent: true
----
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: viz-fake-origin
-  namespace: linkerd-viz
-spec:
-  headers:
-    customRequestHeaders:
-      Host: "web.linkerd-viz.svc.cluster.local"
-      Origin: "http://localhost"
+# ---
+# apiVersion: traefik.io/v1alpha1
+# kind: Middleware
+# metadata:
+#   name: viz-fake-origin
+#   namespace: linkerd-viz
+# spec:
+#   headers:
+#     customRequestHeaders:
+#       Host: "web.linkerd-viz.svc.cluster.local"
+#       Origin: "http://localhost"
 ---
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
@@ -47,7 +47,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-staging
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-    traefik.ingress.kubernetes.io/router.middlewares: linkerd-viz-viz-https-redirect@kubernetescrd,linkerd-viz-viz-auth@kubernetescrd,linkerd-viz-viz-fake-origin@kubernetescrd,linkerd-viz-ssl-header@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: linkerd-viz-viz-https-redirect@kubernetescrd,linkerd-viz-viz-auth@kubernetescrd,linkerd-viz-ssl-header@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
