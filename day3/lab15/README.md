@@ -323,9 +323,8 @@ To get a live metrics summary.
 
 ## 🧼 Cleanup
 
-```bash
 
-```
+##  Day 3 END, the final topic have no LABS
 
 ---
 

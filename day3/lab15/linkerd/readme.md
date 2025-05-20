@@ -1,3 +1,5 @@
+# OLD - Outdated 
+
 # Introduction to Linkerd
 
 ## We need a Kubernetes cluster
@@ -209,7 +211,7 @@ linkerd -n default stat deploy
 ```
 kubectl edit deploy videos-api
 
-#set environment FLAKY=true
+#set environment RAMBO=true
 ```
 
 # Service Profile 

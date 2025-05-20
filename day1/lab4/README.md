@@ -198,7 +198,6 @@ kubectl get ingress longhorn-ingress -n longhorn-system -o jsonpath="{.spec.rule
 
 ```bash
 kubectl delete ns demo-app
-kubectl delete clusterissuer letsencrypt-staging
 ```
 
 ---
