@@ -8,6 +8,28 @@ spec:
     scheme: https
     permanent: true
 ---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: grafana-strip-prefix
+  namespace: grafana
+spec:
+  stripPrefix:
+    prefixes:
+      - /grafana
+
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: grafana-root-rewrite
+  namespace: grafana
+spec:
+  replacePathRegex:
+    regex: ^/$
+    replacement: /grafana/
+
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -15,11 +37,14 @@ metadata:
   namespace: grafana
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-    traefik.ingress.kubernetes.io/router.middlewares: grafana-grafana-https-redirect@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: |
+      grafana-strip-prefix@kubernetescrd,
+      grafana-root-rewrite@kubernetescrd,
+      grafana-https-redirect@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
-  - host: grafana.app.stuXX.steven.asia # 🔁 Replace stuXX
+  - host: grafana.app.stuXX.steven.asia
     http:
       paths:
       - path: /
@@ -29,7 +54,14 @@ spec:
             name: grafana
             port:
               number: 80
+      - path: /grafana
+        pathType: Prefix
+        backend:
+          service:
+            name: grafana
+            port:
+              number: 80
   tls:
   - hosts:
-    - grafana.app.stuXX.steven.asia # 🔁 Replace stuXX
+    - grafana.app.stuXX.steven.asia
     secretName: grafana-tls
