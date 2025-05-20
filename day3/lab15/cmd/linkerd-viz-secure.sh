@@ -59,3 +59,14 @@ echo "🎉 Linkerd Viz is now accessible at:"
 echo "🔗 https://viz.app.${STUID}.steven.asia"
 echo "👤 Username: $USERNAME"
 echo "🔑 Password: $PASSWORD"
+
+# Save to .secret in current dir
+cat <<EOF > .secret
+Linkerd Viz Access Details
+==========================
+URL:      https://viz.app.${STUID}.steven.asia
+Username: ${USERNAME}
+Password: ${PASSWORD}
+EOF
+
+echo "📁 Login credentials saved to $(pwd)/.secret"

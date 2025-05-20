@@ -151,7 +151,6 @@ linkerd check
 ```
 
 ---
-
 ### ✅ 4. Install Grafana via helm ( For Visualization )
 
 * Helm add grafana 
@@ -162,7 +161,6 @@ helm repo add grafana https://grafana.github.io/helm-charts
 ```bash
 helm repo list 
 ```
-
 
 * Use linkerd provided values.yaml to install grafana to attach grafana to linkerd viz 
 ```bash
@@ -192,7 +190,6 @@ linkerd check
 ```
 
 ---
-
 ### ✅ 6. Install and Enable Ingress for linkerd-viz so you can access securely 
  >> we are implementing Basic Auth, its not really Secure, but better then Nothing 
 
@@ -203,6 +200,8 @@ linkerd check
 ```bash
 bash ./cmd/linkerd-viz-secure.sh
 ```
+
+* Access the printed Address with your user name and password and verify linkerd-viz can be accessed with grafana attached
 
 ### ✅ 2. PLACE
 
