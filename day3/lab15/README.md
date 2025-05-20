@@ -1,5 +1,6 @@
 # Lab 15: Deploying Container Apps with Linkerd injection
 
+# Part 1 
 ## 🎯 Objective
 
 > ⚠️ This lab is designed for **k3s** and assumes you have a working cluster ready.
@@ -203,11 +204,102 @@ bash ./cmd/linkerd-viz-secure.sh
 
 * Access the printed Address with your user name and password and verify linkerd-viz can be accessed with grafana attached
 
-### ✅ 2. PLACE
+### ✅ 7. Inject linkerd to our microservice and Check in linkerd-viz 
+
+Awesome, Steve 🐺 — I’ve digested your `README.md` and the directory structure context is clear.
+
+Your microservices (`videos-web`, `videos-api`, `playlists-api`, and both DBs) are all deployed under the namespace `servicemesh-ns`, and everything is ready to be **injected with Linkerd** to observe them in **Linkerd Viz + Grafana**.
+
+Let’s move on to **✅ Step 7: Inject Linkerd into our microservice**.
+
+---
+
+# Part 2 
+
+## Inject Linkerd to Our Microservice and Check in Linkerd-Viz
+
+### 🎯 Objective:
+
+* Enable **Linkerd sidecar injection** on all deployments in `servicemesh-ns`
+* Verify traffic and telemetry appear in **Linkerd Viz dashboard**
+
+---
+
+### 🔧 Steps:
+
+#### 🧬 1. Enable Namespace Injection
+
+Annotate the namespace to enable automatic proxy injection:
 
 ```bash
+kubectl annotate ns servicemesh-ns linkerd.io/inject=enabled
+```
+
+---
+
+#### 🔁 2. Restart All Deployments to Trigger Injection
+
+This will force all deployments to be re-deployed with Linkerd sidecars:
+
+```bash
+kubectl rollout restart deployment -n servicemesh-ns
+```
+
+---
+
+#### ✅ 3. Verify Sidecars Are Injected
+
+Check that pods now contain the `linkerd-proxy` container:
+
+```bash
+kubectl get pods -n servicemesh-ns -o jsonpath="{range .items[*]}{.metadata.name}{'\t'}{range .spec.containers[*]}{.name}{'\t'}{end}{'\n'}"
+```
+
+You should see output like:
 
 ```
+videos-web-xxxxx       videos-web   linkerd-proxy
+playlists-api-xxxxx    playlists-api linkerd-proxy
+...
+```
+
+---
+
+#### 👁️ 4. Open Linkerd Viz & Observe Services
+
+1. Go to `https://viz.app.stuXX.steven.asia`
+2. Authenticate with your username/password
+3. Navigate to **"Namespace" → `servicemesh-ns`**
+4. You should now see:
+
+   * Service-to-service traffic
+   * Latency, success rate
+   * Live tap and top of requests
+
+>> change the XX with your student ID 
+
+---
+
+#### 🔥 5. Optional Cool Stuff
+
+* Use:
+
+```bash
+linkerd viz tap deploy/videos-web -n servicemesh-ns
+```
+
+To live monitor traffic.
+
+* Or:
+
+```bash
+linkerd viz top deploy/videos-web -n servicemesh-ns
+```
+
+To get a live metrics summary.
+
+---
+
 
 
 ---
