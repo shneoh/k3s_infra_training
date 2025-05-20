@@ -232,6 +232,10 @@ Annotate the namespace to enable automatic proxy injection:
 kubectl annotate ns servicemesh-ns linkerd.io/inject=enabled
 ```
 
+```bash 
+kubectl describe ns servicemesh-ns
+```
+
 ---
 
 #### 🔁 2. Restart All Deployments to Trigger Injection
@@ -310,3 +314,5 @@ To get a live metrics summary.
 ---
 
 ## ✅ Validation Checklist
+
+
