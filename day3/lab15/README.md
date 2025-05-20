@@ -96,20 +96,94 @@ curl -k  https://mesh.app.stuXX.steven.asia/api/playlists/ | jq
 
 
 
-### ✅ 3. PLACE
+### ✅ 3. Download and Install linkerd 
+
+* Do you Dive? like diving on Open Sea? 
+
+* Make sure you are in home dir
+
+```bash
+cd ~ 
+```
+
+```sh 
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
+```
+
+```sh 
+echo "PATH=$PATH:/home/droot/.linkerd2/bin" >> ~/.bashrc 
+```
+
+```sh 
+source ~/.bashrc 
+```
+
+```sh 
+linkerd version
+```
+
+* Check for Gateway API in the Kubernetes Cluster - Must return > v1.2.X
+
+```sh 
+kubectl get crds/httproutes.gateway.networking.k8s.io -o "jsonpath={.metadata.annotations.gateway\.networking\.k8s\.io/bundle-version}"
+```
+
+* Validate Kubernetes Cluster
+
+```sh 
+linkerd check --pre
+```
+
+* Install linkerd crd and install linkerd control plane
+
+```sh 
+linkerd install --crds | kubectl apply -f -
+
+
+```sh 
+linkerd install | kubectl apply -f -
+```
+
+* run check to verify linkerd is installed 
+
+```sh 
+linkerd check
+```
+
+### ✅ 4. Install Grafana via helm ( For Visualization )
+
+* Helm add grafana 
+```bash
+helm repo add grafana https://grafana.github.io/helm-charts
+```
+
+```bash
+helm repo list 
+```
+
+
+* Use linkerd provided values.yaml to install grafana to attach grafana to linkerd viz 
+```bash
+helm install grafana -n grafana --create-namespace grafana/grafana -f https://raw.githubusercontent.com/linkerd/linkerd2/main/grafana/values.yaml
+```
+
+* Once installed, you can check grafana password with the following command 
+
+```bash
+kubectl get secret --namespace grafana grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+```
+
+
+* Secure grafana using ingress ( execute the shell script in day3/lab15/cmd/grafana-ingress.sh )
+
+```bash
+./cmd/lab15/grafana-ingress.sh
+```
+
 ```bash
 
 ```
 
-```sh 
-
-```
-
-```sh 
-
-```
-
-### ✅ 4. PLACE
 ```bash
 
 ```
