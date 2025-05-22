@@ -130,8 +130,13 @@ source ~/.bashrc
 * Copy kubectl context file to local .kube/ directory 
 
 ```sh 
-mkdir ~/.kube 2> /dev/null  &&  cat /etc/rancher/k3s/k3s.yaml > ~/.kube/config
+mkdir ~/.kube 2> /dev/null
 ```
+
+```sh 
+cat /etc/rancher/k3s/k3s.yaml > ~/.kube/config
+```
+
 
 
 
