@@ -48,14 +48,15 @@ ssh droot@ssh.stuXX.steven.asia
 
 | Student No  | SSH Host                         | Assigned Student     |
 | ------------ | -----------------------------  | ------------------ |
-| stu01    | `droot@ssh.stu01.steven.asia` | Alex Tan          |
-| stu02    | `droot@ssh.stu02.steven.asia` | Priya Narayanan   |
-| stu03    | `droot@ssh.stu03.steven.asia` | Jason Lim         |
-| stu04    | `droot@ssh.stu04.steven.asia` | Farah Abdullah    |
-| stu05    | `droot@ssh.stu05.steven.asia` | Kelvin Ong        |
-| stu06    | `droot@ssh.stu06.steven.asia` | Aina Rosli        |
-| stu07    | `droot@ssh.stu07.steven.asia` | Steven Nagen      |
-
+| stu01    | `droot@ssh.stu01.steven.asia` | Chan Chin Keong         |
+| stu02    | `droot@ssh.stu02.steven.asia` | Darren Lai Tye Jie  |
+| stu03    | `droot@ssh.stu03.steven.asia` | 	Dixon Lee Ching Kiat        |
+| stu04    | `droot@ssh.stu04.steven.asia` | Mohamad Marwan    |
+| stu05    | `droot@ssh.stu05.steven.asia` | Mohamad Nazri       |
+| stu06    | `droot@ssh.stu06.steven.asia` | Neoh Suen Hong      |
+| stu07    | `droot@ssh.stu07.steven.asia` | 	Nooi Yong Qing      |
+| stu08    | `droot@ssh.stu07.steven.asia` | 	Yap Weng Yang     |
+| stu09    | `droot@ssh.stu07.steven.asia` | Steven Nagen      |
 
 ---
 
