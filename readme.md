@@ -55,8 +55,8 @@ ssh droot@ssh.stuXX.steven.asia
 | stu05    | `droot@ssh.stu05.steven.asia` | Mohamad Nazri       |
 | stu06    | `droot@ssh.stu06.steven.asia` | Neoh Suen Hong      |
 | stu07    | `droot@ssh.stu07.steven.asia` | 	Nooi Yong Qing      |
-| stu08    | `droot@ssh.stu07.steven.asia` | 	Yap Weng Yang     |
-| stu09    | `droot@ssh.stu07.steven.asia` | Steven Nagen      |
+| stu08    | `droot@ssh.stu08.steven.asia` | 	Yap Weng Yang     |
+| stu09    | `droot@ssh.stu09.steven.asia` | Steven Nagen      |
 
 ---
 
