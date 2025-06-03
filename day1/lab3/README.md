@@ -53,7 +53,7 @@ exit
 1. Create NodePort service:
 
 ```bash
-kubectl apply -f kubia/kubia-svc-nodeport.yaml
+kubectl apply -f kubia-svc-nodeport.yaml
 ```
 
 2. Get details:

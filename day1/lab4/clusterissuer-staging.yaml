@@ -5,9 +5,12 @@ metadata:
 spec:
   acme:
     email: steve@cognitoz.net
+    #Staging acme of letsencrypt
     server: https://acme-staging-v02.api.letsencrypt.org/directory
+    
     #Production acme of letsencrypt
     #server: https://acme-v02.api.letsencrypt.org/directory
+    
     privateKeySecretRef:
       name: letsencrypt-staging
     solvers:

@@ -36,6 +36,6 @@ spec:
         - name: TITLE
           value: "Ingress Test App1-Car"
         - name: VOTE1VALUE
-          value: Toyota
+          value: TOYOTA
         - name: VOTE2VALUE
-          value: Honda
+          value: HONDA
