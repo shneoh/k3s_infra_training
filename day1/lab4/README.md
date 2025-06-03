@@ -52,7 +52,7 @@ kubectl expose deployment web --port=80 --target-port=80 -n demo-app
 
 ---
 
-## 🧩 Step 4: Create a Traefik Middleware to enable http to httpd redirect
+## 🧩 Step 4: Create a Traefik Middleware to enable http to https redirect
 
 Apply the middleware:
 
