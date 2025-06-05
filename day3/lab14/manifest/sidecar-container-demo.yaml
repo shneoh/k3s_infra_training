@@ -18,6 +18,15 @@ spec:
         image: stv707/kubia:v14
         ports:
         - containerPort: 8080
-      - name: sidecar
+      - name: sidecar1
+        image: busybox
+        command: ["sh", "-c", "while true; do echo Sidecar active $(date)...; sleep 30; done"]
+      - name: sidecar2
+        image: busybox
+        command: ["sh", "-c", "while true; do echo Sidecar active $(date)...; sleep 30; done"]
+      - name: sidecar3
+        image: busybox
+        command: ["sh", "-c", "while true; do echo Sidecar active $(date)...; sleep 30; done"]
+      - name: sidecar4
         image: busybox
         command: ["sh", "-c", "while true; do echo Sidecar active $(date)...; sleep 30; done"]
