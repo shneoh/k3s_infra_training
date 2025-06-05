@@ -1,0 +1,12 @@
+# .gitlab/agents/stuXX/config.yaml
+
+###### for gitlab-<labber>-lab #####
+user_access:
+  access_as:
+    agent: {}
+  projects:
+    - id: <gitlab_project_or_id>/gitlab-bg-lab  # 🐳  Change this 
+
+ci_access:
+  projects:
+    - id: <gitlab_project_or_id>/gitlab-bg-lab  # 🐳  Change this 

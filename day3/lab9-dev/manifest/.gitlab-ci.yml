@@ -1,0 +1,39 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  AGENT_KUBECONTEXT: <gitlab_project_or_id>/gitlab-ci-lab:stuXX  # 🐳  Change this
+  KUBE_NAMESPACE: ci-demo-stuXX # 🐳  Change this
+
+build:
+  stage: build
+  script: 
+    - echo "There is no Build here, just for testing ... running for 30 sec"
+    - hostname
+    - sleep 30
+
+test:
+  stage: test
+  script: 
+    - echo "There is no Test here, this is just for Test Job test ... running for 30 sec"
+    - hostname
+    - sleep 30
+
+deploy:
+  stage: deploy
+  image:
+    name: bitnami/kubectl:1.29.6
+    entrypoint: [""]
+  before_script:
+    - kubectl config use-context "$AGENT_KUBECONTEXT"
+  script:
+    - kubectl apply -f namespace.yaml
+    - kubectl apply -f deployment.yaml
+    - kubectl apply -f service.yaml
+    - kubectl apply -f ingress.yaml
+    - kubectl rollout status deployment/kubia -n "$KUBE_NAMESPACE"
+  environment:
+    name: KubiaCiLab
+    url: http://kubia.app.stuXX.steven.asia # 🐳  Change this 

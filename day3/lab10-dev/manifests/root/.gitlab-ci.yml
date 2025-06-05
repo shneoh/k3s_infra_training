@@ -1,0 +1,55 @@
+stages:
+  - deploy
+  - swap
+
+variables:
+  AGENT_KUBECONTEXT: <gitlab_project_or_id>/gitlab-ci-lab:stuXX # 🐳  Change this
+  KUBE_NAMESPACE: ci-bg-stuXX # 🐳  Change this
+
+deploy-blue:
+  stage: deploy
+  image:
+    name: bitnami/kubectl:1.29.6
+    entrypoint: [""]
+  script:
+    - kubectl config use-context "$AGENT_KUBECONTEXT"
+    - kubectl apply -f blue/namespace.yaml
+    - kubectl apply -f blue/service.yaml
+    - kubectl apply -f blue/deployment.yaml
+    - kubectl apply -f blue/ingress.yaml
+  environment:
+    name: blue
+    url: http://blue.app.stuXX.steven.asia # 🐳  Change this
+
+deploy-green:
+  stage: deploy
+  image:
+    name: bitnami/kubectl:1.29.6
+    entrypoint: [""]
+  rules:
+    - changes:
+        - green/**
+  script:
+    - kubectl config use-context "$AGENT_KUBECONTEXT"
+    - kubectl apply -f green/service.yaml
+    - kubectl apply -f green/deployment.yaml
+    - kubectl apply -f green/ingress.yaml
+  environment:
+    name: green
+    url: http://green.app.stuXX.steven.asia # 🐳  Change this
+
+swap-to-green:
+  stage: swap
+  image:
+    name: bitnami/kubectl:1.29.6
+    entrypoint: [""]
+  rules:
+    - changes:
+        - stg/**
+  script:
+    - kubectl config use-context "$AGENT_KUBECONTEXT"
+    - kubectl apply -f stg/ingress.yaml
+  when: manual
+  environment:
+    name: swap2green
+    url: http://blue.app.stuXX.steven.asia # 🐳  Change this

@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kubia
+  namespace: ci-demo-stuXX # 🐳  Change this 
+  annotations:
+   traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  rules:
+  - host: kubiatest.app.stuXX.steven.asia # 🐳  Change this 
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service: 
+            name: kubia
+            port: 
+              number: 80

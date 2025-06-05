@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: podinfo-blue
+  namespace: ci-bg-stuXX # 🐳  Change this 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: podinfo
+      version: blue
+  template:
+    metadata:
+      labels:
+        app: podinfo
+        version: blue
+    spec:
+      containers:
+        - name: podinfo
+          image: ghcr.io/stefanprodan/podinfo:5.0.0
+          ports:
+            - containerPort: 9898

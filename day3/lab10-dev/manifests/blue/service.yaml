@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: podinfo-blue
+  namespace: ci-bg-stuXX # 🐳  Change this 
+spec:
+  selector:
+    app: podinfo
+    version: blue
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9898
+  type: ClusterIP
